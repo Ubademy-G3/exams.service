@@ -9,6 +9,10 @@ router = APIRouter()
 async def create_question_solution(question_solution: QuestionSolution):
     return await QuestionSolutionController.create_question_solution(question_solution)
 
+@router.get('/{id}', response_model=QuestionSolution, status_code = 200)
+async def get_question_solution(id: UUID):
+    return await QuestionSolutionController.get_question_solution(id)
+
 @router.get('/', response_model=List[QuestionSolution], status_code = 200)
 async def get_all_question_solutions():
     return await QuestionSolutionController.get_all_question_solutions()

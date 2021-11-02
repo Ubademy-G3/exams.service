@@ -9,6 +9,10 @@ router = APIRouter()
 async def create_exam_template(exam_template: ExamTemplate):
     return await ExamTemplateController.create_exam_template(exam_template)
 
+@router.get('/{id}', response_model=ExamTemplate, status_code = 200)
+async def get_exam_template(id: UUID):
+    return await ExamTemplateController.get_exam_template(id)
+
 @router.get('/', response_model=List[ExamTemplate], status_code = 200)
 async def get_all_exam_templates():
     return await ExamTemplateController.get_all_exam_templates()

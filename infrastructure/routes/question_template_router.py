@@ -9,6 +9,10 @@ router = APIRouter()
 async def create_question_template(question_template: QuestionTemplate):
     return await QuestionTemplateController.create_question_template(question_template)
 
+@router.get('/{id}', response_model=QuestionTemplate, status_code = 200)
+async def get_question_template(id: UUID):
+    return await QuestionTemplateController.get_question_template(id)
+
 @router.get('/', response_model=List[QuestionTemplate], status_code = 200)
 async def get_all_question_templates():
     return await QuestionTemplateController.get_all_question_templates()
