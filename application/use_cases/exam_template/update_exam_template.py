@@ -1,4 +1,5 @@
 from persistence.repositories.exam_template_repository_postgres import ExamTemplateRepositoryPostgres
+from application.serializers.exam_solution_serializer import ExamSolutionSerializer
 
 etrp = ExamTemplateRepositoryPostgres()
 
@@ -18,4 +19,4 @@ async def update_exam_template(id, new_args):
     update_exam_template = exam_template_in_db.copy(update = update_data)
     
     result = await etrp.update_exam_template(id, new_args)
-    return result
+    return ExamTemplateSerializer.serialize(new_exam_template)

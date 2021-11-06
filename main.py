@@ -17,10 +17,10 @@ async def startup():
 async def shutdown():
     await database.disconnect()
 
-app.include_router(question_template_router.router, prefix='/api/v1/question_templates', tags=['question_templates'])
+app.include_router(question_template_router.router, prefix='/exams/questions/templates', tags=['question-templates'])
 
-app.include_router(question_solution_router.router, prefix='/api/v1/question_solutions', tags=['question_solutions'])
+app.include_router(question_solution_router.router, prefix='/exams/questions/solutions', tags=['question-solutions'])
 
-app.include_router(exam_template_router.router, prefix='/api/v1/exam_templates', tags=['exam_templates'])
+app.include_router(exam_template_router.router, prefix='/exams/templates', tags=['exam-templates'])
 
-app.include_router(exam_solution_router.router, prefix='/api/v1/exam_solutions', tags=['exam_solutions'])
+app.include_router(exam_solution_router.router, prefix='/exams/solutions', tags=['exam-solutions'])

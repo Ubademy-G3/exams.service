@@ -2,8 +2,6 @@ from domain.exam_template_model import ExamTemplate
 from infrastructure.db.database import database
 from infrastructure.db.exam_template_schema import exam_templates
 from domain.exam_template_repository import ExamTemplateRepository
-from uuid import uuid4, UUID
-
 
 class ExamTemplateRepositoryPostgres(ExamTemplateRepository):
 
@@ -15,17 +13,17 @@ class ExamTemplateRepositoryPostgres(ExamTemplateRepository):
         query = exam_templates.select()
         return await database.fetch_all(query=query)
 
-    async def get_exam_by_id(self, id: UUID):
+    async def get_exam_by_id(self, id: str):
         query = exam_templates.select(exam_templates.c.id == id)
         return await database.fetch_one(query=query)
 
-    async def update_exam(self, id: UUID, payload: ExamTemplate):
+    async def update_exam(self, id: str, payload: ExamTemplate):
         query = (exam_templates.update().
                  where(exam_templates.c.id == id)
                  .values(**payload.dict()))
         return await database.execute(query=query)
 
-    async def delete_exam(self, id: UUID):
+    async def delete_exam(self, id: str):
         query = exam_templates.delete().where(exam_templates.c.id == id)
         return await database.execute(query=query)
 

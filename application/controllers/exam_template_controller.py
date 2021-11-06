@@ -1,5 +1,5 @@
 from fastapi import HTTPException
-from domain.exam_template_model import ExamTemplate
+from domain.exam_template_model import (ExamTemplate, ExamTemplatePatch)
 from application.use_cases.exam_template import *
 
 class ExamTemplateController:

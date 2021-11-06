@@ -1,4 +1,5 @@
 from persistence.repositories.question_template_repository_postgres import QuestionTemplateRepositoryPostgres
+from application.serializers.question_template_serializer import QuestionTemplateSerializer
 
 etrp = QuestionTemplateRepositoryPostgres()
 
@@ -25,4 +26,4 @@ async def update_question_template(id, new_args):
     update_question_template = question_template_in_db.copy(update = update_data)
     
     result = await etrp.update_question_template(id, new_args)
-    return result
+    return QuestionTemplateSerializer.serialize(new_question_template)

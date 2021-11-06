@@ -1,5 +1,5 @@
 from fastapi import HTTPException
-from domain.question_template_model import QuestionTemplate
+from domain.question_template_model import (QuestionTemplate, QuestionTemplatePatch)
 from application.use_cases.question_template import *
 
 class QuestionTemplateController:
