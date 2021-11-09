@@ -16,23 +16,3 @@ async def add_exam_solution(args):
     )
     await etrp.add_exam_solution(exam_solution)
     return ExamSolutionSerializer.serialize(new_exam_solution)
-
-'''
-async def update_exam_solution(id, new_args):
-    exam_solution_to_update = await get_exam_solution(exam_solution_id)
-    if not exam_solution_to_update:
-        raise HTTPException(status_code=404, detail="Exam solution {exam_solution_id} not found")
-
-    exam_solution_in_db = ExamSolution(**exam_solution_to_update)
-    if update_args.name is not None:
-        exam_solution_in_db.name = update_args.name
-
-    if update_args.exams is not None:
-        exam_solution_in_db.exams = update_args.exams
-
-    update_data = exam_solution_in_db.dict(exclude_unset = True)
-    update_exam_solution = exam_solution_in_db.copy(update = update_data)
-    
-    result = await etrp.update_exam_solution(id, new_args)
-    return result
-'''

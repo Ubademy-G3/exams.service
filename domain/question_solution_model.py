@@ -3,7 +3,7 @@ from uuid import uuid4, UUID
 from typing import Optional
 
 class QuestionSolution(BaseModel):
-    id: UUID
+    id: UUID = uuid4()
     exam_id: UUID
     question: str
     type: str
@@ -19,3 +19,12 @@ class QuestionSolutionPatch(BaseModel):
     options: Optional[list]
     correct: Optional[int]
 '''
+
+class QuestionSolutionSchema(BaseModel):
+    exam_id: UUID
+    question: str
+    type: str
+    options: Optional[list]
+    correct: Optional[int]
+    user_id: UUID
+    answer: str

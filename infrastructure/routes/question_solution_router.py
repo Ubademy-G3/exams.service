@@ -4,8 +4,8 @@ from application.controllers.question_solution_controller import *
 
 router = APIRouter()
 
-@router.post('/', status_code = 201)
-async def create_question_solution(question_solution: QuestionSolution):
+@router.post('/', response_model=QuestionSolution, status_code = 201)
+async def create_question_solution(question_solution: QuestionSolutionSchema):
     return await QuestionSolutionController.create_question_solution(question_solution)
 
 @router.get('/{id}', response_model=QuestionSolution, status_code = 200)
@@ -23,9 +23,3 @@ async def delete_question_solution(id: str):
 @router.delete('/')
 async def delete_all_question_solutions():
     return await QuestionSolutionController.delete_all_question_solutions()
-
-'''
-@router.patch('/{id}', response_model = QuestionSolution, status_code = 200)
-async def update_question_solution(id: str, question_solution: QuestionSolution):
-    return await QuestionSolutionController.update_question_solution(id, question_solution)
-'''

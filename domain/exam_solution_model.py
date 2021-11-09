@@ -3,7 +3,7 @@ from uuid import uuid4, UUID
 from typing import Optional
 
 class ExamSolution(BaseModel):
-    id: UUID
+    id: UUID = uuid4()
     name: str
     course_id: UUID
     user_id: UUID
@@ -18,3 +18,12 @@ class ExamSolutionPatch(BaseModel):
     course_id: Optional[UUID]
     questions: Optional[list]
 '''
+
+class ExamSolutionSchema(BaseModel):
+    name: str
+    course_id: UUID
+    user_id: UUID
+    answers: list
+    graded: bool
+    score: int
+    aprobal_state: bool

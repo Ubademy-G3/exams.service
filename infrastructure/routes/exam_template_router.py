@@ -4,8 +4,8 @@ from application.controllers.exam_template_controller import *
 
 router = APIRouter()
 
-@router.post('/', status_code = 201)
-async def create_exam_template(exam_template: ExamTemplate):
+@router.post('/', response_model=ExamTemplate, status_code = 201)
+async def create_exam_template(exam_template: ExamTemplateSchema):
     return await ExamTemplateController.create_exam_template(exam_template)
 
 @router.get('/{id}', response_model=ExamTemplate, status_code = 200)

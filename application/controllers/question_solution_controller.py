@@ -1,4 +1,3 @@
-from fastapi import HTTPException
 from domain.question_solution_model import QuestionSolution
 from application.use_cases.question_solution import *
 
@@ -14,12 +13,6 @@ class QuestionSolutionController:
     @classmethod
     async def get_all_question_solutions(self):
         return await get_all_question_solutions()
-
-    '''
-    @classmethod
-    async def update_question_solution(self, question_solution_id, update_args):
-        return await update_question_solution(question_solution_id, update_question_solution)
-    '''
 
     @classmethod
     async def delete_question_solution(self, question_solution_id):

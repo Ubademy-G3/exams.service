@@ -4,8 +4,8 @@ from application.controllers.question_template_controller import *
 
 router = APIRouter()
 
-@router.post('/', status_code = 201)
-async def create_question_template(question_template: QuestionTemplate):
+@router.post('/', response_model=QuestionTemplate, status_code = 201)
+async def create_question_template(question_template: QuestionTemplateSchema):
     return await QuestionTemplateController.create_question_template(question_template)
 
 @router.get('/{id}', response_model=QuestionTemplate, status_code = 200)

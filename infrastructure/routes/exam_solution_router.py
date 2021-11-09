@@ -4,8 +4,8 @@ from application.controllers.exam_solution_controller import *
 
 router = APIRouter()
 
-@router.post('/', status_code = 201)
-async def create_exam_solution(exam_solution: ExamSolution):
+@router.post('/', response_model = ExamSolution, status_code = 201)
+async def create_exam_solution(exam_solution: ExamSolutionSchema):
     return await ExamSolutionController.create_exam_solution(exam_solution)
 
 @router.get('/{id}', response_model=ExamSolution, status_code = 200)
@@ -23,9 +23,3 @@ async def delete_exam_solution(id: str):
 @router.delete('/')
 async def delete_all_exam_solutions():
     return await ExamSolutionController.delete_all_exam_solutions()
-
-'''
-@router.patch('/{id}', response_model = ExamSolution, status_code = 200)
-async def update_exam_solution(id: str, exam_solution: ExamSolution):
-    return await ExamSolutionController.update_exam_solution(id, exam_solution)
-'''
