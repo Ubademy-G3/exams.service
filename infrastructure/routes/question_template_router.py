@@ -23,7 +23,3 @@ async def delete_question_template(id: str):
 @router.delete('/')
 async def delete_all_question_templates():
     return await QuestionTemplateController.delete_all_question_templates()
-
-@router.patch('/{id}', response_model = QuestionTemplate, status_code = 200)
-async def update_question_template(id: str, question_template: QuestionTemplatePatch):
-    return await QuestionTemplateController.update_question_template(id, question_template)

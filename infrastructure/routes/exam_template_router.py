@@ -23,7 +23,3 @@ async def delete_exam_template(id: str):
 @router.delete('/')
 async def delete_all_exam_templates():
     return await ExamTemplateController.delete_all_exam_templates()
-
-@router.patch('/{id}', response_model = ExamTemplate, status_code = 200)
-async def update_exam_template(id: str, exam_template: ExamTemplatePatch):
-    return await ExamTemplateController.update_exam_template(id, exam_template)

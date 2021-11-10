@@ -6,6 +6,7 @@ class ExamTemplate(BaseModel):
     id: UUID = uuid4()
     name: str
     course_id: UUID
+    active: bool = True
 
 class ExamTemplatePatch(BaseModel):
     name: Optional[str]

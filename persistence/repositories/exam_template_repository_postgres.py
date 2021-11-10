@@ -17,12 +17,6 @@ class ExamTemplateRepositoryPostgres(ExamTemplateRepository):
         query = exam_templates.select(exam_templates.c.id == id)
         return await database.fetch_one(query=query)
 
-    async def update_exam(self, id: str, payload: ExamTemplate):
-        query = (exam_templates.update().
-                 where(exam_templates.c.id == id)
-                 .values(**payload.dict()))
-        return await database.execute(query=query)
-
     async def delete_exam(self, id: str):
         query = exam_templates.delete().where(exam_templates.c.id == id)
         return await database.execute(query=query)
