@@ -9,16 +9,7 @@ class QuestionSolutionController:
     @classmethod
     async def get_question_solution(self, question_solution_id):
         return await get_question_solution(question_solution_id)
-    
-    @classmethod
-    async def get_all_question_solutions(self):
-        return await get_all_question_solutions()
 
     @classmethod
     async def delete_question_solution(self, question_solution_id):
         return await delete_question_solution(question_solution_id)
-
-    @classmethod
-    async def delete_all_question_solutions(self):
-        return await delete_all_question_solutions()
-            

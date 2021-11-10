@@ -9,18 +9,10 @@ class ExamTemplateRepositoryPostgres(ExamTemplateRepository):
         query = exam_templates.insert().values(**exam_template.dict())
         return await database.execute(query=query)
 
-    async def get_all_exams(self):
-        query = exam_templates.select()
-        return await database.fetch_all(query=query)
-
     async def get_exam_by_id(self, id: str):
         query = exam_templates.select(exam_templates.c.id == id)
         return await database.fetch_one(query=query)
 
     async def delete_exam(self, id: str):
         query = exam_templates.delete().where(exam_templates.c.id == id)
-        return await database.execute(query=query)
-
-    async def delete_all_exams(self):
-        query = exam_templates.delete()
         return await database.execute(query=query)

@@ -12,14 +12,6 @@ async def create_question_template(question_template: QuestionTemplateSchema):
 async def get_question_template(id: str):
     return await QuestionTemplateController.get_question_template(id)
 
-@router.get('/', response_model=List[QuestionTemplate], status_code = 200)
-async def get_all_question_templates():
-    return await QuestionTemplateController.get_all_question_templates()
-
 @router.delete('/{id}')
 async def delete_question_template(id: str):
     return await QuestionTemplateController.delete_question_template(id)
-
-@router.delete('/')
-async def delete_all_question_templates():
-    return await QuestionTemplateController.delete_all_question_templates()

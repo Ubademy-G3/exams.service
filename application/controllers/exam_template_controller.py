@@ -11,14 +11,6 @@ class ExamTemplateController:
         return await get_exam_template(exam_template_id)
     
     @classmethod
-    async def get_all_exam_templates(self):
-        return await get_all_exam_templates()
-    
-    @classmethod
     async def delete_exam_template(self, exam_template_id):
         return await delete_exam_template(exam_template_id)
-
-    @classmethod
-    async def delete_all_exam_templates(self):
-        return await delete_all_exam_templates()
             

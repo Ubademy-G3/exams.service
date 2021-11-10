@@ -15,5 +15,3 @@ question_templates = Table(
     Column('correct', Integer)
     
 )
-
-#va eso de foreign key?

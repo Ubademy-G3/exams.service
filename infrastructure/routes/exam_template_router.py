@@ -12,14 +12,6 @@ async def create_exam_template(exam_template: ExamTemplateSchema):
 async def get_exam_template(id: str):
     return await ExamTemplateController.get_exam_template(id)
 
-@router.get('/', response_model=List[ExamTemplate], status_code = 200)
-async def get_all_exam_templates():
-    return await ExamTemplateController.get_all_exam_templates()
-
 @router.delete('/{id}')
 async def delete_exam_template(id: str):
     return await ExamTemplateController.delete_exam_template(id)
-
-@router.delete('/')
-async def delete_all_exam_templates():
-    return await ExamTemplateController.delete_all_exam_templates()

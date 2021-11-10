@@ -12,14 +12,6 @@ async def create_question_solution(question_solution: QuestionSolutionSchema):
 async def get_question_solution(id: str):
     return await QuestionSolutionController.get_question_solution(id)
 
-@router.get('/', response_model=List[QuestionSolution], status_code = 200)
-async def get_all_question_solutions():
-    return await QuestionSolutionController.get_all_question_solutions()
-
 @router.delete('/{id}')
 async def delete_question_solution(id: str):
     return await QuestionSolutionController.delete_question_solution(id)
-
-@router.delete('/')
-async def delete_all_question_solutions():
-    return await QuestionSolutionController.delete_all_question_solutions()

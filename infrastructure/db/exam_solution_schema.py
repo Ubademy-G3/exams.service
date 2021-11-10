@@ -16,5 +16,3 @@ exam_solutions = Table(
     Column('aprobal_state', Boolean())
     
 )
-
-#va eso de foreign key?

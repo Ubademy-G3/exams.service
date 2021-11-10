@@ -12,5 +12,3 @@ exam_templates = Table(
     Column('course_id', UUID,  default= uuid.uuid4),
     Column('active', Boolean)
 )
-
-#va eso de foreign key?

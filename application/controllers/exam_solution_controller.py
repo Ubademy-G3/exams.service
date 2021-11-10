@@ -11,14 +11,6 @@ class ExamSolutionController:
         return await get_exam_solution(exam_solution_id)
     
     @classmethod
-    async def get_all_exam_solutions(self):
-        return await get_all_exam_solutions()
-    
-    @classmethod
     async def delete_exam_solution(self, exam_solution_id):
         return await delete_exam_solution(exam_solution_id)
-
-    @classmethod
-    async def delete_all_exam_solutions(self):
-        return await delete_all_exam_solutions()
             

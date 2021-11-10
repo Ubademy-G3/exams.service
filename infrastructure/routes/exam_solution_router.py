@@ -12,14 +12,6 @@ async def create_exam_solution(exam_solution: ExamSolutionSchema):
 async def get_exam_solution(id: str):
     return await ExamSolutionController.get_exam_solution(id)
 
-@router.get('/', response_model=List[ExamSolution], status_code = 200)
-async def get_all_exam_solutions():
-    return await ExamSolutionController.get_all_exam_solutions()
-
 @router.delete('/{id}')
 async def delete_exam_solution(id: str):
     return await ExamSolutionController.delete_exam_solution(id)
-
-@router.delete('/')
-async def delete_all_exam_solutions():
-    return await ExamSolutionController.delete_all_exam_solutions()
