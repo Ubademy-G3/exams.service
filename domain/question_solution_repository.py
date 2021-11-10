@@ -15,12 +15,6 @@ class QuestionSolutionRepository(ABC):
     def get_question_solution(self, id):
         pass
 
-    '''
-    @abstractmethod
-    def update_question_solution(self, id, payload):
-        pass
-    '''
-
     @abstractmethod
     def delete_question_solution(self, id):
         pass

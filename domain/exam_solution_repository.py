@@ -14,12 +14,6 @@ class ExamSolutionRepository(ABC):
     @abstractmethod
     def get_exam_solution(self, id):
         pass
-
-    '''
-    @abstractmethod
-    def update_exam_solution(self, id, payload):
-        pass
-    '''
     
     @abstractmethod
     def delete_exam_solution(self, id):

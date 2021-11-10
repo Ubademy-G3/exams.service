@@ -12,14 +12,6 @@ class QuestionSolution(BaseModel):
     user_id: UUID
     answer: str
 
-'''
-class QuestionSolutionPatch(BaseModel):
-    question: Optional[str]
-    type: Optional[str]
-    options: Optional[list]
-    correct: Optional[int]
-'''
-
 class QuestionSolutionSchema(BaseModel):
     exam_id: UUID
     question: str

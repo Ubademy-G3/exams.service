@@ -11,10 +11,6 @@ class QuestionTemplateController:
         return await get_all_question_templates()
 
     @classmethod
-    async def update_question_template(self, question_template_id, update_args):
-        return await update_question_template(question_template_id, update_question_template)
-
-    @classmethod
     async def delete_question_template(self, question_template_id):
         return await delete_question_template(question_template_id)
 

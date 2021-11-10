@@ -10,7 +10,6 @@ exam_templates = Table(
     Column('id', UUID, primary_key=True, default= uuid.uuid4),
     Column('name', String(50)),
     Column('course_id', UUID,  default= uuid.uuid4),
-    Column('questions', ARRAY(UUID, ForeignKey('question_templates.id')))
     
 )
 

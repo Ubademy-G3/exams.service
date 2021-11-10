@@ -13,11 +13,7 @@ class ExamTemplateController:
     @classmethod
     async def get_all_exam_templates(self):
         return await get_all_exam_templates()
-
-    @classmethod
-    async def update_exam_template(self, exam_template_id, update_args):
-        return await update_exam_template(exam_template_id, update_exam_template)
-
+    
     @classmethod
     async def delete_exam_template(self, exam_template_id):
         return await delete_exam_template(exam_template_id)

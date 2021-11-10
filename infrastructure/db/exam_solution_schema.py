@@ -11,7 +11,6 @@ exam_solutions = Table(
     Column('name', String(50)),
     Column('course_id', UUID, default= uuid.uuid4),
     Column('user_id', UUID, default= uuid.uuid4),
-    Column('answers', ARRAY(UUID, ForeignKey('question_solutions.id'))),
     Column('graded', Boolean()),
     Column('score', Integer()),
     Column('aprobal_state', Boolean())

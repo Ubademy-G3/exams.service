@@ -7,6 +7,5 @@ class ExamTemplateSerializer:
         return {
         "id": args.id,
         "name": args.name,
-        "course_id": args.course_id,
-        "questions": args.questions
+        "course_id": args.course_id
     }

@@ -7,23 +7,14 @@ class ExamSolution(BaseModel):
     name: str
     course_id: UUID
     user_id: UUID
-    answers: list
     graded: bool
     score: int
     aprobal_state: bool
-
-'''
-class ExamSolutionPatch(BaseModel):
-    name: Optional[str]
-    course_id: Optional[UUID]
-    questions: Optional[list]
-'''
 
 class ExamSolutionSchema(BaseModel):
     name: str
     course_id: UUID
     user_id: UUID
-    answers: list
     graded: bool
     score: int
     aprobal_state: bool
