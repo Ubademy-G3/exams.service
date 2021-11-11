@@ -1,6 +1,9 @@
 from pydantic import BaseModel
 from uuid import uuid4, UUID
 from typing import Optional
+from typing import List
+
+from domain.question_template_model import QuestionTemplateSchema
 
 class ExamTemplate(BaseModel):
     id: UUID = uuid4()
@@ -10,8 +13,9 @@ class ExamTemplate(BaseModel):
 
 class ExamTemplatePatch(BaseModel):
     name: Optional[str]
-    course_id: Optional[UUID]
+    active: Optional[bool]
 
 class ExamTemplateSchema(BaseModel):
     name: str
     course_id: UUID
+    questions: List[QuestionTemplateSchema]

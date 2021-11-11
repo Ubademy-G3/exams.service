@@ -1,4 +1,4 @@
-from domain.exam_template_model import ExamTemplate
+from domain.exam_template_model import (ExamTemplate, ExamTemplatePatch)
 from infrastructure.db.database import database
 from infrastructure.db.exam_template_schema import exam_templates
 from domain.exam_template_repository import ExamTemplateRepository
@@ -15,4 +15,10 @@ class ExamTemplateRepositoryPostgres(ExamTemplateRepository):
 
     async def delete_exam(self, id: str):
         query = exam_templates.delete().where(exam_templates.c.id == id)
+        return await database.execute(query=query)
+
+    async def update_exam(self, id: str, payload: ExamTemplatePatch):
+        query = (exam_templates.update().
+                where(exam_templates.c.id == id)
+                .values(**payload.dict()))
         return await database.execute(query=query)
