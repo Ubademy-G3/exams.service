@@ -1,5 +1,6 @@
 from domain.exam_solution_model import *
 from application.use_cases.exam_solution.add_exam_solution import add_exam_solution
+from application.use_cases.exam_solution.update_exam_solution import update_exam_solution
 from application.use_cases.exam_solution.get_exam_solution import get_exam_solution
 from application.use_cases.exam_solution.delete_exam_solution import delete_exam_solution
 
