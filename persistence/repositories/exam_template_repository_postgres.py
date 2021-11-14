@@ -13,6 +13,10 @@ class ExamTemplateRepositoryPostgres(ExamTemplateRepository):
         query = exam_templates.select(exam_templates.c.id == id)
         return await database.fetch_one(query=query)
 
+    async def get_all_exam_templates(self):
+        query = exam_templates.select()
+        return await database.fetch_all(query=query)
+
     async def delete_exam_template(self, id: str):
         query = exam_templates.delete().where(exam_templates.c.id == id)
         return await database.execute(query=query)

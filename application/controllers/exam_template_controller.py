@@ -1,5 +1,6 @@
 from domain.exam_template_model import *
 from application.use_cases.exam_template.add_exam_template import add_exam_template
+from application.use_cases.exam_template.update_exam_template import update_exam_template
 from application.use_cases.exam_template.get_exam_template import get_exam_template
 from application.use_cases.exam_template.delete_exam_template import delete_exam_template
 
