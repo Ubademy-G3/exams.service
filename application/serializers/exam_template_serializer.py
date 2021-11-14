@@ -5,8 +5,8 @@ class ExamTemplateSerializer:
     @classmethod
     def serialize(self, exam_template: ExamTemplate):
         return {
-        "id": args.id,
-        "name": args.name,
-        "course_id": args.course_id,
-        "active": args.active
+        "id": exam_template.id,
+        "name": exam_template.name,
+        "course_id": exam_template.course_id,
+        "active": exam_template.active
     }

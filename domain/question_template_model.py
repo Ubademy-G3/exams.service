@@ -7,24 +7,25 @@ class QuestionTemplate(BaseModel):
     exam_id: UUID
     question: str
     type: str
-    options: Optional[list]
+    options: Optional[dict]
     correct: Optional[int]
 '''
 class QuestionTemplatePatch(BaseModel):
     question: Optional[str]
     type: Optional[str]
-    options: Optional[list]
+    options: Optional[dict]
     correct: Optional[int]
 '''
 class QuestionTemplateUsable(BaseModel):
     exam_id: UUID
     question: str
     type: str
-    options: Optional[list]
+    options: Optional[dict]
     correct: Optional[int]
 
 class QuestionTemplateSchema(BaseModel):
+    exam_id: UUID
     question: str
     type: str
-    options: Optional[list]
+    options: Optional[dict]
     correct: Optional[int]

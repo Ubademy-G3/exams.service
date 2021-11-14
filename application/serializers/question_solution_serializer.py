@@ -5,12 +5,12 @@ class QuestionSolutionSerializer:
     @classmethod
     def serialize(self, question_solution: QuestionSolution):
         return {
-        "id": args.id,
-        "exam_id": args.exam_id,
-        "question": args.question,
-        "type": args.type,
-        "options": args.options,
-        "correct": args.correct,
-        "user_id": args.user_id,
-        "answer": args.answer
+        "id": question_solution.id,
+        "exam_id": question_solution.exam_id,
+        "question": question_solution.question,
+        "type": question_solution.type,
+        "options": question_solution.options,
+        "correct": question_solution.correct,
+        "user_id": question_solution.user_id,
+        "answer": question_solution.answer
     }

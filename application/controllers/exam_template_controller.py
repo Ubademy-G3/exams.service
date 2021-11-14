@@ -1,10 +1,12 @@
-from domain.exam_template_model import (ExamTemplate, ExamTemplatePatch)
-from application.use_cases.exam_template import *
+from domain.exam_template_model import *
+from application.use_cases.exam_template.add_exam_template import add_exam_template
+from application.use_cases.exam_template.get_exam_template import get_exam_template
+from application.use_cases.exam_template.delete_exam_template import delete_exam_template
 
 class ExamTemplateController:
     @classmethod
     async def create_exam_template(self, args):
-        return await add_exam_template(new_exam_template)
+        return await add_exam_template(args)
 
     @classmethod
     async def get_exam_template(self, exam_template_id):

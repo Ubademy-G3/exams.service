@@ -1,4 +1,4 @@
-from sqlalchemy import (Column, Integer, String, Table, MetaData, ForeignKey)
+from sqlalchemy import (Column, Integer, String, Table, MetaData, ForeignKey, JSON)
 from sqlalchemy.dialects.postgresql import (UUID, ARRAY)
 import uuid
 
@@ -11,7 +11,7 @@ question_solutions = Table(
     Column('exam_id', UUID, ForeignKey('exam_templates.id')),
     Column('question', String(300)),
     Column('type', String(15)),
-    Column('options', ARRAY(String(50))),
+    Column('options', JSON()),
     Column('correct', Integer),
     Column('user_id', UUID, default= uuid.uuid4),
     Column('answer', String(300))

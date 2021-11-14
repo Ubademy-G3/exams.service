@@ -2,5 +2,5 @@ from persistence.repositories.question_template_repository_postgres import Quest
 
 etrp = QuestionTemplateRepositoryPostgres()
 
-async def delete_question_template(id):
-    return await etrp.delete_question_template(id)
+async def delete_question_templates(id):
+    return await etrp.delete_question_templates(id)

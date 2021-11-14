@@ -9,10 +9,10 @@ class QuestionTemplateRepositoryPostgres(QuestionTemplateRepository):
         query = question_templates.insert().values(**question_template.dict())
         return await database.execute(query=query)
 
-    async def get_question_by_id(self, id: str):
-        query = question_templates.select(question_templates.c.id == id)
-        return await database.fetch_one(query=query)
+    async def get_question_templates(self, exam_template_id: str):
+        query = question_templates.select(question_templates.c.exam_id == exam_template_id)
+        return await database.fetch_all(query=query)
 
-    async def delete_question(self, id: str):
-        query = question_templates.delete().where(question_templates.c.id == id)
+    async def delete_question_templates(self, exam_template_id: str):
+        query = question_templates.delete().where(question_templates.c.exam_id == exam_template_id)
         return await database.execute(query=query)

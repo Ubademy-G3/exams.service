@@ -4,7 +4,7 @@ from application.controllers.exam_solution_controller import *
 
 router = APIRouter()
 
-@router.post('/', response_model = ExamSolution, status_code = 201)
+@router.post('/', response_model=ExamSolution, status_code = 201)
 async def create_exam_solution(exam_solution: ExamSolutionSchema):
     return await ExamSolutionController.create_exam_solution(exam_solution)
 

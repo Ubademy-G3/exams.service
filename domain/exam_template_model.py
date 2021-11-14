@@ -18,4 +18,4 @@ class ExamTemplatePatch(BaseModel):
 class ExamTemplateSchema(BaseModel):
     name: str
     course_id: UUID
-    questions: List[QuestionTemplateSchema]
+    #questions: List[QuestionTemplateSchema]

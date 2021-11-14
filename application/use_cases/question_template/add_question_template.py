@@ -1,5 +1,6 @@
 from persistence.repositories.question_template_repository_postgres import QuestionTemplateRepositoryPostgres
 from application.serializers.question_template_serializer import QuestionTemplateSerializer
+from domain.question_template_model import QuestionTemplate
 
 etrp = QuestionTemplateRepositoryPostgres()
 
@@ -11,5 +12,5 @@ async def add_question_template(args):
         options = args.options,
         correct = args.correct
     )
-    await etrp.add_question_template(question_template)
+    await etrp.add_question_template(new_question_template)
     return QuestionTemplateSerializer.serialize(new_question_template)

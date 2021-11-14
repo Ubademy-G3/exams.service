@@ -1,7 +1,7 @@
 from fastapi import FastAPI
-#from infrastructure.routes import (exam_template_router, exam_solution_router, question_template_router, question_solution_router)
-from infrastructure.routes import question_template_router
-from infrastructure.routes import template_router
+from infrastructure.routes import (exam_template_router, exam_solution_router, question_template_router, question_solution_router)
+#from infrastructure.routes import question_template_router
+#from infrastructure.routes import template_router
 from infrastructure.db.database import database, engine
 from infrastructure.db.exam_template_schema import metadata
 
@@ -19,14 +19,14 @@ async def startup():
 async def shutdown():
     await database.disconnect()
 
-app.include_router(question_template_router.router, prefix='/exams/questions/templates', tags=['question-templates'])
+app.include_router(question_template_router.router, prefix='/exams/{exam_id}/questions/templates', tags=['question-templates'])
 
-#app.include_router(question_solution_router.router, prefix='/exams/questions/solutions', tags=['question-solutions'])
+app.include_router(question_solution_router.router, prefix='/exams/{exam_id}/questions/solutions', tags=['question-solutions'])
 
-#app.include_router(exam_template_router.router, prefix='/exams/templates', tags=['exam-templates'])
+app.include_router(exam_template_router.router, prefix='/exams/templates', tags=['exam-templates'])
 
-#app.include_router(exam_solution_router.router, prefix='/exams/solutions', tags=['exam-solutions'])
+app.include_router(exam_solution_router.router, prefix='/exams/{exam_id}/solutions', tags=['exam-solutions'])
 
 
-app.include_router(template_router.router, prefix='/exams/templates', tags=['exam-templates'])
+#app.include_router(template_router.router, prefix='/exams/templates', tags=['exam-templates'])
 

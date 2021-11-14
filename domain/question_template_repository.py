@@ -8,9 +8,9 @@ class QuestionTemplateRepository(ABC):
         pass
 
     @abstractmethod
-    def get_question_template(self, id):
+    def get_question_templates(self, exam_id):
         pass
 
     @abstractmethod
-    def delete_question_template(self, id):
+    def delete_question_templates(self, exam_id):
         pass

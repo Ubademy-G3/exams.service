@@ -6,10 +6,10 @@ class QuestionTemplateSerializer:
     @classmethod
     def serialize(self, question_template: QuestionTemplate):
         return {
-        "id": args.id,
-        "exam_id": args.exam_id,
-        "question": args.question,
-        "type": args.type,
-        "options": args.options,
-        "correct": args.correct
+        "id": question_template.id,
+        "exam_id": question_template.exam_id,
+        "question": question_template.question,
+        "type": question_template.type,
+        "options": question_template.options,
+        "correct": question_template.correct
     }

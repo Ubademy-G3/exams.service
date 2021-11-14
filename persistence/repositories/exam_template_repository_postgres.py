@@ -9,15 +9,15 @@ class ExamTemplateRepositoryPostgres(ExamTemplateRepository):
         query = exam_templates.insert().values(**exam_template.dict())
         return await database.execute(query=query)
 
-    async def get_exam_by_id(self, id: str):
+    async def get_exam_template(self, id: str):
         query = exam_templates.select(exam_templates.c.id == id)
         return await database.fetch_one(query=query)
 
-    async def delete_exam(self, id: str):
+    async def delete_exam_template(self, id: str):
         query = exam_templates.delete().where(exam_templates.c.id == id)
         return await database.execute(query=query)
 
-    async def update_exam(self, id: str, payload: ExamTemplatePatch):
+    async def update_exam_template(self, id: str, payload: ExamTemplatePatch):
         query = (exam_templates.update().
                 where(exam_templates.c.id == id)
                 .values(**payload.dict()))

@@ -5,11 +5,11 @@ class ExamSolutionSerializer:
     @classmethod
     def serialize(self, exam_solution: ExamSolution):
         return {
-        "id": args.id,
-        "name": args.name,
-        "course_id": args.course_id,
-        "user_id": args.user_id,
-        "graded": args.graded,
-        "score": args.score,
-        "aprobal_state": args.aprobal_state
+        "id": exam_solution.id,
+        "name": exam_solution.name,
+        "course_id": exam_solution.course_id,
+        "user_id": exam_solution.user_id,
+        "graded": exam_solution.graded,
+        "score": exam_solution.score,
+        "aprobal_state": exam_solution.aprobal_state
     }

@@ -2,5 +2,5 @@ from persistence.repositories.question_solution_repository_postgres import Quest
 
 etrp = QuestionSolutionRepositoryPostgres()
 
-async def get_question_solution(id):
-    return await etrp.get_question_solution(id)
+async def get_question_solutions(id):
+    return await etrp.get_question_solutions(id)
