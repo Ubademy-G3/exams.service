@@ -3,7 +3,6 @@ from uuid import uuid4, UUID
 from typing import Optional
 
 class QuestionSolution(BaseModel):
-    id: UUID = uuid4()
     exam_id: UUID
     question: str
     type: str

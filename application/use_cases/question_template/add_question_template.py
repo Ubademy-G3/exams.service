@@ -6,6 +6,7 @@ etrp = QuestionTemplateRepositoryPostgres()
 
 async def add_question_template(args):
     new_question_template = QuestionTemplate(
+        id = uuid4(),
         exam_id = args.exam_id,
         question = args.question,
         type = args.type,
