@@ -8,11 +8,14 @@ services:
     volumes:
       - .:/app/
     ports:
-      - 8002:8000
+      - 8003:8000
     environment:
       - DATABASE_URL=postgresql://hello_fastapi:hello_fastapi@db/hello_fastapi_dev
     depends_on:
       - db
+    networks:
+      - my-network
+      - external-net
   db:
     image: postgres:13-alpine
     volumes:
@@ -23,8 +26,9 @@ services:
       - POSTGRES_USER=hello_fastapi
       - POSTGRES_PASSWORD=hello_fastapi
       - POSTGRES_DB=hello_fastapi_dev
-  pgadmin:
-      container_name: pgadmin
+    networks:
+      - my-network
+  pgadmin_exams:
       image: dpage/pgadmin4
       environment:
         - PGADMIN_DEFAULT_EMAIL=pgadmin4@pgadmin.org
@@ -33,5 +37,13 @@ services:
         - "5050:80"
       depends_on:
         - db
+      networks:
+        - my-network
 volumes:
   postgres_data:
+networks:
+  my-network:
+    driver: bridge
+  external-net:
+    external: 
+      name: ubademy
