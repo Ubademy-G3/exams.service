@@ -6,6 +6,7 @@ etrp = QuestionSolutionRepositoryPostgres()
 
 async def add_question_solution(args):
     new_question_solution = QuestionSolution(
+        id = uuid4(),
         exam_id = args.exam_id,
         question = args.question,
         type = args.type,

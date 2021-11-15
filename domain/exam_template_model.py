@@ -6,7 +6,7 @@ from typing import List
 from domain.question_template_model import QuestionTemplateSchema
 
 class ExamTemplate(BaseModel):
-    id: UUID = uuid4()
+    id: UUID
     name: str
     course_id: UUID
     active: bool = True

@@ -3,7 +3,7 @@ from uuid import uuid4, UUID
 from typing import Optional
 
 class QuestionTemplate(BaseModel):
-    id: UUID = uuid4()
+    id: UUID
     exam_id: UUID
     question: str
     type: str

@@ -6,6 +6,7 @@ etrp = ExamTemplateRepositoryPostgres()
 
 async def add_exam_template(args):
     new_exam_template = ExamTemplate(
+        id = uuid4(),
         name = args.name,
         course_id = args.course_id
     )
