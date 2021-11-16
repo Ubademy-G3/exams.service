@@ -2,18 +2,27 @@ from pydantic import BaseModel
 from uuid import uuid4, UUID
 from typing import Optional
 from typing import List
+'''
+from enum import Enum
 
-from domain.question_template_model import QuestionTemplateSchema
-
+class ExamStateEnum(Enum):
+    draft = 1
+    active = 2
+    obsolete = 3
+'''
 class ExamTemplate(BaseModel):
+    id: UUID
     name: str
     course_id: UUID
-    active: bool = True
+    state: ExamStateEnum
 
 class ExamTemplatePatch(BaseModel):
     name: Optional[str]
-    active: Optional[bool]
+    state: Optional[str]
+    state: Optional[str]
 
 class ExamTemplateSchema(BaseModel):
     name: str
     course_id: UUID
+    state: str
+    state: str

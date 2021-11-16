@@ -3,6 +3,7 @@ from uuid import uuid4, UUID
 from typing import Optional
 
 class ExamSolution(BaseModel):
+    id: UUID
     name: str
     course_id: UUID
     user_id: UUID
@@ -10,8 +11,8 @@ class ExamSolution(BaseModel):
     score: int = 0
     aprobal_state: bool = False
 
-
 class ExamSolutionPatch(BaseModel):
+    name: Optional[str]
     graded: Optional[bool]
     score: Optional[int]
     aprobal_state: Optional[bool]

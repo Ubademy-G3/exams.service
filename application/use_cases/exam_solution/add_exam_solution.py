@@ -1,6 +1,7 @@
 from persistence.repositories.exam_solution_repository_postgres import ExamSolutionRepositoryPostgres
 from application.serializers.exam_solution_serializer import ExamSolutionSerializer
 from domain.exam_solution_model import ExamSolution
+from uuid import uuid4
 
 etrp = ExamSolutionRepositoryPostgres()
 

@@ -15,6 +15,11 @@ async def get_exam_template(exam_id: str,
                                 apikey: Optional[str] = Header(None)):
     return await ExamTemplateController.get_exam_template(exam_id)
 
+@router.get('course/{course_id}', response_model=List[ExamTemplate], status_code = 200)
+async def get_exam_template(course_id: str,
+                                apikey: Optional[str] = Header(None)):
+    return await ExamTemplateController.get_exam_templates_from_course(course_id)
+
 @router.delete('/{exam_id}')
 async def delete_exam_template(exam_id: str,
                                 apikey: Optional[str] = Header(None)):

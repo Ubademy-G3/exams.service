@@ -1,6 +1,6 @@
 from persistence.repositories.exam_template_repository_postgres import ExamTemplateRepositoryPostgres
 from domain.exam_template_model import *
-from errors.http_error import NotFoundError
+from exeptions.http_exeption import NotFoundExeption
 from application.serializers.exam_template_serializer import ExamTemplateSerializer
 
 etrp = ExamTemplateRepositoryPostgres()
@@ -9,7 +9,7 @@ async def update_exam_template(exam_template_id, new_args):
     
     exam_template_to_update = await etrp.get_exam_template(exam_template_id)
     if not exam_template_to_update:
-        raise NotFoundError("Exam template {}".format(exam_template_id))
+        raise NotFoundExeption("Exam template {}".format(exam_template_id))
 
     exam_template_in_db = ExamTemplate(**exam_template_to_update)
 
