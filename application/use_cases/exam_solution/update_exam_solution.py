@@ -1,6 +1,6 @@
 from persistence.repositories.exam_solution_repository_postgres import ExamSolutionRepositoryPostgres
 from domain.exam_solution_model import *
-from errors.http_error import NotFoundError
+from exeptions.http_exeption import NotFoundExeption
 from application.serializers.exam_solution_serializer import ExamSolutionSerializer
 
 etrp = ExamSolutionRepositoryPostgres()
@@ -9,7 +9,7 @@ async def update_exam_solution(exam_solution_id, new_args):
     
     exam_solution_to_update = await etrp.get_exam_solution(exam_solution_id)
     if not exam_solution_to_update:
-        raise NotFoundError("Exam solution {}".format(exam_solution_id))
+        raise NotFoundExeption("Exam solution {}".format(exam_solution_id))
 
     exam_solution_in_db = ExamSolution(**exam_solution_to_update)
 

@@ -10,23 +10,28 @@ async def create_exam_template(exam_template: ExamTemplateSchema,
                                 apikey: Optional[str] = Header(None)):
     return await ExamTemplateController.create_exam_template(exam_template)
 
-@router.get('/{id}', response_model=ExamTemplate, status_code = 200)
-async def get_exam_template(id: str,
+@router.get('/{exam_id}', response_model=ExamTemplate, status_code = 200)
+async def get_exam_template(exam_id: str,
                                 apikey: Optional[str] = Header(None)):
-    return await ExamTemplateController.get_exam_template(id)
+    return await ExamTemplateController.get_exam_template(exam_id)
 
-@router.delete('/{id}')
-async def delete_exam_template(id: str,
+@router.get('course/{course_id}', response_model=List[ExamTemplate], status_code = 200)
+async def get_exam_template(course_id: str,
                                 apikey: Optional[str] = Header(None)):
-    return await ExamTemplateController.delete_exam_template(id)
+    return await ExamTemplateController.get_exam_templates_from_course(course_id)
+
+@router.delete('/{exam_id}')
+async def delete_exam_template(exam_id: str,
+                                apikey: Optional[str] = Header(None)):
+    return await ExamTemplateController.delete_exam_template(exam_id)
 
 
-@router.patch('/{id}', response_model = ExamTemplate, status_code = 200)
+@router.patch('/{exam_id}', response_model = ExamTemplate, status_code = 200)
 async def update_exam_template(
-                        id: str,
+                        exam_id: str,
                         exam_template: ExamTemplatePatch,
                         apikey: Optional[str] = Header(None)
                     ):
 
     auth_service.check_api_key(apikey)
-    return await ExamTemplateController.update_exam_template(id, exam_template)
+    return await ExamTemplateController.update_exam_template(exam_id, exam_template)

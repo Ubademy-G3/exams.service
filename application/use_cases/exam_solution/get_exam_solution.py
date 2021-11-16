@@ -1,10 +1,10 @@
 from persistence.repositories.exam_solution_repository_postgres import ExamSolutionRepositoryPostgres
-from errors.http_error import NotFoundError
+from exeptions.http_exeption import NotFoundExeption
 
 etrp = ExamSolutionRepositoryPostgres()
 
 async def get_exam_solution(exam_solution_id):
     exam_solution = await etrp.get_exam_solution(exam_solution_id)
     if exam_solution is None:
-        raise NotFoundError("Exam solution {}".format(exam_solution_id))
+        raise NotFoundExeption("Exam solution {}".format(exam_solution_id))
     return exam_solution
