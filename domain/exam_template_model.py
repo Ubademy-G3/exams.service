@@ -14,7 +14,7 @@ class ExamTemplate(BaseModel):
     id: UUID
     name: str
     course_id: UUID
-    state: ExamStateEnum
+    state: str#ExamStateEnum
 
 class ExamTemplatePatch(BaseModel):
     name: Optional[str]
