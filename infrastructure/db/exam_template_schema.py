@@ -12,21 +12,18 @@ class ExamTemplate(Base):
     name = Column(String(50), nullable = False)
     course_id = Column(UUID, nullable = False)
     state = Column(String(10), nullable = False)#Enum(ExamStateEnum))
+    max_score = Column(Integer)
+    has_multiple_choice = Column(Boolean)
+    has_written = Column(Boolean)
+    has_media = Column(Boolean)
     
-    def __init__(self, id, name, course_id, state):
+    def __init__(self, id, name, course_id, state, max_score, has_multiple_choice, has_written, has_media):
         self.id = id
         self.name = name
         self.course_id = course_id
         self.state = state
-
-'''
-metadata = MetaData()
-
-exam_templates = Table(
-    'exam_templates',
-    metadata,
-    Column('id', UUID, primary_key=True, default= uuid.uuid4),
-    Column('name', String(50)),
-    Column('course_id', UUID,  default= uuid.uuid4),
-    Column('state', String(10))#Enum(ExamStateEnum))
-)'''
+        self.max_score = max_score
+        self.has_multiple_choice = has_multiple_choice
+        self.has_written = has_written
+        self.has_media = has_media
+        

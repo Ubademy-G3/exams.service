@@ -22,9 +22,11 @@ class QuestionTemplate(BaseModel):
 class QuestionTemplateSchema(BaseModel):
     exam_id: UUID
     question: str
-    type: str
+    is_written: bool
+    is_media: bool
     options: Optional[dict]
     correct: Optional[int]
+    value: Optional[int]
 
 class QuestionTemplateDB(QuestionTemplateSchema):
     id: UUID
@@ -36,6 +38,8 @@ class QuestionTemplateList(BaseModel):
 
 class QuestionTemplatePatch(BaseModel):
     question: Optional[str]
-    type: Optional[str]
+    is_written: Optional[bool]
+    is_media: Optional[bool]
     options: Optional[dict]
     correct: Optional[int]
+    value: Optional[int]

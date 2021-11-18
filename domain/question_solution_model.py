@@ -14,12 +14,8 @@ class QuestionSolution(BaseModel):
 '''
 
 class QuestionSolutionSchema(BaseModel):
-    exam_id: UUID
-    question: str
-    type: str
-    options: Optional[list]
-    correct: Optional[int]
-    user_id: UUID
+    exam_solution_id: UUID
+    question_template_id: UUID
     answer: str
 
 class QuestionSolutionDB(QuestionSolutionSchema):
@@ -31,8 +27,5 @@ class QuestionSolutionList(BaseModel):
     QuestionSolutions: List[QuestionSolutionDB]
 
 class QuestionSolutionPatch(BaseModel):
-    question: Optional[str]
-    type: Optional[str]
-    options: Optional[list]
-    correct: Optional[int]
     answer: Optional[str]
+    score: Optional[int]

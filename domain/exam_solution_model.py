@@ -12,9 +12,9 @@ class ExamSolution(BaseModel):
     aprobal_state: bool = False
 '''
 class ExamSolutionSchema(BaseModel):
-    name: str
     course_id: UUID
     user_id: UUID
+    exam_template_id: UUID
 
 class ExamSolutionDB(ExamSolutionSchema):
     id: UUID
@@ -30,7 +30,6 @@ class ExamSolutionList(BaseModel):
     ExamSolutions: List[ExamSolutionDB]
 
 class ExamSolutionPatch(BaseModel):
-    name: Optional[str]
     graded: Optional[bool]
     score: Optional[int]
     aprobal_state: Optional[bool]

@@ -19,8 +19,6 @@ class ExamTemplate(BaseModel):
 class ExamTemplateSchema(BaseModel):
     name: str
     course_id: UUID
-    state: str
-    state: str
 
 class ExamTemplateDB(ExamTemplateSchema):
     id: UUID
@@ -33,4 +31,7 @@ class ExamTemplateList(BaseModel):
 class ExamTemplatePatch(BaseModel):
     name: Optional[str]
     state: Optional[str]
-    state: Optional[str]
+    max_score: Optional[int]
+    has_multiple_choice: Optional[bool]
+    has_written: Optional[bool]
+    has_media: Optional[bool]
