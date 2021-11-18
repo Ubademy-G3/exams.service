@@ -1,6 +1,6 @@
 from pydantic import BaseModel
 from uuid import uuid4, UUID
-from typing import Optional
+from typing import Optional, List
 '''
 from enum import Enum
 
@@ -9,6 +9,7 @@ class QuestionTypeEnum(Enum):
     written = 2
     media = 3
 '''
+'''
 class QuestionTemplate(BaseModel):
     id: UUID
     exam_id: UUID
@@ -16,16 +17,25 @@ class QuestionTemplate(BaseModel):
     type: str#QuestionTypeEnum
     options: Optional[dict]
     correct: Optional[int]
-
-class QuestionTemplatePatch(BaseModel):
-    question: Optional[str]
-    type: Optional[str]
-    options: Optional[dict]
-    correct: Optional[int]
+'''
 
 class QuestionTemplateSchema(BaseModel):
     exam_id: UUID
     question: str
     type: str
+    options: Optional[dict]
+    correct: Optional[int]
+
+class QuestionTemplateDB(QuestionTemplateSchema):
+    id: UUID
+
+class QuestionTemplateList(BaseModel):
+    amount: int
+    exam_template_id: UUID
+    QuestionTemplates: List[QuestionTemplateDB]
+
+class QuestionTemplatePatch(BaseModel):
+    question: Optional[str]
+    type: Optional[str]
     options: Optional[dict]
     correct: Optional[int]

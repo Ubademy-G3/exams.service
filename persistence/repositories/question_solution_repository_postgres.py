@@ -1,18 +1,24 @@
-from domain.question_solution_model import QuestionSolution
-from infrastructure.db.database import database
-from infrastructure.db.question_solution_schema import question_solutions
-from domain.question_solution_repository import QuestionSolutionRepository
+from infrastructure.db.question_solution_schema import QuestionSolution
+from sqlalchemy import func
 
-class QuestionSolutionRepositoryPostgres(QuestionSolutionRepository):
+class QuestionSolutionRepositoryPostgres():
 
-    async def add_question_solution(self, question_solution: QuestionSolution):
-        query = question_solutions.insert().values(**question_solution.dict())
-        return await database.execute(query=query)
+    def add_question_solution(self, question_solution):
+        db.add(question_solution)
+        db.commit()
 
-    async def get_question_solutions(self, exam_solution_id: str):
-        query = question_solutions.select(question_solutions.c.exam_id == exam_solution_id)
-        return await database.fetch_all(query=query)
+    def get_question_solution(self, question_solution_id):
+        question_solution = db.query(QuestionSolution).filter(QuestionTemplate.id == question_solution_id)
+        return question_solution
 
-    async def delete_question_solutions(self, exam_solution_id: str):
-        query = question_solutions.delete().where(question_solutions.c.exam_id == exam_solution_id)
-        return await database.execute(query=query)
+    def get_question_solutions_by_exam_solution_id(self, exam_solution_id):
+        query = db.query(QuestionSolution).filter(QuestionTemplate.exam_solution_id == exam_solution_id)
+        question_solutions = query.all()
+        return question_solutions
+
+    def delete_question_solutions(self, question_solutions):
+        db.delete(question_solutions)
+        db.commit()
+
+    def update_exam_solution(self, db):
+        db.commit()

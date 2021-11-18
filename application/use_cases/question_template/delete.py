@@ -3,8 +3,8 @@ from exeptions.http_exeption import NotFoundExeption
 
 etrp = QuestionTemplateRepositoryPostgres()
 
-async def delete_question_templates(question_template_id):
-    question_templates = await etrp.get_question_templates(question_template_id)
+def delete_question_templates(db, question_template_id):
+    question_templates = etrp.get_question_templates(db, question_template_id)
     if not question_templates:
         raise NotFoundExeption("Question template {}".format(question_template_id))
-    return  await etrp.delete_question_templates(question_template_id)
+    return etrp.delete_question_templates(db, question_template_id)

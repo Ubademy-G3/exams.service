@@ -1,24 +1,29 @@
-from domain.exam_solution_model import (ExamSolution, ExamSolutionPatch)
-from infrastructure.db.database import database
-from infrastructure.db.exam_solution_schema import exam_solutions
-from domain.exam_solution_repository import ExamSolutionRepository
+from infrastructure.db.exam_solution_schema import ExamSolution
+from sqlalchemy import func
 
-class ExamSolutionRepositoryPostgres(ExamSolutionRepository):
+class ExamSolutionRepositoryPostgres():
 
-    async def add_exam_solution(self, exam_solution: ExamSolution):
-        query = exam_solutions.insert().values(**exam_solution.dict())
-        return await database.execute(query=query)
+    def add_exam_solution(self, db, exam_solution):
+        db.add(exam_solution)
+        db.commit()
 
-    async def get_exam_solution(self, exam_solution_id: str):
-        query = exam_solutions.select(exam_solutions.c.id == exam_solution_id)
-        return await database.fetch_one(query=query)
+    def get_exam_solution(self, db, exam_solution_id):
+        exam_solution = db.query(ExamSolution).filter(ExamSolution.id == exam_solution_id)
+        return exam_solution
 
-    async def delete_exam_solution(self, exam_solution_id: str):
-        query = exam_solutions.delete().where(exam_solutions.c.id == exam_solution_id)
-        return await database.execute(query=query)
+    def get_exam_solutions_by_exam_id(self, db, exam_template_id):
+        query = db.query(ExamSolution).filter(ExamSolution.exam_id == exam_template_id)
+        exam_templates = query.all()
+        return exam_solutions
+    
+    def get_exam_solutions_by_user_id(self, db, user_id):
+        query = db.query(ExamSolution).filter(ExamSolution.user_id == user_id)
+        exam_templates = query.all()
+        return exam_solutions
+    
+    def delete_exam_solution(self, db, exam_solution):
+        db.delete(exam_solution)
+        db.commit()
 
-    async def update_exam_solution(self, exam_solution_id: str, payload: ExamSolutionPatch):
-        query = (exam_solutions.update().
-                where(exam_solutions.c.id == exam_solution_id)
-                .values(**payload.dict()))
-        return await database.execute(query=query)
+    def update_exam_solution(self, db):
+        db.commit()

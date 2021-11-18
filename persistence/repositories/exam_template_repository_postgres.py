@@ -1,28 +1,24 @@
-from domain.exam_template_model import (ExamTemplate, ExamTemplatePatch)
-from infrastructure.db.database import database
-from infrastructure.db.exam_template_schema import exam_templates
-from domain.exam_template_repository import ExamTemplateRepository
+from infrastructure.db.exam_template_schema import ExamTemplate
+from sqlalchemy import func
 
-class ExamTemplateRepositoryPostgres(ExamTemplateRepository):
+class ExamTemplateRepositoryPostgres():
 
-    async def add_exam_template(self, exam_template: ExamTemplate):
-        query = exam_templates.insert().values(**exam_template.dict())
-        return await database.execute(query=query)
+    def add_exam_template(self, db, exam_template):
+        db.add(exam_template)
+        db.commit()
 
-    async def get_exam_template(self, exam_template_id: str):
-        query = exam_templates.select(exam_templates.c.id == exam_template_id)
-        return await database.fetch_one(query=query)
+    def get_exam_template(self, db, exam_template_id):
+        exam_template = db.query(ExamTemplate).filter(ExamTemplate.id == exam_template_id)
+        return exam_template
 
-    async def get_all_exam_templates(self):
-        query = exam_templates.select()
-        return await database.fetch_all(query=query)
+    def get_exam_templates_by_course_id(self, db, course_id):
+        query = db.query(ExamTemplate).filter(ExamTemplate.course_id == course_id)
+        exam_templates = query.all()
+        return exam_templates
+    
+    def delete_exam_template(self, db, exam_template):
+        db.delete(exam_template)
+        db.commit()
 
-    async def delete_exam_template(self, exam_template_id: str):
-        query = exam_templates.delete().where(exam_templates.c.id == exam_template_id)
-        return await database.execute(query=query)
-
-    async def update_exam_template(self, exam_template_id: str, payload: ExamTemplatePatch):
-        query = (exam_templates.update().
-                where(exam_templates.c.id == exam_template_id)
-                .values(**payload.dict()))
-        return await database.execute(query=query)
+    def update_exam_template(self, db):
+        db.commit()

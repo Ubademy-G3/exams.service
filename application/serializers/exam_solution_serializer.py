@@ -1,4 +1,4 @@
-from domain.exam_solution_model import ExamSolution
+from infrastructure.db.exam_solution_schema import ExamSolution
 
 class ExamSolutionSerializer:
 

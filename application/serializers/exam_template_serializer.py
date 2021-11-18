@@ -1,4 +1,4 @@
-from domain.exam_template_model import ExamTemplate
+from infrastructure.db.exam_template_schema import ExamTemplate
 
 class ExamTemplateSerializer:
 

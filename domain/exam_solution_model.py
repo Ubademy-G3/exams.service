@@ -1,7 +1,7 @@
 from pydantic import BaseModel
 from uuid import uuid4, UUID
-from typing import Optional
-
+from typing import Optional, List
+'''
 class ExamSolution(BaseModel):
     id: UUID
     name: str
@@ -10,14 +10,27 @@ class ExamSolution(BaseModel):
     graded: bool = False
     score: int = 0
     aprobal_state: bool = False
+'''
+class ExamSolutionSchema(BaseModel):
+    name: str
+    course_id: UUID
+    user_id: UUID
+
+class ExamSolutionDB(ExamSolutionSchema):
+    id: UUID
+
+class UserExamSolutionList(BaseModel):
+    amount: int
+    user_id: UUID
+    ExamSolutions: List[ExamSolutionDB]
+
+class ExamSolutionList(BaseModel):
+    amount: int
+    exam_template_id: UUID
+    ExamSolutions: List[ExamSolutionDB]
 
 class ExamSolutionPatch(BaseModel):
     name: Optional[str]
     graded: Optional[bool]
     score: Optional[int]
     aprobal_state: Optional[bool]
-
-class ExamSolutionSchema(BaseModel):
-    name: str
-    course_id: UUID
-    user_id: UUID

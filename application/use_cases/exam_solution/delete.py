@@ -3,8 +3,8 @@ from exeptions.http_exeption import NotFoundExeption
 
 etrp = ExamSolutionRepositoryPostgres()
 
-async def delete_exam_solution(exam_solution_id):
-    exam_solution = await etrp.get_exam_solution(exam_solution_id)
+def delete_exam_solution(db, exam_solution_id):
+    exam_solution = etrp.get_exam_solution(db, exam_solution_id)
     if not exam_solution:
         raise NotFoundExeption("Exam solution {}".format(exam_solution_id))
-    return  await etrp.delete_exam_solution(exam_solution_id)
+    return  etrp.delete_exam_solution(db, exam_solution_id)

@@ -1,12 +1,12 @@
 from persistence.repositories.question_template_repository_postgres import QuestionTemplateRepositoryPostgres
 from application.serializers.question_template_serializer import QuestionTemplateSerializer
-from domain.question_template_model import (QuestionTemplate, QuestionTypeEnum)
+from infrastructure.db.question_template_schema import QuestionTemplate #(QuestionTemplate, QuestionTypeEnum)
 from exeptions.ubademy_exeption import InvalidQuestionTypeException
 from uuid import uuid4
 
 etrp = QuestionTemplateRepositoryPostgres()
 
-async def add_question_template(args):
+async def add_question_template(db, args):
     #if (args.type not in ["multiple choice", "written", "media"]):
     #    raise InvalidQuestionTypeException()
     new_question_template = QuestionTemplate(
@@ -21,5 +21,5 @@ async def add_question_template(args):
     #    new_question_template.type = QuestionTypeEnum.written
     #if(args.type == "media"):
     #    new_question_template.type = QuestionTypeEnum.media
-    await etrp.add_question_template(new_question_template)
+    await etrp.add_question_template(db, new_question_template)
     return QuestionTemplateSerializer.serialize(new_question_template)

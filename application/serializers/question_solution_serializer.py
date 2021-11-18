@@ -1,4 +1,4 @@
-from domain.question_solution_model import QuestionSolution
+from infrastructure.db.question_solution_schema import QuestionSolution
 
 class QuestionSolutionSerializer:
 

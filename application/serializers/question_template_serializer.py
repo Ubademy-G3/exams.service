@@ -1,5 +1,5 @@
 
-from domain.question_template_model import QuestionTemplate
+from infrastructure.db.question_template_schema import QuestionTemplate
 
 class QuestionTemplateSerializer:
 

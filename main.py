@@ -4,25 +4,18 @@ from fastapi.responses import JSONResponse
 from fastapi import HTTPException
 from infrastructure.routes import (exam_template_router, exam_solution_router,
                                 question_template_router, question_solution_router)
-from infrastructure.db.database import database, engine
-from infrastructure.db.exam_template_schema import metadata
+
+from infrastructure.db.database import Base, engine
+from sqlalchemy.exc import SQLAlchemyError
 from exeptions.ubademy_exeption import UbademyException
 from exeptions.auth_exeption import AuthorizationException
 
-metadata.create_all(engine)
+Base.metadata.create_all(engine)
 
-app = FastAPI()
-
-
-@app.on_event("startup")
-async def startup():
-    await database.connect()
-
-
-@app.on_event("shutdown")
-async def shutdown():
-    await database.disconnect()
-
+app = FastAPI(
+                title = "ubademy-examsservice",
+                description = "Exams service API"
+)
 
 @app.exception_handler(HTTPException)
 async def http_exception_handler(request, exc):
