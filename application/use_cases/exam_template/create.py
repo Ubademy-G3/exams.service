@@ -12,8 +12,9 @@ def add_exam_template(db, args):
         id = uuid4(),
         name = args.name,
         course_id = args.course_id,
-        state = args.state#ExamStateEnum.draft
+        #state = args.state#ExamStateEnum.draft
     )
+    
     #if(args.state == "active"):
     #    new_exam_template.state = ExamStateEnum.active
     etrp.add_exam_template(db, new_exam_template)

@@ -22,8 +22,8 @@ class QuestionTemplate(BaseModel):
 class QuestionTemplateSchema(BaseModel):
     exam_id: UUID
     question: str
-    is_written: bool
-    is_media: bool
+    is_written: Optional[bool]
+    is_media: Optional[bool]
     options: Optional[dict]
     correct: Optional[int]
     value: Optional[int]

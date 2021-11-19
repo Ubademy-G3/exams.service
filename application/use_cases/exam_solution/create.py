@@ -3,14 +3,14 @@ from application.serializers.exam_solution_serializer import ExamSolutionSeriali
 from infrastructure.db.exam_solution_schema import ExamSolution
 from uuid import uuid4
 
-etrp = ExamSolutionRepositoryPostgres()
+esrp = ExamSolutionRepositoryPostgres()
 
 def add_exam_solution(db, args):
     new_exam_solution = ExamSolution(
         id = uuid4(),
-        name = args.name,
         course_id = args.course_id,
-        user_id = args.user_id
+        user_id = args.user_id,
+        exam_template_id = args.exam_template_id
     )
-    etrp.add_exam_solution(db, new_exam_solution)
+    esrp.add_exam_solution(db, new_exam_solution)
     return ExamSolutionSerializer.serialize(new_exam_solution)

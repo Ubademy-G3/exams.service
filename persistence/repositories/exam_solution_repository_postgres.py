@@ -11,7 +11,7 @@ class ExamSolutionRepositoryPostgres():
         exam_solution = db.query(ExamSolution).filter(ExamSolution.id == exam_solution_id).first()
         return exam_solution
 
-    def get_all_exam_solutions_by_exam_id(self, db, exam_template_id, has):
+    def get_all_exam_solutions_by_exam_template_id(self, db, exam_template_id):
         query = db.query(ExamSolution).filter(ExamSolution.exam_template_id == exam_template_id)
         exam_templates = query.all()
         return exam_solutions

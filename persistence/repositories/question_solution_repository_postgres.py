@@ -11,12 +11,17 @@ class QuestionSolutionRepositoryPostgres():
         question_solution = db.query(QuestionSolution).filter(QuestionTemplate.id == question_solution_id).first()
         return question_solution
 
+    def get_all_question_solutions_by_question_template_id(self, question_template_id):
+        query = db.query(QuestionSolution).filter(QuestionTemplate.question_template_id == question_template_id)
+        question_solutions = query.all()
+        return question_solutions
+
     def get_all_question_solutions_by_exam_solution_id(self, exam_solution_id):
         query = db.query(QuestionSolution).filter(QuestionTemplate.exam_solution_id == exam_solution_id)
         question_solutions = query.all()
         return question_solutions
 
-    def delete_question_solutions(self, question_solution):
+    def delete_question_solution(self, question_solution):
         db.delete(question_solution)
         db.commit()
 
