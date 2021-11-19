@@ -38,6 +38,13 @@ async def auth_exception_handler(request, exc):
     return JSONResponse(status_code = exc.status_code, content = exeption)
 
 
+@app.exception_handler(SQLAlchemyError)
+async def sql_exception_handler(request, exc):
+    error = {"message": str(exc.__dict__['orig'])}
+    logging.error(f"status_code: 500 message: {str(exc.__dict__['orig'])}")
+    return JSONResponse(status_code = 500, content = error)
+
+
 app.include_router(question_template_router.router, prefix='/exams/{exam_id}/questions/templates', tags=['question-templates'])
 
 app.include_router(question_solution_router.router, prefix='/exams/{exam_id}/questions/solutions', tags=['question-solutions'])
