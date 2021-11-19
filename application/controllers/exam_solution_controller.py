@@ -3,17 +3,25 @@ from application.use_cases.exam_solution import (create, get, delete, update)
 class ExamSolutionController:
     @classmethod
     def create_exam_solution(self, db, args):
-        return add_exam_solution(args)
+        return create.add_exam_solution(db, args)
 
     @classmethod
     def get_exam_solution(self, db, exam_solution_id):
-        return get_exam_solution(exam_solution_id)
+        return get.get_exam_solution(db, exam_solution_id)
+
+    @classmethod
+    def get_all_exam_solutions_by_user_id(db, user_id):
+        return get.get_all_exam_solutions_by_user_id(db, user_id)
+
+    @classmethod
+    def get_all_exam_solutions_by_exam_template_id(db, exam_template_id):
+        return get.get_all_exam_solutions_by_exam_template_id(db, exam_template_id)
     
     @classmethod
     def delete_exam_solution(self, db, exam_solution_id):
-        return delete_exam_solution(exam_solution_id)
+        return delete.delete_exam_solution(db, exam_solution_id)
     
     @classmethod
     def update_exam_solution(self, db, exam_solution_id, payload):
-        return update_exam_solution(exam_solution_id, payload)
+        return update.update_exam_solution(db, exam_solution_id, payload)
     
