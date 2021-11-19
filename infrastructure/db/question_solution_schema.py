@@ -1,13 +1,13 @@
-from infrastructure.db.database import Base
+from infrastructure.db.database import Base, relationship
 from sqlalchemy import (Column, Integer, String, Table, MetaData, ForeignKey, JSON)
 from sqlalchemy.dialects.postgresql import (UUID, ARRAY)
 import uuid
 
 class QuestionSolution(Base):
     __tablename__ = "question_solutions"
-    id = Column(UUID, primary_key=True, nullable = False)
-    exam_solution_id = Column(UUID, ForeignKey('exam_solutions.id'), nullable = False)
-    question_template_id = Column(UUID, ForeignKey('question_templates.id'), nullable = False)
+    id = Column(UUID(as_uuid=True), primary_key=True, default = uuid.uuid4())
+    exam_solution_id = Column(UUID(as_uuid=True), ForeignKey('exam_solutions.id', ondelete="CASCADE"), nullable = False)
+    question_template_id = Column(UUID(as_uuid=True), ForeignKey('question_templates.id', ondelete="CASCADE"), nullable = False)
     answer = Column(String(300), nullable = False)
     score = Column(Integer)
 

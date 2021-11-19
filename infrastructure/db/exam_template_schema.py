@@ -1,4 +1,4 @@
-from infrastructure.db.database import Base
+from infrastructure.db.database import Base, relationship
 from sqlalchemy import (Column, Integer, String, Table, MetaData, ForeignKey, Boolean, Enum)
 from sqlalchemy.dialects.postgresql import (UUID, ARRAY)
 import uuid
@@ -8,15 +8,19 @@ import uuid
 class ExamTemplate(Base):
     
     __tablename__ = "exam_templates"
-    id = Column(UUID(as_uuid=True), primary_key=True, nullable = False)
+    id = Column(UUID(as_uuid=True), primary_key=True, default = uuid.uuid4())
     name = Column(String(50), nullable = False)
-    course_id = Column(UUID, nullable = False)
+    course_id = Column(UUID(as_uuid=True), nullable = False)
     state = Column(String(10), nullable = False)#Enum(ExamStateEnum))
     max_score = Column(Integer)
-    has_multiple_choice = Column(Boolean)
-    has_written = Column(Boolean)
-    has_media = Column(Boolean)
+    has_multiple_choice = Column(Boolean, default = True)
+    has_written = Column(Boolean, default = False)
+    has_media = Column(Boolean, default = False)
     
+    #Relationships
+    exam_solution = relationship("ExamSolution", cascade = "all, delete")
+    question_template = relationship("QuestionTemplate", cascade = "all, delete")
+
     def __init__(self, id, name, course_id, state, max_score, has_multiple_choice, has_written, has_media):
         self.id = id
         self.name = name

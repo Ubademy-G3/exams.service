@@ -1,4 +1,4 @@
-from infrastructure.db.database import Base
+from infrastructure.db.database import Base, relationship
 from sqlalchemy import (Column, Integer, String, Table, MetaData, ForeignKey, JSON, Boolean)
 from sqlalchemy.dialects.postgresql import (UUID, ARRAY)
 import uuid
@@ -7,14 +7,17 @@ import uuid
 
 class QuestionTemplate(Base):
     __tablename__ = "question_templates"
-    id = Column(UUID, primary_key=True, nullable = False)
-    exam_id = Column(UUID, ForeignKey('exam_templates.id'), nullable = False)
+    id = Column(UUID(as_uuid=True), primary_key=True, default = uuid.uuid4())
+    exam_id = Column(UUID(as_uuid=True), ForeignKey('exam_templates.id', ondelete="CASCADE"), nullable = False)
     question = Column(String(300), nullable = False)
-    is_written = Column(Boolean)
-    is_media = Column(Boolean)
+    is_written = Column(Boolean, default = False)
+    is_media = Column(Boolean, default = False)
     options = Column(JSON)
     correct = Column(Integer)
-    value = Column(Integer)
+    value = Column(Integer, default = 1)
+
+    #Relationships
+    question_solution = relationship("QuestionSolution", cascade = "all, delete")
 
     def __init__(self, id, exam_id, question, type, options, correct):
         self.id = id
