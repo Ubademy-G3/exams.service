@@ -8,7 +8,7 @@ class ExamTemplateRepositoryPostgres():
         db.commit()
 
     def get_exam_template(self, db, exam_template_id):
-        exam_template = db.query(ExamTemplate).filter(ExamTemplate.id == exam_template_id)
+        exam_template = db.query(ExamTemplate).filter(ExamTemplate.id == exam_template_id).first()
         return exam_template
 
     def get_all_exam_templates_by_course_id(self, db, course_id, has_multiple_choice, has_written, has_media):

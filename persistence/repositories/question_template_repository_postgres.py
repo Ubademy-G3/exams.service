@@ -9,7 +9,7 @@ class QuestionTemplateRepositoryPostgres():
 
     #revisar este que onda
     def get_question_template(self, question_template_id):
-        question_templates = db.query(QuestionTemplate).filter(QuestionTemplate.id == question_template_id)
+        question_templates = db.query(QuestionTemplate).filter(QuestionTemplate.id == question_template_id).first()
         return question_templates
 
     def get_all_question_templates_by_exam_id(self, exam_template_id):
