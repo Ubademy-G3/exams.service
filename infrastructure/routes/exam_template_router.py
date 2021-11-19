@@ -12,7 +12,7 @@ async def create_exam_template(
                                 exam_id: str,
                                 exam_template: ExamTemplateSchema,
                                 db: Session = Depends(get_db),
-                                apikey: Optional[str] = Header(None)
+                                apikey: str = Header(None)
                             ):
     auth_service.check_api_key(api_key)
     return ExamTemplateController.create_exam_template(db, exam_id, exam_template)
@@ -21,7 +21,7 @@ async def create_exam_template(
 async def get_exam_template(
                                 exam_id: str,
                                 db: Session = Depends(get_db),
-                                apikey: Optional[str] = Header(None)
+                                apikey: str = Header(None)
                             ):
     auth_service.check_api_key(api_key)
     return ExamTemplateController.get_exam_template(db, exam_id)
@@ -30,7 +30,7 @@ async def get_exam_template(
 async def get_exam_template(
                                 course_id: str,
                                 db: Session = Depends(get_db),
-                                apikey: Optional[str] = Header(None)
+                                apikey: str = Header(None)
                             ):
     auth_service.check_api_key(api_key)
     exam_template_list = ExamTemplateController.get_exam_templates_from_course(db, course_id)
@@ -42,7 +42,7 @@ async def get_exam_template(
 async def delete_exam_template(
                                 exam_id: str,
                                 db: Session = Depends(get_db),
-                                apikey: Optional[str] = Header(None)
+                                apikey: str = Header(None)
                             ):
     auth_service.check_api_key(api_key)
     deleted_exam_template = ExamTemplateController.delete_exam_template(db, exam_id)
@@ -56,7 +56,7 @@ async def update_exam_template(
                         exam_id: str,
                         exam_template: ExamTemplatePatch,
                         db: Session = Depends(get_db),
-                        apikey: Optional[str] = Header(None)
+                        apikey: str = Header(None)
                     ):
 
     auth_service.check_api_key(apikey)

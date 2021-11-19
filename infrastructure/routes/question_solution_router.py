@@ -11,7 +11,7 @@ router = APIRouter()
 async def create_question_solution(exam_id: str,
                                 question_solution: QuestionSolutionSchema,
                                 db: Session = Depends(get_db),
-                                apikey: Optional[str] = Header(None)):
+                                apikey: str = Header(None)):
     auth_service.check_api_key(apikey)
     return QuestionSolutionController.create_question_solution(db, question_solution)
 
@@ -19,7 +19,7 @@ async def create_question_solution(exam_id: str,
 async def get_question_solutions(exam_id: str,
                                 exam_solution_id: str,
                                 db: Session = Depends(get_db),
-                                apikey: Optional[str] = Header(None)):
+                                apikey: str = Header(None)):
     auth_service.check_api_key(apikey)
     question_solution_list = QuestionSolutionController.get_question_solutions(db, exam_solution_id)
     return {"amount": len(question_solution_list),
@@ -31,7 +31,7 @@ async def get_question_solutions(exam_id: str,
 async def delete_question_solutions(exam_id: str,
                                 question_solution_id: str,
                                 db: Session = Depends(get_db),
-                                apikey: Optional[str] = Header(None)):
+                                apikey: str = Header(None)):
     auth_service.check_api_key(apikey)
     deleted_question_solution = QuestionSolutionController.delete_question_solutions(db, question_solution_id)
     return {

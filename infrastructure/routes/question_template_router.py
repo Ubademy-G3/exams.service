@@ -12,7 +12,7 @@ async def create_question_template(
                                 exam_id: str,
                                 question_template: QuestionTemplateSchema,
                                 db: Session = Depends(get_db),
-                                apikey: Optional[str] = Header(None)):
+                                apikey: str = Header(None)):
     auth_service.check_api_key(apikey)
     return QuestionTemplateController.create_question_template(db, question_template)
 
@@ -21,7 +21,7 @@ async def get_question_templates(
                                 exam_id: str,
                                 question_template_id: str,
                                 db: Session = Depends(get_db),
-                                apikey: Optional[str] = Header(None)):
+                                apikey: str = Header(None)):
     auth_service.check_api_key(apikey)
     return QuestionTemplateController.get_question_templates(db, question_template_id)
 
@@ -35,7 +35,7 @@ async def delete_question_templates(
                                 exam_id: str,
                                 question_template_id: str,
                                 db: Session = Depends(get_db),
-                                apikey: Optional[str] = Header(None)):
+                                apikey: str = Header(None)):
     auth_service.check_api_key(apikey)
     deleted_question_template = QuestionTemplateController.delete_question_templates(db, question_template_id)
     return {

@@ -11,7 +11,7 @@ router = APIRouter()
 async def create_exam_solution(
                                 exam_solution: ExamSolutionSchema,
                                 db: Session = Depends(get_db),
-                                apikey: Optional[str] = Header(None)
+                                apikey: str = Header(None)
                             ):
     auth_service.check_api_key(apikey)
     return ExamSolutionController.create_exam_solution(db, exam_solution)
@@ -20,7 +20,7 @@ async def create_exam_solution(
 async def get_exam_solution(
                             exam_solution_id: str,
                             db: Session = Depends(get_db),
-                            apikey: Optional[str] = Header(None)
+                            apikey: str = Header(None)
                         ):
     auth_service.check_api_key(apikey)
     return ExamSolutionController.get_exam_solution(db, id)
@@ -29,7 +29,7 @@ async def get_exam_solution(
 async def delete_exam_solution(
                                 exam_solution_id: str,
                                 db: Session = Depends(get_db),
-                                apikey: Optional[str] = Header(None)
+                                apikey: str = Header(None)
                             ):
     auth_service.check_api_key(apikey)
     deleted_exam_solution = ExamSolutionController.delete_exam_solution(db, id)
@@ -42,7 +42,7 @@ async def update_exam_solution(
                         exam_solution_id: str,
                         exam_solution: ExamSolutionPatch,
                         db: Session = Depends(get_db),
-                        apikey: Optional[str] = Header(None)
+                        apikey: str = Header(None)
                     ):
 
     auth_service.check_api_key(apikey)
