@@ -11,8 +11,14 @@ class ExamTemplateRepositoryPostgres():
         exam_template = db.query(ExamTemplate).filter(ExamTemplate.id == exam_template_id)
         return exam_template
 
-    def get_exam_templates_by_course_id(self, db, course_id):
+    def get_all_exam_templates_by_course_id(self, db, course_id, has_multiple_choice, has_written, has_media):
         query = db.query(ExamTemplate).filter(ExamTemplate.course_id == course_id)
+        if has_multiple_choice != None:
+            query = query.filter(ExamTemplate.has_multiple_choice == has_multiple_choice)
+        if has_multiple_choice != None:
+            query = query.filter(ExamTemplate.has_written == has_written)
+        if has_multiple_choice != None:
+            query = query.filter(ExamTemplate.has_media == has_media)
         exam_templates = query.all()
         return exam_templates
     

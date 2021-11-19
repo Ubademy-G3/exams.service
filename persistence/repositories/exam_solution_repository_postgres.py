@@ -11,12 +11,12 @@ class ExamSolutionRepositoryPostgres():
         exam_solution = db.query(ExamSolution).filter(ExamSolution.id == exam_solution_id)
         return exam_solution
 
-    def get_exam_solutions_by_exam_id(self, db, exam_template_id):
-        query = db.query(ExamSolution).filter(ExamSolution.exam_id == exam_template_id)
+    def get_all_exam_solutions_by_exam_id(self, db, exam_template_id, has):
+        query = db.query(ExamSolution).filter(ExamSolution.exam_template_id == exam_template_id)
         exam_templates = query.all()
         return exam_solutions
     
-    def get_exam_solutions_by_user_id(self, db, user_id):
+    def get_all_exam_solutions_by_user_id(self, db, user_id):
         query = db.query(ExamSolution).filter(ExamSolution.user_id == user_id)
         exam_templates = query.all()
         return exam_solutions
