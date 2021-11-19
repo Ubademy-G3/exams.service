@@ -23,7 +23,32 @@ async def get_exam_solution(
                             apikey: str = Header(None)
                         ):
     auth_service.check_api_key(apikey)
-    return ExamSolutionController.get_exam_solution(db, id)
+    return ExamSolutionController.get_exam_solution(db, exam_solution_id)
+
+@router.get('/', response_model=ExamSolutionList, status_code = 200)
+async def get_all_exam_solutions_by_user_id(
+                            user_id: str,
+                            db: Session = Depends(get_db),
+                            apikey: str = Header(None)
+                        ):
+    auth_service.check_api_key(apikey)
+    exam_solution_list = ExamSolutionController.get_all_exam_solutions_by_user_id(db, user_id)
+    return {"amount": len(exam_solution_list),
+            "user_id": user_id,
+            "exam_solutions": exam_solution_list}
+
+@router.get('/', response_model=ExamSolutionList, status_code = 200)
+async def get_all_exam_solutions_by_exam_template_id(
+                            exam_solution_id: str,
+                            exam_template_id: str,
+                            db: Session = Depends(get_db),
+                            apikey: str = Header(None)
+                        ):
+    auth_service.check_api_key(apikey)
+    exam_solution_list = ExamSolutionController.get_all_exam_solutions_by_exam_template_id(db, exam_solution_id, exam_template_id)
+    return {"amount": len(exam_solution_list),
+            "user_id": user_id,
+            "exam_templates": exam_solution_list}
 
 @router.delete('/{exam_solution_id}', response_model= dict, status_code = 200)
 async def delete_exam_solution(

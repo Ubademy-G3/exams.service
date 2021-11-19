@@ -27,13 +27,16 @@ async def get_exam_template(
     return ExamTemplateController.get_exam_template(db, exam_id)
 
 @router.get('/course/{course_id}', response_model=ExamTemplateList, status_code = 200)
-async def get_exam_template(
+async def get_all_exam_templates_by_course_id(
                                 course_id: str,
+                                has_multiple_choice: bool,
+                                has_written: bool,
+                                has_media: bool,
                                 db: Session = Depends(get_db),
                                 apikey: str = Header(None)
                             ):
     auth_service.check_api_key(api_key)
-    exam_template_list = ExamTemplateController.get_exam_templates_from_course(db, course_id)
+    exam_template_list = ExamTemplateController.get_all_exam_templates_by_course_id(db, course_id)
     return {"amount": len(exam_template_list),
             "course_id": course_id,
             "exam_templates": exam_template_list}
