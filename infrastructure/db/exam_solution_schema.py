@@ -8,7 +8,7 @@ class ExamSolution(Base):
     id = Column(UUID(as_uuid=True), primary_key = True, default = uuid.uuid4())
     course_id = Column(UUID(as_uuid=True), nullable = False)
     user_id = Column(UUID(as_uuid=True), nullable = False)
-    exam_template_id = Column(UUID(as_uuid=True), ForeignKey('courses.id', ondelete="CASCADE"), nullable = Falsee)
+    exam_template_id = Column(UUID(as_uuid=True), ForeignKey('exam_templates.id', ondelete="CASCADE"), nullable = False)
     graded = Column(Boolean)
     score = Column(Integer)
     aprobal_state = Column(Boolean)

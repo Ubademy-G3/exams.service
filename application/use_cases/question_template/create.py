@@ -31,5 +31,5 @@ def add_question_template(db, args):
     if(args.is_written != None):
         new_question_template.value = args.value
     
-    await qtrp.add_question_template(db, new_question_template)
+    qtrp.add_question_template(db, new_question_template)
     return QuestionTemplateSerializer.serialize(new_question_template)

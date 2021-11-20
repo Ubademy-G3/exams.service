@@ -6,7 +6,7 @@ qtrp = QuestionTemplateRepositoryPostgres()
 
 def update_question_template(db, question_template_id, new_args):
     
-    question_template_to_update = await qtrp.get_question_template(db, question_template_id)
+    question_template_to_update = qtrp.get_question_template(db, question_template_id)
     if not question_template_to_update:
         raise NotFoundExeption("Question template {}".format(question_template_id))
 
