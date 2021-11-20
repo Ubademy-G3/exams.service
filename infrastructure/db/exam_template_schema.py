@@ -15,7 +15,7 @@ class ExamTemplate(Base):
     name = Column(String(50), nullable=False)
     course_id = Column(UUID(as_uuid=True), nullable=False)
     state = Column(String(10), default="Draft")  # Enum(ExamStateEnum))
-    max_score = Column(Integer)
+    max_score = Column(Integer, default=10)
     has_multiple_choice = Column(Boolean, default=True)
     has_written = Column(Boolean, default=False)
     has_media = Column(Boolean, default=False)

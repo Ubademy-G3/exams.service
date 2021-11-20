@@ -4,7 +4,7 @@ from infrastructure.db.exam_template_schema import ExamTemplate  # (ExamTemplate
 from uuid import uuid4
 
 
-# from exeptions.ubademy_exeption import InvalidExamStateException
+# from exceptions.ubademy_exception import InvalidExamStateException
 
 
 etrp = ExamTemplateRepositoryPostgres()
@@ -17,7 +17,11 @@ def add_exam_template(db, args):
         id=uuid4(),
         name=args.name,
         course_id=args.course_id,
-        # state = args.state#ExamStateEnum.draft
+        state="Draft",# ExamStateEnum.draft
+        max_score=10,
+        has_multiple_choice=False,
+        has_written=False,
+        has_media=False,
     )
 
     # if(args.state == "active"):

@@ -90,4 +90,4 @@ async def update_question_solution(
 ):
 
     auth_service.check_api_key(apikey)
-    return QuestionSolutionController.update_question_solution(db, id, question_solution)
+    return QuestionSolutionController.update_question_solution(db, question_solution_id, question_solution)

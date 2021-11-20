@@ -1,5 +1,5 @@
 from persistence.repositories.question_template_repository_postgres import QuestionTemplateRepositoryPostgres
-from exeptions.http_exeption import NotFoundExeption
+from exceptions.http_exception import NotFoundException
 from application.serializers.question_template_serializer import QuestionTemplateSerializer
 
 qtrp = QuestionTemplateRepositoryPostgres()
@@ -9,7 +9,7 @@ def update_question_template(db, question_template_id, new_args):
 
     question_template_to_update = qtrp.get_question_template(db, question_template_id)
     if not question_template_to_update:
-        raise NotFoundExeption("Question template {}".format(question_template_id))
+        raise NotFoundException("Question template {}".format(question_template_id))
 
     if new_args.question is not None:
         question_template_to_update.question = new_args.question

@@ -1,6 +1,6 @@
 import os
 from dotenv import load_dotenv
-from exeptions.auth_exeption import ApiKeyExeption
+from exceptions.auth_exception import ApiKeyException
 
 load_dotenv()
 
@@ -14,7 +14,7 @@ class AuthService:
 
         if api_key == self.api_key:
             return True
-        raise ApiKeyExeption()
+        raise ApiKeyException()
 
 
 auth_service = AuthService()

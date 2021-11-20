@@ -4,7 +4,7 @@ from infrastructure.db.question_template_schema import QuestionTemplate  # (Ques
 from uuid import uuid4
 
 
-# from exeptions.ubademy_exeption import InvalidQuestionTypeException
+# from exceptions.ubademy_exception import InvalidQuestionTypeException
 
 
 qtrp = QuestionTemplateRepositoryPostgres()
@@ -17,6 +17,11 @@ def add_question_template(db, args):
         id=uuid4(),
         exam_id=args.exam_id,
         question=args.question,
+        is_written=False,
+        is_media=False,
+        options=NULL,
+        correct=0,
+        value=1,
         # type = args.type,#QuestionTypeEnum.multiple_choice,
     )
     # if(args.type == "written"):

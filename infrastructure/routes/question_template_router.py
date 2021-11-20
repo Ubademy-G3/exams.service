@@ -67,4 +67,4 @@ async def update_question_template(
 ):
 
     auth_service.check_api_key(apikey)
-    return QuestionTemplateController.update_question_template(db, id, question_template)
+    return QuestionTemplateController.update_question_template(db, question_template_id, question_template)

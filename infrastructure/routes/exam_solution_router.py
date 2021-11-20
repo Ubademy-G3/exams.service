@@ -48,7 +48,7 @@ async def delete_exam_solution(
     apikey: str = Header(None)
 ):
     auth_service.check_api_key(apikey)
-    ExamSolutionController.delete_exam_solution(db, id)
+    ExamSolutionController.delete_exam_solution(db, exam_solution_id)
     return {"message": "The exam solution {} was deleted succesfully".format(exam_solution_id)}
 
 
@@ -62,4 +62,4 @@ async def update_exam_solution(
 ):
 
     auth_service.check_api_key(apikey)
-    return ExamSolutionController.update_exam_solution(db, id, exam_solution)
+    return ExamSolutionController.update_exam_solution(db, exam_solution_id, exam_solution)

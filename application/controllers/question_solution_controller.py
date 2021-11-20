@@ -11,11 +11,11 @@ class QuestionSolutionController:
         return get.get_question_solution(db, question_solution_id)
 
     @classmethod
-    def get_all_question_solutions_by_question_template_id(db, question_template_id):
+    def get_all_question_solutions_by_question_template_id(self, db, question_template_id):
         return get.get_all_question_solutions_by_question_template_id(db, question_template_id)
 
     @classmethod
-    def get_all_question_solutions_by_exam_solution_id(db, exam_solution_id):
+    def get_all_question_solutions_by_exam_solution_id(self, db, exam_solution_id):
         return delete.get_all_question_solutions_by_exam_solution_id(db, exam_solution_id)
 
     @classmethod

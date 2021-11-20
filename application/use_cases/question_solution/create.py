@@ -8,7 +8,11 @@ qsrp = QuestionSolutionRepositoryPostgres()
 
 def add_question_solution(db, args):
     new_question_solution = QuestionSolution(
-        id=uuid4(), exam_solution_id=args.exam_solution_id, question_template_id=args.question_template_id, answer=args.answer
+        id=uuid4(),
+        exam_solution_id=args.exam_solution_id,
+        question_template_id=args.question_template_id,
+        answer=args.answer,
+        score=0,
     )
     qsrp.add_question_solution(db, new_question_solution)
     return QuestionSolutionSerializer.serialize(new_question_solution)
