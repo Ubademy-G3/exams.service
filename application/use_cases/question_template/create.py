@@ -19,7 +19,7 @@ def add_question_template(db, args):
         question=args.question,
         is_written=False,
         is_media=False,
-        options=NULL,
+        options=None,
         correct=0,
         value=1,
         # type = args.type,#QuestionTypeEnum.multiple_choice,
