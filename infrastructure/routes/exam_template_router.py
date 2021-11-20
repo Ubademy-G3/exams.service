@@ -9,14 +9,20 @@ router = APIRouter()
 
 @router.post("/", response_model=ExamTemplateDB, status_code=201)
 async def create_exam_template(
-    exam_id: str, exam_template: ExamTemplateSchema, db: Session = Depends(get_db), apikey: str = Header(None)
+    exam_template: ExamTemplateSchema,
+    db: Session = Depends(get_db),
+    apikey: str = Header(None)
 ):
     auth_service.check_api_key(apikey)
-    return ExamTemplateController.create_exam_template(db, exam_id, exam_template)
+    return ExamTemplateController.create_exam_template(db, exam_template)
 
 
 @router.get("/{exam_id}", response_model=ExamTemplateDB, status_code=200)
-async def get_exam_template(exam_id: str, db: Session = Depends(get_db), apikey: str = Header(None)):
+async def get_exam_template(
+    exam_id: str,
+    db: Session = Depends(get_db),
+    apikey: str = Header(None)
+):
     auth_service.check_api_key(apikey)
     return ExamTemplateController.get_exam_template(db, exam_id)
 
@@ -36,7 +42,11 @@ async def get_all_exam_templates_by_course_id(
 
 
 @router.delete("/{exam_id}", response_model=dict, status_code=200)
-async def delete_exam_template(exam_id: str, db: Session = Depends(get_db), apikey: str = Header(None)):
+async def delete_exam_template(
+    exam_id: str,
+    db: Session = Depends(get_db),
+    apikey: str = Header(None)
+):
     auth_service.check_api_key(apikey)
     ExamTemplateController.delete_exam_template(db, exam_id)
     return {"message": "The exam template {} was deleted successfully".format(exam_id)}
@@ -44,7 +54,10 @@ async def delete_exam_template(exam_id: str, db: Session = Depends(get_db), apik
 
 @router.patch("/{exam_id}", response_model=ExamTemplateDB, status_code=200)
 async def update_exam_template(
-    exam_id: str, exam_template: ExamTemplatePatch, db: Session = Depends(get_db), apikey: str = Header(None)
+    exam_id: str,
+    exam_template: ExamTemplatePatch,
+    db: Session = Depends(get_db),
+    apikey: str = Header(None)
 ):
 
     auth_service.check_api_key(apikey)

@@ -8,7 +8,11 @@ router = APIRouter()
 
 
 @router.get("/", response_model=ExamSolutionList, status_code=200)
-async def get_all_exam_solutions_by_user_id(user_id: str, db: Session = Depends(get_db), apikey: str = Header(None)):
+async def get_all_exam_solutions_by_user_id(
+    user_id: str,
+    db: Session = Depends(get_db),
+    apikey: str = Header(None)
+):
     auth_service.check_api_key(apikey)
     exam_solution_list = ExamSolutionController.get_all_exam_solutions_by_user_id(db, user_id)
     return {"amount": len(exam_solution_list), "user_id": user_id, "exam_solutions": exam_solution_list}
