@@ -1,4 +1,4 @@
-'''import json
+"""import json
 import pytest
 import uuid
 from tests.conftest import test_app
@@ -47,7 +47,7 @@ def test_get_existing_course(test_app, monkeypatch):
         "subscription_type": "free",
         "location": "arg",
         "info": {"hola": "as"}
-    }   
+    }
     async def mock_get(cls, id):
         return test_response_payload
     monkeypatch.setattr(CourseRepositoryPostgres, "get_course_by_id", mock_get)
@@ -62,7 +62,8 @@ def test_get_existing_course(test_app, monkeypatch):
     assert response_json['subscription_type'] == test_request_payload['subscription_type']
     assert response_json['location'] == test_request_payload['location']
     assert response_json['info'] == test_request_payload['info']
-'''
+"""
+
 
 def test_basic():
-    assert 2 == 1+1
+    assert 2 == 1 + 1

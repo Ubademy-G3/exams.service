@@ -1,18 +1,20 @@
-from sqlalchemy import (Column, Integer, String, Table, MetaData, ForeignKey, JSON)
-from sqlalchemy.dialects.postgresql import (UUID, ARRAY)
+from infrastructure.db.database import Base
+from sqlalchemy import Column, Integer, String, ForeignKey
+from sqlalchemy.dialects.postgresql import UUID
 import uuid
 
-metadata = MetaData()
 
-question_solutions = Table(
-    'question_solutions',
-    metadata,
-    Column('id', UUID, primary_key=True, default= uuid.uuid4),
-    Column('exam_id', UUID, ForeignKey('exam_templates.id')),
-    Column('question', String(300)),
-    Column('type', String(15)),
-    Column('options', JSON()),
-    Column('correct', Integer),
-    Column('user_id', UUID, default= uuid.uuid4),
-    Column('answer', String(300))
-)
+class QuestionSolution(Base):
+    __tablename__ = "question_solutions"
+    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4())
+    exam_solution_id = Column(UUID(as_uuid=True), ForeignKey("exam_solutions.id", ondelete="CASCADE"), nullable=False)
+    question_template_id = Column(UUID(as_uuid=True), ForeignKey("question_templates.id", ondelete="CASCADE"), nullable=False)
+    answer = Column(String(300), nullable=False)
+    score = Column(Integer)
+
+    def __init__(self, id, exam_solution_id, question_template_id, answer, score):
+        self.id = id
+        self.exam_solution_id = exam_solution_id
+        self.question_template_id = question_template_id
+        self.answer = answer
+        self.score = score

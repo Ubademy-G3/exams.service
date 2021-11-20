@@ -1,17 +1,27 @@
-from domain.question_solution_model import *
-from application.use_cases.question_solution.add_question_solution import add_question_solution
-from application.use_cases.question_solution.get_question_solutions import get_question_solutions
-from application.use_cases.question_solution.delete_question_solutions import delete_question_solutions
+from application.use_cases.question_solution import create, get, delete, update
+
 
 class QuestionSolutionController:
     @classmethod
-    async def create_question_solution(self, args):
-        return await add_question_solution(args)
+    def create_question_solution(self, db, args):
+        return create.add_question_solution(db, args)
 
     @classmethod
-    async def get_question_solutions(self, question_solution_id):
-        return await get_question_solutions(question_solution_id)
+    def get_question_solution(self, db, question_solution_id):
+        return get.get_question_solution(db, question_solution_id)
 
     @classmethod
-    async def delete_question_solutions(self, question_solution_id):
-        return await delete_question_solutions(question_solution_id)
+    def get_all_question_solutions_by_question_template_id(db, question_template_id):
+        return get.get_all_question_solutions_by_question_template_id(db, question_template_id)
+
+    @classmethod
+    def get_all_question_solutions_by_exam_solution_id(db, exam_solution_id):
+        return delete.get_all_question_solutions_by_exam_solution_id(db, exam_solution_id)
+
+    @classmethod
+    def delete_question_solutions(self, db, question_solution_id):
+        return delete.delete_question_solutions(db, question_solution_id)
+
+    @classmethod
+    def update_question_solution(self, db, question_solution_id, payload):
+        return update.update_question_solution(db, question_solution_id, payload)

@@ -1,18 +1,25 @@
-from domain.question_template_model import QuestionTemplate
-from infrastructure.db.database import database
-from infrastructure.db.question_template_schema import question_templates
-from domain.question_template_repository import QuestionTemplateRepository
+from infrastructure.db.question_template_schema import QuestionTemplate
+from infrastructure.db import db
 
-class QuestionTemplateRepositoryPostgres(QuestionTemplateRepository):
 
-    async def add_question_template(self, question_template: QuestionTemplate):
-        query = question_templates.insert().values(**question_template.dict())
-        return await database.execute(query=query)
+class QuestionTemplateRepositoryPostgres:
+    def add_question_template(self, question_template):
+        db.add(question_template)
+        db.commit()
 
-    async def get_question_templates(self, exam_template_id: str):
-        query = question_templates.select(question_templates.c.exam_id == exam_template_id)
-        return await database.fetch_all(query=query)
+    # revisar este que onda
+    def get_question_template(self, question_template_id):
+        question_templates = db.query(QuestionTemplate).filter(QuestionTemplate.id == question_template_id).first()
+        return question_templates
 
-    async def delete_question_templates(self, exam_template_id: str):
-        query = question_templates.delete().where(question_templates.c.exam_id == exam_template_id)
-        return await database.execute(query=query)
+    def get_all_question_templates_by_exam_template_id(self, exam_template_id):
+        query = db.query(QuestionTemplate).filter(QuestionTemplate.exam_id == exam_template_id)
+        question_templates = query.all()
+        return question_templates
+
+    def delete_question_template(self, question_template):
+        db.delete(question_template)
+        db.commit()
+
+    def update_question_template(self, db):
+        db.commit()

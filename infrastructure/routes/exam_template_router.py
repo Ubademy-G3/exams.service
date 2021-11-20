@@ -1,37 +1,51 @@
-from fastapi import APIRouter, Header
-from typing import List, Optional
-from application.controllers.exam_template_controller import *
+from fastapi import APIRouter, Header, Depends
+from infrastructure.db.database import Session, get_db
+from application.controllers.exam_template_controller import ExamTemplateController
 from application.services.auth import auth_service
+from domain.exam_template_model import ExamTemplateSchema, ExamTemplateDB, ExamTemplateList, ExamTemplatePatch
 
 router = APIRouter()
 
-@router.post('/', response_model=ExamTemplate, status_code = 201)
-async def create_exam_template(exam_template: ExamTemplateSchema,
-                                apikey: Optional[str] = Header(None)):
-    return await ExamTemplateController.create_exam_template(exam_template)
 
-@router.get('/{exam_id}', response_model=ExamTemplate, status_code = 200)
-async def get_exam_template(exam_id: str,
-                                apikey: Optional[str] = Header(None)):
-    return await ExamTemplateController.get_exam_template(exam_id)
-
-@router.get('course/{course_id}', response_model=List[ExamTemplate], status_code = 200)
-async def get_exam_template(course_id: str,
-                                apikey: Optional[str] = Header(None)):
-    return await ExamTemplateController.get_exam_templates_from_course(course_id)
-
-@router.delete('/{exam_id}')
-async def delete_exam_template(exam_id: str,
-                                apikey: Optional[str] = Header(None)):
-    return await ExamTemplateController.delete_exam_template(exam_id)
+@router.post("/", response_model=ExamTemplateDB, status_code=201)
+async def create_exam_template(
+    exam_id: str, exam_template: ExamTemplateSchema, db: Session = Depends(get_db), apikey: str = Header(None)
+):
+    auth_service.check_api_key(apikey)
+    return ExamTemplateController.create_exam_template(db, exam_id, exam_template)
 
 
-@router.patch('/{exam_id}', response_model = ExamTemplate, status_code = 200)
+@router.get("/{exam_id}", response_model=ExamTemplateDB, status_code=200)
+async def get_exam_template(exam_id: str, db: Session = Depends(get_db), apikey: str = Header(None)):
+    auth_service.check_api_key(apikey)
+    return ExamTemplateController.get_exam_template(db, exam_id)
+
+
+@router.get("/course/{course_id}", response_model=ExamTemplateList, status_code=200)
+async def get_all_exam_templates_by_course_id(
+    course_id: str,
+    has_multiple_choice: bool,
+    has_written: bool,
+    has_media: bool,
+    db: Session = Depends(get_db),
+    apikey: str = Header(None),
+):
+    auth_service.check_api_key(apikey)
+    exam_template_list = ExamTemplateController.get_all_exam_templates_by_course_id(db, course_id)
+    return {"amount": len(exam_template_list), "course_id": course_id, "exam_templates": exam_template_list}
+
+
+@router.delete("/{exam_id}", response_model=dict, status_code=200)
+async def delete_exam_template(exam_id: str, db: Session = Depends(get_db), apikey: str = Header(None)):
+    auth_service.check_api_key(apikey)
+    ExamTemplateController.delete_exam_template(db, exam_id)
+    return {"message": "The exam template {} was deleted successfully".format(exam_id)}
+
+
+@router.patch("/{exam_id}", response_model=ExamTemplateDB, status_code=200)
 async def update_exam_template(
-                        exam_id: str,
-                        exam_template: ExamTemplatePatch,
-                        apikey: Optional[str] = Header(None)
-                    ):
+    exam_id: str, exam_template: ExamTemplatePatch, db: Session = Depends(get_db), apikey: str = Header(None)
+):
 
     auth_service.check_api_key(apikey)
-    return await ExamTemplateController.update_exam_template(exam_id, exam_template)
+    return ExamTemplateController.update_exam_template(db, exam_id, exam_template)

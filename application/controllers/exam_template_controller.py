@@ -1,23 +1,23 @@
-from domain.exam_template_model import *
-from application.use_cases.exam_template.add_exam_template import add_exam_template
-from application.use_cases.exam_template.update_exam_template import update_exam_template
-from application.use_cases.exam_template.get_exam_template import get_exam_template
-from application.use_cases.exam_template.delete_exam_template import delete_exam_template
+from application.use_cases.exam_template import create, get, delete, update
+
 
 class ExamTemplateController:
     @classmethod
-    async def create_exam_template(self, args):
-        return await add_exam_template(args)
+    def create_exam_template(self, db, args):
+        return create.add_exam_template(db, args)
 
     @classmethod
-    async def get_exam_template(self, exam_template_id):
-        return await get_exam_template(exam_template_id)
-    
+    def get_exam_template(self, db, exam_template_id):
+        return get.get_exam_template(db, exam_template_id)
+
     @classmethod
-    async def delete_exam_template(self, exam_template_id):
-        return await delete_exam_template(exam_template_id)
-    
+    def get_all_exam_templates_by_course_id(db, course_id, has_multiple_choice, has_written, has_media):
+        return get.get_all_exam_templates_by_course_id(db, course_id, has_multiple_choice, has_written, has_media)
+
     @classmethod
-    async def update_exam_template(self, exam_template_id, payload):
-        return await update_exam_template(exam_template_id, payload)
-    
+    def delete_exam_template(self, db, exam_template_id):
+        return delete.delete_exam_template(db, exam_template_id)
+
+    @classmethod
+    def update_exam_template(self, db, exam_template_id, payload):
+        return update.update_exam_template(db, exam_template_id, payload)
