@@ -1,5 +1,6 @@
 from infrastructure.db.exam_template_schema import ExamTemplate
 from sqlalchemy import func
+from infrastructure.db.database import db
 
 class ExamTemplateRepositoryPostgres():
 

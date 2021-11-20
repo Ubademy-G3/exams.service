@@ -1,5 +1,6 @@
 from infrastructure.db.exam_solution_schema import ExamSolution
 from sqlalchemy import func
+from infrastructure.db.database import db
 
 class ExamSolutionRepositoryPostgres():
 
@@ -13,12 +14,12 @@ class ExamSolutionRepositoryPostgres():
 
     def get_all_exam_solutions_by_exam_template_id(self, db, exam_template_id):
         query = db.query(ExamSolution).filter(ExamSolution.exam_template_id == exam_template_id)
-        exam_templates = query.all()
+        exam_solutions = query.all()
         return exam_solutions
     
     def get_all_exam_solutions_by_user_id(self, db, user_id):
         query = db.query(ExamSolution).filter(ExamSolution.user_id == user_id)
-        exam_templates = query.all()
+        exam_solutions = query.all()
         return exam_solutions
     
     def delete_exam_solution(self, db, exam_solution):

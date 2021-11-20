@@ -17,4 +17,4 @@ def update_question_solution(db, question_solution_id, new_args):
         question_solution_to_update.score = new_args.score
     
     qsrp.update_question_solution(db)
-    return QuestionSolutionSerializer.serialize(updated_question_solution)
+    return QuestionSolutionSerializer.serialize(question_solution_to_update)

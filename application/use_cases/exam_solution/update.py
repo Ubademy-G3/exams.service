@@ -20,4 +20,4 @@ def update_exam_solution(db, exam_solution_id, new_args):
         exam_solution_to_update.aprobal_state = new_args.aprobal_state
     
     esrp.update_exam_solution(db)
-    return ExamSolutionSerializer.serialize(updated_exam_solution)
+    return ExamSolutionSerializer.serialize(exam_solution_to_update)

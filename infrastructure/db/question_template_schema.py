@@ -19,12 +19,12 @@ class QuestionTemplate(Base):
     #Relationships
     question_solution = relationship("QuestionSolution", cascade = "all, delete")
 
-    def __init__(self, id, exam_id, question, type, options, correct):
+    def __init__(self, id, exam_id, question, is_written, is_media, options, correct, value):
         self.id = id
         self.exam_id = exam_id
         self.question = question
-        self,is_written = is_written
-        self,is_media = is_media
+        self.is_written = is_written
+        self.is_media = is_media
         self.options = options
         self.correct = correct
-        self,value = value
+        self.value = value

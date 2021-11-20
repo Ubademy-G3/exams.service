@@ -1,5 +1,6 @@
-from infrastructure.db.exam_solution_schema import ExamSolution
+from infrastructure.db.question_template_schema import QuestionTemplate
 from sqlalchemy import func
+from infrastructure.db.database import db
 
 class QuestionTemplateRepositoryPostgres():
 

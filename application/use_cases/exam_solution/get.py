@@ -11,7 +11,7 @@ def get_exam_solution(db, exam_solution_id):
     return ExamSolutionSerializer.serialize(exam_solution)
 
 def get_all_exam_solutions_by_user_id(db, user_id):
-    exam_solutions = etrp.get_all_exam_solutions_by_user_id(db, user_id)
+    exam_solutions = esrp.get_all_exam_solutions_by_user_id(db, user_id)
     if exam_solutions is None or len(exam_solutions) == 0:
         raise NotFoundExeption("Exam solutions by user_id {}".format(user_id))
     exam_solution_list = []
@@ -20,7 +20,7 @@ def get_all_exam_solutions_by_user_id(db, user_id):
     return exam_solution_list
 
 def get_all_exam_solutions_by_exam_template_id(db, exam_template_id):
-    exam_solutions = etrp.get_all_exam_solutions_by_exam_template_id(db, exam_template_id)
+    exam_solutions = esrp.get_all_exam_solutions_by_exam_template_id(db, exam_template_id)
     if exam_solutions is None or len(exam_solutions) == 0:
         raise NotFoundExeption("Exam solutions by exam_template_id {}".format(exam_template_id))
     exam_solution_list = []
