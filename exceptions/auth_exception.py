@@ -5,7 +5,7 @@ class AuthorizationException(Exception):
         self.status_code = status_code
 
 
-class ApiKeyExeption(AuthorizationException):
+class ApiKeyException(AuthorizationException):
     def __init__(self):
-        msg = "Exeption with API Key"
+        msg = "Exception with API Key"
         super().__init__(status_code=401, detail=msg)

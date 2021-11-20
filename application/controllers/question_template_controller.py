@@ -11,7 +11,7 @@ class QuestionTemplateController:
         return get.get_question_template(db, question_template_id)
 
     @classmethod
-    def get_all_question_templates_by_exam_template_id(db, exam_template_id):
+    def get_all_question_templates_by_exam_template_id(self, db, exam_template_id):
         return get.get_all_question_templates_by_exam_template_id(db, exam_template_id)
 
     @classmethod

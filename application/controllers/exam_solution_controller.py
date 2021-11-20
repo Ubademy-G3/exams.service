@@ -11,11 +11,11 @@ class ExamSolutionController:
         return get.get_exam_solution(db, exam_solution_id)
 
     @classmethod
-    def get_all_exam_solutions_by_user_id(db, user_id):
+    def get_all_exam_solutions_by_user_id(self, db, user_id):
         return get.get_all_exam_solutions_by_user_id(db, user_id)
 
     @classmethod
-    def get_all_exam_solutions_by_exam_template_id(db, exam_template_id):
+    def get_all_exam_solutions_by_exam_template_id(self, db, exam_template_id):
         return get.get_all_exam_solutions_by_exam_template_id(db, exam_template_id)
 
     @classmethod

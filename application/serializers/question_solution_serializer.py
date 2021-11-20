@@ -6,11 +6,9 @@ class QuestionSolutionSerializer:
     def serialize(self, question_solution: QuestionSolution):
         return {
             "id": question_solution.id,
-            "exam_id": question_solution.exam_id,
-            "question": question_solution.question,
+            "exam_solution_id": question_solution.exam_solution_id,
+            "question_template_id": question_solution.question_template_id,
             "type": question_solution.type,
-            "options": question_solution.options,
-            "correct": question_solution.correct,
-            "user_id": question_solution.user_id,
             "answer": question_solution.answer,
+            "score": question_solution.score,
         }

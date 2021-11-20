@@ -12,8 +12,8 @@ from infrastructure.routes import (
 
 from infrastructure.db.database import Base, engine
 from sqlalchemy.exc import SQLAlchemyError
-from exeptions.ubademy_exeption import UbademyException
-from exeptions.auth_exeption import AuthorizationException
+from exceptions.ubademy_exception import UbademyException
+from exceptions.auth_exception import AuthorizationException
 
 Base.metadata.create_all(engine)
 
@@ -22,29 +22,29 @@ app = FastAPI(title="ubademy-examsservice", description="Exams service API")
 
 @app.exception_handler(HTTPException)
 async def http_exception_handler(request, exc):
-    exeption = {"exeption": exc.detail}
-    logging.exeption(f"status_code: {exc.status_code} message: {exc.detail}")
-    return JSONResponse(status_code=exc.status_code, content=exeption)
+    exception = {"exception": exc.detail}
+    logging.error(f"status_code: {exc.status_code} message: {exc.detail}")
+    return JSONResponse(status_code=exc.status_code, content=exception)
 
 
 @app.exception_handler(UbademyException)
 async def ubademy_exception_hanlder(request, exc):
-    exeption = {"exeption": exc.detail}
-    logging.exeption(f"status_code: {exc.status_code} message: {exc.detail}")
-    return JSONResponse(status_code=exc.status_code, content=exeption)
+    exception = {"exception": exc.detail}
+    logging.error(f"status_code: {exc.status_code} message: {exc.detail}")
+    return JSONResponse(status_code=exc.status_code, content=exception)
 
 
 @app.exception_handler(AuthorizationException)
 async def auth_exception_handler(request, exc):
-    exeption = {"exeption": exc.detail}
-    logging.exeption(f"status_code: {exc.status_code} message: {exc.detail}")
-    return JSONResponse(status_code=exc.status_code, content=exeption)
+    exception = {"exception": exc.detail}
+    logging.error(f"status_code: {exc.status_code} message: {exc.detail}")
+    return JSONResponse(status_code=exc.status_code, content=exception)
 
 
 @app.exception_handler(SQLAlchemyError)
 async def sql_exception_handler(request, exc):
-    error = {"message": str(exc.__dict__["orig"])}
-    logging.error(f"status_code: 500 message: {str(exc.__dict__['orig'])}")
+    error = {"message": "SQLAlchemyError"}# str(exc.__dict__["orig"])}
+    logging.error(f"status_code: 500 message: SQLAlchemyError")# {str(exc.__dict__['orig'])}")
     return JSONResponse(status_code=500, content=error)
 
 
