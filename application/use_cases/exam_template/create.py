@@ -1,10 +1,13 @@
 from persistence.repositories.exam_template_repository_postgres import ExamTemplateRepositoryPostgres
 from application.serializers.exam_template_serializer import ExamTemplateSerializer
 from infrastructure.db.exam_template_schema import ExamTemplate  # (ExamTemplate, ExamStateEnum)
-from exeptions.ubademy_exeption import InvalidExamStateException
+from uuid import uuid4
+
+
+# from exeptions.ubademy_exeption import InvalidExamStateException
+
 
 etrp = ExamTemplateRepositoryPostgres()
-from uuid import uuid4
 
 
 def add_exam_template(db, args):

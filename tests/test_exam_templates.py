@@ -47,7 +47,7 @@ def test_get_existing_course(test_app, monkeypatch):
         "subscription_type": "free",
         "location": "arg",
         "info": {"hola": "as"}
-    }   
+    }
     async def mock_get(cls, id):
         return test_response_payload
     monkeypatch.setattr(CourseRepositoryPostgres, "get_course_by_id", mock_get)

@@ -1,6 +1,6 @@
 from infrastructure.db.database import Base, relationship
-from sqlalchemy import Column, Integer, String, Table, MetaData, ForeignKey, Boolean, Enum
-from sqlalchemy.dialects.postgresql import UUID, ARRAY
+from sqlalchemy import Column, Integer, String, Boolean
+from sqlalchemy.dialects.postgresql import UUID
 import uuid
 
 # from domain.exam_template_model import ExamStateEnum

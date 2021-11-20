@@ -1,9 +1,9 @@
 from fastapi import APIRouter, Header, Depends
-from typing import List, Optional
 from infrastructure.db.database import Session, get_db
-from application.controllers.question_solution_controller import *
+from application.controllers.question_solution_controller import QuestionSolutionController
 from application.services.auth import auth_service
-from domain.question_solution_model import *
+from domain.question_solution_model import (QuestionSolutionSchema, QuestionSolutionDB,
+                                            QuestionSolutionList, QuestionSolutionPatch)
 
 router = APIRouter()
 
@@ -30,7 +30,8 @@ async def get_all_question_solutions_by_question_template_id(
                             apikey: str = Header(None)
                         ):
     auth_service.check_api_key(apikey)
-    question_solution_list = QuestionSolutionController.get_all_question_solutions_by_question_template_id(db, question_template_id)
+    question_solution_list = QuestionSolutionController.get_all_question_solutions_by_question_template_id(db,
+                                                                                                        question_template_id)
     return {"amount": len(question_solution_list),
             "question_template_id": question_template_id,
             "question_solutions": question_solution_list}
@@ -55,7 +56,7 @@ async def delete_question_solutions(
     exam_id: str, question_solution_id: str, db: Session = Depends(get_db), apikey: str = Header(None)
 ):
     auth_service.check_api_key(apikey)
-    deleted_question_solution = QuestionSolutionController.delete_question_solutions(db, question_solution_id)
+    QuestionSolutionController.delete_question_solutions(db, question_solution_id)
     return {"message": "The question solution {} was deleted succesfully".format(question_solution_id)}
 
 

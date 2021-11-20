@@ -1,9 +1,8 @@
 from fastapi import APIRouter, Header, Depends
-from typing import List, Optional
 from infrastructure.db.database import Session, get_db
-from application.controllers.exam_solution_controller import *
+from application.controllers.exam_solution_controller import ExamSolutionController
 from application.services.auth import auth_service
-from domain.exam_solution_model import *
+from domain.exam_solution_model import ExamSolutionList
 
 router = APIRouter()
 

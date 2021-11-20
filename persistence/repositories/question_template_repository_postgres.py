@@ -1,6 +1,5 @@
 from infrastructure.db.question_template_schema import QuestionTemplate
-from sqlalchemy import func
-from infrastructure.db.database import db
+from infrastructure.db import db
 
 
 class QuestionTemplateRepositoryPostgres:
