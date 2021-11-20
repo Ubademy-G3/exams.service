@@ -24,6 +24,7 @@ async def get_question_solution(
     auth_service.check_api_key(apikey)
     return QuestionSolutionController.get_question_solution(db, question_solution_id)
 
+'''
 @router.get('/', response_model=QuestionSolutionList, status_code = 200)
 async def get_all_question_solutions_by_question_template_id(
                             question_template_id: str,
@@ -35,6 +36,7 @@ async def get_all_question_solutions_by_question_template_id(
     return {"amount": len(question_solution_list),
             "question_template_id": question_template_id,
             "question_solutions": question_solution_list}
+'''
 
 @router.get('/', response_model=QuestionSolutionList, status_code = 200)
 async def get_all_question_solutions_by_exam_solution_id(
