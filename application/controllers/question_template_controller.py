@@ -1,4 +1,5 @@
-from application.use_cases.question_template import (create, get, delete, update)
+from application.use_cases.question_template import create, get, delete, update
+
 
 class QuestionTemplateController:
     @classmethod
@@ -16,8 +17,7 @@ class QuestionTemplateController:
     @classmethod
     def delete_question_templates(self, db, question_template_id):
         return delete.delete_question_templates(db, question_template_id)
-    
+
     @classmethod
     def update_question_template(self, db, question_template_id, payload):
         return update.update_question_template(db, question_template_id, payload)
-    

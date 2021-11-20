@@ -2,8 +2,8 @@ from infrastructure.db.exam_template_schema import ExamTemplate
 from sqlalchemy import func
 from infrastructure.db.database import db
 
-class ExamTemplateRepositoryPostgres():
 
+class ExamTemplateRepositoryPostgres:
     def add_exam_template(self, db, exam_template):
         db.add(exam_template)
         db.commit()
@@ -22,7 +22,7 @@ class ExamTemplateRepositoryPostgres():
             query = query.filter(ExamTemplate.has_media == has_media)
         exam_templates = query.all()
         return exam_templates
-    
+
     def delete_exam_template(self, db, exam_template):
         db.delete(exam_template)
         db.commit()

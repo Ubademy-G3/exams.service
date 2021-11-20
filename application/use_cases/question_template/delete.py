@@ -3,6 +3,7 @@ from exeptions.http_exeption import NotFoundExeption
 
 qtrp = QuestionTemplateRepositoryPostgres()
 
+
 def delete_question_templates(db, question_template_id):
     question_templates = qtrp.get_question_templates(db, question_template_id)
     if not question_templates:

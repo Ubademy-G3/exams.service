@@ -1,20 +1,21 @@
 from infrastructure.db.database import Base, relationship
-from sqlalchemy import (Column, Integer, String, Table, MetaData, ForeignKey, Boolean)
-from sqlalchemy.dialects.postgresql import (UUID, ARRAY)
+from sqlalchemy import Column, Integer, String, Table, MetaData, ForeignKey, Boolean
+from sqlalchemy.dialects.postgresql import UUID, ARRAY
 import uuid
+
 
 class ExamSolution(Base):
     __tablename__ = "exam_solutions"
-    id = Column(UUID(as_uuid=True), primary_key = True, default = uuid.uuid4())
-    course_id = Column(UUID(as_uuid=True), nullable = False)
-    user_id = Column(UUID(as_uuid=True), nullable = False)
-    exam_template_id = Column(UUID(as_uuid=True), ForeignKey('exam_templates.id', ondelete="CASCADE"), nullable = False)
+    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4())
+    course_id = Column(UUID(as_uuid=True), nullable=False)
+    user_id = Column(UUID(as_uuid=True), nullable=False)
+    exam_template_id = Column(UUID(as_uuid=True), ForeignKey("exam_templates.id", ondelete="CASCADE"), nullable=False)
     graded = Column(Boolean)
     score = Column(Integer)
     aprobal_state = Column(Boolean)
 
-    #Relationships
-    question_solution = relationship("QuestionSolution", cascade = "all, delete")
+    # Relationships
+    question_solution = relationship("QuestionSolution", cascade="all, delete")
 
     def __init__(self, id, course_id, user_id, exam_template_id, graded, score, aprobal_state):
         self.id = id

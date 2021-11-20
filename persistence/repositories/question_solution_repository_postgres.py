@@ -2,8 +2,8 @@ from infrastructure.db.question_solution_schema import QuestionSolution
 from sqlalchemy import func
 from infrastructure.db.database import db
 
-class QuestionSolutionRepositoryPostgres():
 
+class QuestionSolutionRepositoryPostgres:
     def add_question_solution(self, question_solution):
         db.add(question_solution)
         db.commit()

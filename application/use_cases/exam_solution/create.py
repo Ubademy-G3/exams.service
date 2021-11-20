@@ -5,12 +5,10 @@ from uuid import uuid4
 
 esrp = ExamSolutionRepositoryPostgres()
 
+
 def add_exam_solution(db, args):
     new_exam_solution = ExamSolution(
-        id = uuid4(),
-        course_id = args.course_id,
-        user_id = args.user_id,
-        exam_template_id = args.exam_template_id
+        id=uuid4(), course_id=args.course_id, user_id=args.user_id, exam_template_id=args.exam_template_id
     )
     esrp.add_exam_solution(db, new_exam_solution)
     return ExamSolutionSerializer.serialize(new_exam_solution)

@@ -3,6 +3,7 @@ from exeptions.http_exeption import NotFoundExeption
 
 qsrp = QuestionSolutionRepositoryPostgres()
 
+
 def delete_question_solution(db, question_solution_id):
     question_solution = qsrp.get_question_solution(db, question_solution_id)
     if not question_solution:

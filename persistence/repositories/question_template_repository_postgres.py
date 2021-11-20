@@ -2,13 +2,13 @@ from infrastructure.db.question_template_schema import QuestionTemplate
 from sqlalchemy import func
 from infrastructure.db.database import db
 
-class QuestionTemplateRepositoryPostgres():
 
+class QuestionTemplateRepositoryPostgres:
     def add_question_template(self, question_template):
         db.add(question_template)
         db.commit()
 
-    #revisar este que onda
+    # revisar este que onda
     def get_question_template(self, question_template_id):
         question_templates = db.query(QuestionTemplate).filter(QuestionTemplate.id == question_template_id).first()
         return question_templates
@@ -21,6 +21,6 @@ class QuestionTemplateRepositoryPostgres():
     def delete_question_template(self, question_template):
         db.delete(question_template)
         db.commit()
-    
+
     def update_question_template(self, db):
         db.commit()
