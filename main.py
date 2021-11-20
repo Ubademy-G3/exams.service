@@ -3,7 +3,8 @@ import logging
 from fastapi.responses import JSONResponse
 from fastapi import HTTPException
 from infrastructure.routes import (exam_template_router, exam_solution_router,
-                                question_template_router, question_solution_router)
+                                question_template_router, question_solution_router,
+                                exam_user_solution_router)
 
 from infrastructure.db.database import Base, engine
 from sqlalchemy.exc import SQLAlchemyError

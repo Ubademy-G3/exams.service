@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Header, Depends
 from typing import List, Optional
 from infrastructure.db.database import Session, get_db
-from application.controllers.exam_solution_controller import get_all_exam_solutions_by_user_id
+from application.controllers.exam_solution_controller import *
 from application.services.auth import auth_service
 from domain.exam_solution_model import *
 
