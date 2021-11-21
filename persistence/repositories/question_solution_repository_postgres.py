@@ -24,5 +24,5 @@ class QuestionSolutionRepositoryPostgres:
         db.delete(question_solution)
         db.commit()
 
-    def update_exam_solution(self, db):
+    def update_question_solution(self, db):
         db.commit()
