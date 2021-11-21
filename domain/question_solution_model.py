@@ -15,14 +15,17 @@ class QuestionSolution(BaseModel):
 """
 
 
-class QuestionSolutionSchema(BaseModel):
-    exam_solution_id: UUID
+class QuestionSolutionPostBody(BaseModel):
     question_template_id: UUID
     answer: str
 
 
-class QuestionSolutionDB(QuestionSolutionSchema):
+class QuestionSolutionDB(BaseModel):
     id: UUID
+    exam_solution_id: UUID
+    question_template_id: UUID
+    answer: str
+    score: int
 
 
 class QuestionSolutionList(BaseModel):

@@ -3,14 +3,14 @@ from infrastructure.db.database import Session, get_db
 from typing import Optional
 from application.controllers.exam_template_controller import ExamTemplateController
 from application.services.auth import auth_service
-from domain.exam_template_model import ExamTemplateSchema, ExamTemplateDB, ExamTemplateList, ExamTemplatePatch
+from domain.exam_template_model import ExamTemplatePostBody, ExamTemplateDB, ExamTemplateList, ExamTemplatePatch
 
 router = APIRouter()
 
 
 @router.post("/", response_model=ExamTemplateDB, status_code=201)
 async def create_exam_template(
-    exam_template: ExamTemplateSchema,
+    exam_template: ExamTemplatePostBody,
     db: Session = Depends(get_db),
     apikey: str = Header(None),
 ):

@@ -3,8 +3,8 @@ from application.use_cases.question_template import create, get, delete, update
 
 class QuestionTemplateController:
     @classmethod
-    def create_question_template(self, db, args):
-        return create.add_question_template(db, args)
+    def create_question_template(self, db, exam_template_id, args):
+        return create.add_question_template(db, exam_template_id, args)
 
     @classmethod
     def get_question_template(self, db, question_template_id):

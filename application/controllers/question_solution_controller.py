@@ -3,8 +3,8 @@ from application.use_cases.question_solution import create, get, delete, update
 
 class QuestionSolutionController:
     @classmethod
-    def create_question_solution(self, db, args):
-        return create.add_question_solution(db, args)
+    def create_question_solution(self, db, exam_solution_id, args):
+        return create.add_question_solution(db, exam_solution_id, args)
 
     @classmethod
     def get_question_solution(self, db, question_solution_id):

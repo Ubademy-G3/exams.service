@@ -6,12 +6,12 @@ from uuid import uuid4
 esrp = ExamSolutionRepositoryPostgres()
 
 
-def add_exam_solution(db, args):
+def add_exam_solution(db, exam_template_id, args):
     new_exam_solution = ExamSolution(
         id=uuid4(),
         course_id=args.course_id,
         user_id=args.user_id,
-        exam_template_id=args.exam_template_id,
+        exam_template_id=exam_template_id,
         graded=False,
         score=0,
         aprobal_state=False,
