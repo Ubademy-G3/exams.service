@@ -43,8 +43,8 @@ async def auth_exception_handler(request, exc):
 
 @app.exception_handler(SQLAlchemyError)
 async def sql_exception_handler(request, exc):
-    error = {"message": "SQLAlchemyError"}# str(exc.__dict__["orig"])}
-    logging.error(f"status_code: 500 message: SQLAlchemyError")# {str(exc.__dict__['orig'])}")
+    error = {"message": str(exc.__dict__)}
+    logging.error(f"status_code: 500 message: {str(exc.__dict__)}")
     return JSONResponse(status_code=500, content=error)
 
 

@@ -11,8 +11,8 @@ class ExamTemplateController:
         return get.get_exam_template(db, exam_template_id)
 
     @classmethod
-    def get_all_exam_templates_by_course_id(self, db, course_id, has_multiple_choice, has_written, has_media):
-        return get.get_all_exam_templates_by_course_id(db, course_id, has_multiple_choice, has_written, has_media)
+    def get_all_exam_templates_by_course_id(self, db, course_id, has_multiple_choice, has_written, has_media, state):
+        return get.get_all_exam_templates_by_course_id(db, course_id, has_multiple_choice, has_written, has_media, state)
 
     @classmethod
     def delete_exam_template(self, db, exam_template_id):

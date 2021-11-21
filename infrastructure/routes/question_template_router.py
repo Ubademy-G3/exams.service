@@ -10,10 +10,10 @@ router = APIRouter()
 
 @router.post("/", response_model=QuestionTemplateDB, status_code=201)
 async def create_question_template(
+    apikey: str,
     exam_template_id: str,
     question_template: QuestionTemplateSchema,
     db: Session = Depends(get_db),
-    apikey: str = Header(None)
 ):
     auth_service.check_api_key(apikey)
     return QuestionTemplateController.create_question_template(db, question_template)
@@ -21,10 +21,10 @@ async def create_question_template(
 
 @router.get("/{question_template_id}", response_model=QuestionTemplateList, status_code=200)
 async def get_question_template(
+    apikey: str,
     exam_template_id: str,
     question_template_id: str,
     db: Session = Depends(get_db),
-    apikey: str = Header(None)
 ):
     auth_service.check_api_key(apikey)
     return QuestionTemplateController.get_question_template(db, question_template_id)
@@ -32,9 +32,9 @@ async def get_question_template(
 
 @router.get("/", response_model=QuestionTemplateList, status_code=200)
 async def get_all_question_templates_by_exam_template_id(
+    apikey: str,
     exam_template_id: str,
     db: Session = Depends(get_db),
-    apikey: str = Header(None)
 ):
     auth_service.check_api_key(apikey)
     question_template_list = QuestionTemplateController.get_all_question_templates_by_exam_template_id(db, exam_template_id)
@@ -47,10 +47,10 @@ async def get_all_question_templates_by_exam_template_id(
 
 @router.delete("/{question_template_id}", response_model=dict, status_code=200)
 async def delete_question_templates(
+    apikey: str,
     exam_template_id: str,
     question_template_id: str,
     db: Session = Depends(get_db),
-    apikey: str = Header(None)
 ):
     auth_service.check_api_key(apikey)
     QuestionTemplateController.delete_question_templates(db, question_template_id)
@@ -59,11 +59,11 @@ async def delete_question_templates(
 
 @router.patch("/{question_template_id}", response_model=QuestionTemplateDB, status_code=200)
 async def update_question_template(
+    apikey: str,
     exam_template_id: str,
     question_template_id: str,
     question_template: QuestionTemplatePatch,
     db: Session = Depends(get_db),
-    apikey: str = Header(None),
 ):
 
     auth_service.check_api_key(apikey)

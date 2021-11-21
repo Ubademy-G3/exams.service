@@ -12,8 +12,8 @@ def get_exam_template(db, exam_template_id):
     return ExamTemplateSerializer.serialize(exam_template)
 
 
-def get_all_exam_templates_by_course_id(db, course_id, has_multiple_choice, has_written, has_media):
-    exam_templates = etrp.get_all_exam_templates_by_course_id(db, course_id, has_multiple_choice, has_written, has_media)
+def get_all_exam_templates_by_course_id(db, course_id, has_multiple_choice, has_written, has_media, state):
+    exam_templates = etrp.get_all_exam_templates_by_course_id(db, course_id, has_multiple_choice, has_written, has_media, state)
     if exam_templates is None or len(exam_templates) == 0:
         raise NotFoundException("Exam templates by course_id {}".format(course_id))
     exam_template_list = []
