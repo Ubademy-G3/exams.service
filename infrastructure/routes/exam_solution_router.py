@@ -9,10 +9,10 @@ router = APIRouter()
 
 @router.post("/", response_model=ExamSolutionDB, status_code=201)
 async def create_exam_solution(
+    apikey: str,
     exam_template_id: str,
     exam_solution: ExamSolutionSchema,
     db: Session = Depends(get_db),
-    apikey: str = Header(None)
 ):
     auth_service.check_api_key(apikey)
     return ExamSolutionController.create_exam_solution(db, exam_solution)
@@ -20,10 +20,10 @@ async def create_exam_solution(
 
 @router.get("/{exam_solution_id}", response_model=ExamSolutionDB, status_code=200)
 async def get_exam_solution(
+    apikey: str,
     exam_template_id: str,
     exam_solution_id: str,
     db: Session = Depends(get_db),
-    apikey: str = Header(None)
 ):
     auth_service.check_api_key(apikey)
     return ExamSolutionController.get_exam_solution(db, exam_solution_id)
@@ -31,9 +31,9 @@ async def get_exam_solution(
 
 @router.get("/", response_model=ExamSolutionList, status_code=200)
 async def get_all_exam_solutions_by_exam_template_id(
+    apikey: str,
     exam_template_id: str,
     db: Session = Depends(get_db),
-    apikey: str = Header(None)
 ):
     auth_service.check_api_key(apikey)
     exam_solution_list = ExamSolutionController.get_all_exam_solutions_by_exam_template_id(db, exam_template_id)
@@ -42,10 +42,10 @@ async def get_all_exam_solutions_by_exam_template_id(
 
 @router.delete("/{exam_solution_id}", response_model=dict, status_code=200)
 async def delete_exam_solution(
+    apikey: str,
     exam_template_id: str,
     exam_solution_id: str,
     db: Session = Depends(get_db),
-    apikey: str = Header(None)
 ):
     auth_service.check_api_key(apikey)
     ExamSolutionController.delete_exam_solution(db, exam_solution_id)
@@ -54,11 +54,11 @@ async def delete_exam_solution(
 
 @router.patch("/{exam_solution_id}", response_model=ExamSolutionDB, status_code=200)
 async def update_exam_solution(
+    apikey: str,
     exam_template_id: str,
     exam_solution_id: str,
     exam_solution: ExamSolutionPatch,
     db: Session = Depends(get_db),
-    apikey: str = Header(None)
 ):
 
     auth_service.check_api_key(apikey)
