@@ -16,7 +16,6 @@ class QuestionSolution(BaseModel):
 
 
 class QuestionSolutionSchema(BaseModel):
-    exam_solution_id: UUID
     question_template_id: UUID
     answer: str
 

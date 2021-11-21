@@ -17,7 +17,6 @@ class ExamSolution(BaseModel):
 class ExamSolutionSchema(BaseModel):
     course_id: UUID
     user_id: UUID
-    exam_template_id: UUID
 
 
 class ExamSolutionDB(ExamSolutionSchema):

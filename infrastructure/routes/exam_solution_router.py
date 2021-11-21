@@ -15,7 +15,7 @@ async def create_exam_solution(
     apikey: str = Header(None),
 ):
     auth_service.check_api_key(apikey)
-    return ExamSolutionController.create_exam_solution(db, exam_solution)
+    return ExamSolutionController.create_exam_solution(db, exam_template_id, exam_solution)
 
 
 @router.get("/{exam_solution_id}", response_model=ExamSolutionDB, status_code=200)

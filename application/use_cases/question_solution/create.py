@@ -6,10 +6,10 @@ from uuid import uuid4
 qsrp = QuestionSolutionRepositoryPostgres()
 
 
-def add_question_solution(db, args):
+def add_question_solution(db, exam_solution_id, args):
     new_question_solution = QuestionSolution(
         id=uuid4(),
-        exam_solution_id=args.exam_solution_id,
+        exam_solution_id=exam_solution_id,
         question_template_id=args.question_template_id,
         answer=args.answer,
         score=0,

@@ -16,7 +16,7 @@ async def create_question_template(
     apikey: str = Header(None),
 ):
     auth_service.check_api_key(apikey)
-    return QuestionTemplateController.create_question_template(db, question_template)
+    return QuestionTemplateController.create_question_template(db, exam_template_id, question_template)
 
 
 @router.get("/{question_template_id}", response_model=QuestionTemplateList, status_code=200)

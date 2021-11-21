@@ -10,12 +10,12 @@ from uuid import uuid4
 qtrp = QuestionTemplateRepositoryPostgres()
 
 
-def add_question_template(db, args):
+def add_question_template(db, exam_template_id, args):
     # if (args.type not in ["multiple choice", "written", "media"]):
     #    raise InvalidQuestionTypeException()
     new_question_template = QuestionTemplate(
         id=uuid4(),
-        exam_id=args.exam_id,
+        exam_id=exam_template_id,
         question=args.question,
         is_written=False,
         is_media=False,

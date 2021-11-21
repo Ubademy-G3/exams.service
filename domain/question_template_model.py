@@ -22,7 +22,6 @@ class QuestionTemplate(BaseModel):
 
 
 class QuestionTemplateSchema(BaseModel):
-    exam_id: UUID
     question: str
     is_written: Optional[bool]
     is_media: Optional[bool]
