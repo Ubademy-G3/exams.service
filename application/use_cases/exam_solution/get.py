@@ -19,12 +19,12 @@ def get_all_exam_solutions_by_user_id(db, user_id):
     exam_solution_list = []
     for exam_solution in exam_solutions:
         exam_solution_list.append(ExamSolutionSerializer.serialize(exam_solution))
-    amount = len(question_solution_list)
+    amount = len(exam_solution_list)
     total_score = 0
     average_score = 0
     if amount != 0:
-        for question_solution in question_solution_list:
-            total_score += question_solution["score"]
+        for exam_solution in exam_solution_list:
+            total_score += exam_solution["score"]
         average_score = total_score/amount
     return {
         "amount": amount,
@@ -41,12 +41,12 @@ def get_all_exam_solutions_by_exam_template_id(db, exam_template_id):
     exam_solution_list = []
     for exam_solution in exam_solutions:
         exam_solution_list.append(ExamSolutionSerializer.serialize(exam_solution))
-    amount = len(question_solution_list)
+    amount = len(exam_solution_list)
     total_score = 0
     average_score = 0
     if amount != 0:
-        for question_solution in question_solution_list:
-            total_score += question_solution["score"]
+        for exam_solution in exam_solution_list:
+            total_score += exam_solution["score"]
         average_score = total_score/amount
     return {
         "amount": amount,

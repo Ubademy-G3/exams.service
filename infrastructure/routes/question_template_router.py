@@ -19,7 +19,7 @@ async def create_question_template(
     return QuestionTemplateController.create_question_template(db, exam_template_id, question_template)
 
 
-@router.get("/{question_template_id}", response_model=QuestionTemplateList, status_code=200)
+@router.get("/{question_template_id}", response_model=QuestionTemplateDB, status_code=200)
 async def get_question_template(
     exam_template_id: str,
     question_template_id: str,
