@@ -15,8 +15,8 @@ class QuestionTemplate(Base):
     question = Column(String(300), nullable=False)
     is_written = Column(Boolean, default=False)
     is_media = Column(Boolean, default=False)
-    options = Column(JSON)
-    correct = Column(Integer)
+    options = Column(JSON, default={})
+    correct = Column(Integer, default=0)
     value = Column(Integer, default=1)
 
     # Relationships

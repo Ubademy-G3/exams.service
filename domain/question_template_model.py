@@ -36,8 +36,8 @@ class QuestionTemplateDB(BaseModel):
     question: str
     is_written: bool
     is_media: bool
-    options: dict
-    correct: int
+    options: Optional[dict]
+    correct: Optional[int]
     value: int
 
 
