@@ -31,7 +31,7 @@ class QuestionSolutionDB(BaseModel):
 class QuestionSolutionList(BaseModel):
     amount: int
     exam_solution_id: UUID
-    QuestionSolutions: List[QuestionSolutionDB]
+    QuestionSolutions: Optional[List[QuestionSolutionDB]]
 
 
 class QuestionSolutionPatch(BaseModel):

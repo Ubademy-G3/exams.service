@@ -32,13 +32,13 @@ class ExamSolutionDB(BaseModel):
 class UserExamSolutionList(BaseModel):
     amount: int
     user_id: UUID
-    ExamSolutions: List[ExamSolutionDB]
+    ExamSolutions: Optional[List[ExamSolutionDB]]
 
 
 class ExamSolutionList(BaseModel):
     amount: int
     exam_template_id: UUID
-    ExamSolutions: List[ExamSolutionDB]
+    ExamSolutions: Optional[List[ExamSolutionDB]]
 
 
 class ExamSolutionPatch(BaseModel):

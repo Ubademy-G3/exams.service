@@ -38,7 +38,7 @@ class ExamTemplateDB(BaseModel):
 class ExamTemplateList(BaseModel):
     amount: int
     course_id: UUID
-    exam_templates: List[ExamTemplateDB]
+    exam_templates: Optional[List[ExamTemplateDB]]
 
 
 class ExamTemplatePatch(BaseModel):
