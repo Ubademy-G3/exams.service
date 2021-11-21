@@ -39,8 +39,7 @@ async def get_all_exam_templates_by_course_id(
     apikey: str = Header(None),
 ):
     auth_service.check_api_key(apikey)
-    exam_template_list = ExamTemplateController.get_all_exam_templates_by_course_id(db, course_id, has_multiple_choice, has_written, has_media, state)
-    return {"amount": len(exam_template_list), "course_id": course_id, "exam_templates": exam_template_list}
+    return ExamTemplateController.get_all_exam_templates_by_course_id(db, course_id, has_multiple_choice, has_written, has_media, state)
 
 
 @router.delete("/{exam_id}", response_model=dict, status_code=200)

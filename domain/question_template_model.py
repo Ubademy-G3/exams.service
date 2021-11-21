@@ -44,7 +44,7 @@ class QuestionTemplateDB(BaseModel):
 class QuestionTemplateList(BaseModel):
     amount: int
     exam_template_id: UUID
-    QuestionTemplates: Optional[List[QuestionTemplateDB]]
+    question_templates: Optional[List[QuestionTemplateDB]]
 
 
 class QuestionTemplatePatch(BaseModel):

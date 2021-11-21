@@ -19,7 +19,11 @@ def get_all_question_templates_by_exam_template_id(db, exam_template_id):
     question_template_list = []
     for question_template in question_templates:
         question_template_list.append(QuestionTemplateSerializer.serialize(question_template))
-    return question_template_list
+    return {
+        "amount": len(question_template_list),
+        "exam_template_id": exam_template_id,
+        "question_templates": question_template_list,
+    }
 
 
 def question_template_exists(db, question_template_id):

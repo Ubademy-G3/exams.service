@@ -19,7 +19,20 @@ def get_all_question_solutions_by_question_template_id(db, question_template_id)
     question_solution_list = []
     for question_solution in question_solutions:
         question_solution_list.append(QuestionSolutionSerializer.serialize(question_solution))
-    return question_solution_list
+    amount = len(question_solution_list)
+    total_score = 0
+    average_score = 0
+    if amount != 0:
+        for question_solution in question_solution_list:
+            total_score += question_solution["score"]
+        average_score = total_score/amount
+    return {
+        "amount": amount,
+        "question_template_id": question_template_id,
+        "Average": average_score,
+        "question_solutions": question_solution_list,
+    }
+
 
 
 def get_all_question_solutions_by_exam_solution_id(db, exam_solution_id):
@@ -29,4 +42,12 @@ def get_all_question_solutions_by_exam_solution_id(db, exam_solution_id):
     question_solution_list = []
     for question_solution in question_solutions:
         question_solution_list.append(QuestionSolutionSerializer.serialize(question_solution))
-    return question_solution_list
+    total_score = 0
+    for question_solution in question_solution_list:
+        total_score += question_solution["score"]
+    return {
+        "amount": len(question_solution_list),
+        "exam_solution_id": exam_solution_id,
+        "Total_score": total_score,
+        "question_solutions": question_solution_list,
+    }

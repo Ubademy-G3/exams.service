@@ -19,7 +19,11 @@ def get_all_exam_templates_by_course_id(db, course_id, has_multiple_choice, has_
     exam_template_list = []
     for exam_template in exam_templates:
         exam_template_list.append(ExamTemplateSerializer.serialize(exam_template))
-    return exam_template_list
+    return {
+        "amount": len(exam_template_list),
+        "course_id": course_id,
+        "exam_templates": exam_template_list,
+    }
 
 
 def exam_template_exists(db, exam_template_id):
