@@ -19,13 +19,20 @@ class ExamTemplate(BaseModel):
 """
 
 
-class ExamTemplateSchema(BaseModel):
+class ExamTemplatePostBody(BaseModel):
     name: str
     course_id: UUID
 
 
-class ExamTemplateDB(ExamTemplateSchema):
+class ExamTemplateDB(BaseModel):
     id: UUID
+    name: str
+    course_id: UUID
+    state: str  # Enum(ExamStateEnum))
+    max_score: int
+    has_multiple_choice: bool
+    has_written: bool
+    has_media: bool
 
 
 class ExamTemplateList(BaseModel):

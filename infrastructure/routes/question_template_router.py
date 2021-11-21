@@ -2,7 +2,7 @@ from fastapi import APIRouter, Header, Depends
 from infrastructure.db.database import Session, get_db
 from application.controllers.question_template_controller import QuestionTemplateController
 from application.services.auth import auth_service
-from domain.question_template_model import (QuestionTemplateSchema, QuestionTemplateDB,
+from domain.question_template_model import (QuestionTemplatePostBody, QuestionTemplateDB,
                                             QuestionTemplateList, QuestionTemplatePatch)
 
 router = APIRouter()
@@ -11,7 +11,7 @@ router = APIRouter()
 @router.post("/", response_model=QuestionTemplateDB, status_code=201)
 async def create_question_template(
     exam_template_id: str,
-    question_template: QuestionTemplateSchema,
+    question_template: QuestionTemplatePostBody,
     db: Session = Depends(get_db),
     apikey: str = Header(None),
 ):

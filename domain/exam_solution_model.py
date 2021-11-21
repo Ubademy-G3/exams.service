@@ -14,13 +14,19 @@ class ExamSolution(BaseModel):
 """
 
 
-class ExamSolutionSchema(BaseModel):
+class ExamSolutionPostBody(BaseModel):
     course_id: UUID
     user_id: UUID
 
 
-class ExamSolutionDB(ExamSolutionSchema):
+class ExamSolutionDB(BaseModel):
     id: UUID
+    course_id: UUID
+    user_id: UUID
+    exam_template_id: UUID
+    graded: bool
+    score: int
+    aprobal_state: bool
 
 
 class UserExamSolutionList(BaseModel):

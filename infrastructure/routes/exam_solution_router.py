@@ -2,7 +2,7 @@ from fastapi import APIRouter, Header, Depends
 from infrastructure.db.database import Session, get_db
 from application.controllers.exam_solution_controller import ExamSolutionController
 from application.services.auth import auth_service
-from domain.exam_solution_model import ExamSolutionSchema, ExamSolutionDB, ExamSolutionList, ExamSolutionPatch
+from domain.exam_solution_model import ExamSolutionPostBody, ExamSolutionDB, ExamSolutionList, ExamSolutionPatch
 
 router = APIRouter()
 
@@ -10,7 +10,7 @@ router = APIRouter()
 @router.post("/", response_model=ExamSolutionDB, status_code=201)
 async def create_exam_solution(
     exam_template_id: str,
-    exam_solution: ExamSolutionSchema,
+    exam_solution: ExamSolutionPostBody,
     db: Session = Depends(get_db),
     apikey: str = Header(None),
 ):

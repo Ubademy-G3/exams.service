@@ -2,7 +2,7 @@ from fastapi import APIRouter, Header, Depends
 from infrastructure.db.database import Session, get_db
 from application.controllers.question_solution_controller import QuestionSolutionController
 from application.services.auth import auth_service
-from domain.question_solution_model import (QuestionSolutionSchema, QuestionSolutionDB,
+from domain.question_solution_model import (QuestionSolutionPostBody, QuestionSolutionDB,
                                             QuestionSolutionList, QuestionSolutionPatch)
 
 router = APIRouter()
@@ -12,7 +12,7 @@ router = APIRouter()
 async def create_question_solution(
     exam_template_id: str,
     exam_solution_id: str,
-    question_solution: QuestionSolutionSchema,
+    question_solution: QuestionSolutionPostBody,
     db: Session = Depends(get_db),
     apikey: str = Header(None),
 ):

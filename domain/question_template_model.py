@@ -21,7 +21,7 @@ class QuestionTemplate(BaseModel):
 """
 
 
-class QuestionTemplateSchema(BaseModel):
+class QuestionTemplatePostBody(BaseModel):
     question: str
     is_written: Optional[bool]
     is_media: Optional[bool]
@@ -30,8 +30,15 @@ class QuestionTemplateSchema(BaseModel):
     value: Optional[int]
 
 
-class QuestionTemplateDB(QuestionTemplateSchema):
+class QuestionTemplateDB(BaseModel):
     id: UUID
+    exam_id: UUID
+    question: str
+    is_written: bool
+    is_media: bool
+    options: dict
+    correct: int
+    value: int
 
 
 class QuestionTemplateList(BaseModel):
