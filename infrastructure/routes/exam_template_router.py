@@ -35,10 +35,11 @@ async def get_all_exam_templates_by_course_id(
     has_multiple_choice: Optional[bool] = Query(None),
     has_written: Optional[bool] = Query(None),
     has_media: Optional[bool] = Query(None),
+    state: Optional[str] = Query(None),
     db: Session = Depends(get_db),
 ):
     auth_service.check_api_key(apikey)
-    exam_template_list = ExamTemplateController.get_all_exam_templates_by_course_id(db, course_id, has_multiple_choice, has_written, has_media)
+    exam_template_list = ExamTemplateController.get_all_exam_templates_by_course_id(db, course_id, has_multiple_choice, has_written, has_media, state)
     return {"amount": len(exam_template_list), "course_id": course_id, "exam_templates": exam_template_list}
 
 
