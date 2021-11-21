@@ -19,7 +19,7 @@ async def create_question_template(
     return QuestionTemplateController.create_question_template(db, exam_template_id, question_template)
 
 
-@router.get("/{question_template_id}", response_model=QuestionTemplateList, status_code=200)
+@router.get("/{question_template_id}", response_model=QuestionTemplateDB, status_code=200)
 async def get_question_template(
     exam_template_id: str,
     question_template_id: str,
@@ -37,12 +37,7 @@ async def get_all_question_templates_by_exam_template_id(
     apikey: str = Header(None),
 ):
     auth_service.check_api_key(apikey)
-    question_template_list = QuestionTemplateController.get_all_question_templates_by_exam_template_id(db, exam_template_id)
-    return {
-        "amount": len(question_template_list),
-        "exam_template_id": exam_template_id,
-        "question_templates": question_template_list,
-    }
+    return QuestionTemplateController.get_all_question_templates_by_exam_template_id(db, exam_template_id)
 
 
 @router.delete("/{question_template_id}", response_model=dict, status_code=200)

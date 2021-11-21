@@ -36,15 +36,15 @@ class QuestionTemplateDB(BaseModel):
     question: str
     is_written: bool
     is_media: bool
-    options: dict
-    correct: int
+    options: Optional[dict]
+    correct: Optional[int]
     value: int
 
 
 class QuestionTemplateList(BaseModel):
     amount: int
     exam_template_id: UUID
-    QuestionTemplates: List[QuestionTemplateDB]
+    question_templates: Optional[List[QuestionTemplateDB]]
 
 
 class QuestionTemplatePatch(BaseModel):

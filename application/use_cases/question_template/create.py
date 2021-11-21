@@ -17,11 +17,11 @@ def add_question_template(db, exam_template_id, args):
         id=uuid4(),
         exam_id=exam_template_id,
         question=args.question,
-        is_written=False,
-        is_media=False,
-        options=None,
-        correct=0,
-        value=1,
+        is_written=args.is_written,
+        is_media=args.is_media,
+        options=args.options,
+        correct=args.correct,
+        value=args.value,
         # type = args.type,#QuestionTypeEnum.multiple_choice,
     )
     # if(args.type == "written"):
@@ -29,16 +29,16 @@ def add_question_template(db, exam_template_id, args):
     # if(args.type == "media"):
     #    new_question_template.type = QuestionTypeEnum.media
 
-    if args.is_written is not None:
-        new_question_template.is_written = args.is_written
-    if args.is_media is not None:
-        new_question_template.is_media = args.is_media
-    if args.is_written is not None:
-        new_question_template.options = args.options
-    if args.is_written is not None:
-        new_question_template.correct = args.correct
-    if args.is_written is not None:
-        new_question_template.value = args.value
+    if new_question_template.is_written is None:
+        new_question_template.is_written = False
+    if new_question_template.is_media is None:
+        new_question_template.is_media = False
+    if new_question_template.is_written is None:
+        new_question_template.options = {}
+    if new_question_template.is_written is None:
+        new_question_template.correct = 0
+    if new_question_template.is_written is None:
+        new_question_template.value = 1
 
     qtrp.add_question_template(db, new_question_template)
     return QuestionTemplateSerializer.serialize(new_question_template)

@@ -40,13 +40,7 @@ async def get_all_question_solutions_by_question_template_id(
     apikey: str = Header(None),
 ):
     auth_service.check_api_key(apikey)
-    question_solution_list = QuestionSolutionController.get_all_question_solutions_by_question_template_id(db,
-                                                                                                        question_template_id)
-    return {
-        "amount": len(question_solution_list),
-        "question_template_id": question_template_id,
-        "question_solutions": question_solution_list
-    }
+    return QuestionSolutionController.get_all_question_solutions_by_question_template_id(db, question_template_id)
 """
 
 
@@ -58,12 +52,7 @@ async def get_all_question_solutions_by_exam_solution_id(
     apikey: str = Header(None),
 ):
     auth_service.check_api_key(apikey)
-    question_solution_list = QuestionSolutionController.get_all_question_solutions_by_exam_solution_id(db, exam_solution_id)
-    return {
-        "amount": len(question_solution_list),
-        "exam_solution_id": exam_solution_id,
-        "question_solutions": question_solution_list,
-    }
+    return QuestionSolutionController.get_all_question_solutions_by_exam_solution_id(db, exam_solution_id)
 
 
 @router.delete("/{question_solution_id}", response_model=dict, status_code=200)
