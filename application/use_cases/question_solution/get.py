@@ -48,6 +48,6 @@ def get_all_question_solutions_by_exam_solution_id(db, exam_solution_id):
     return {
         "amount": len(question_solution_list),
         "exam_solution_id": exam_solution_id,
-        "Total_score": total_score,
+        "total_score": total_score,
         "question_solutions": question_solution_list,
     }

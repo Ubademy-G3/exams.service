@@ -8,7 +8,6 @@ class QuestionSolutionSerializer:
             "id": question_solution.id,
             "exam_solution_id": question_solution.exam_solution_id,
             "question_template_id": question_solution.question_template_id,
-            "type": question_solution.type,
             "answer": question_solution.answer,
             "score": question_solution.score,
         }

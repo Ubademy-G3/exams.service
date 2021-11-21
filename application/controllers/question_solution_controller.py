@@ -16,7 +16,7 @@ class QuestionSolutionController:
 
     @classmethod
     def get_all_question_solutions_by_exam_solution_id(self, db, exam_solution_id):
-        return delete.get_all_question_solutions_by_exam_solution_id(db, exam_solution_id)
+        return get.get_all_question_solutions_by_exam_solution_id(db, exam_solution_id)
 
     @classmethod
     def delete_question_solutions(self, db, question_solution_id):
