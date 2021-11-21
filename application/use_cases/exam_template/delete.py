@@ -8,4 +8,4 @@ def delete_exam_template(db, exam_template_id):
     exam_template = etrp.get_exam_template(db, exam_template_id)
     if not exam_template:
         raise NotFoundException("Exam template {}".format(exam_template_id))
-    return etrp.delete_exam_template(db, exam_template_id)
+    return etrp.delete_exam_template(db, exam_template)

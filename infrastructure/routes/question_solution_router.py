@@ -56,7 +56,7 @@ async def get_all_question_solutions_by_exam_solution_id(
 
 
 @router.delete("/{question_solution_id}", response_model=dict, status_code=200)
-async def delete_question_solutions(
+async def delete_question_solution(
     exam_template_id: str,
     exam_solution_id: str,
     question_solution_id: str,
@@ -64,7 +64,7 @@ async def delete_question_solutions(
     apikey: str = Header(None),
 ):
     auth_service.check_api_key(apikey)
-    QuestionSolutionController.delete_question_solutions(db, question_solution_id)
+    QuestionSolutionController.delete_question_solution(db, question_solution_id)
     return {"message": "The question solution {} was deleted succesfully".format(question_solution_id)}
 
 
