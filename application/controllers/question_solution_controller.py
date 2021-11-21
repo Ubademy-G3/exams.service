@@ -19,8 +19,8 @@ class QuestionSolutionController:
         return get.get_all_question_solutions_by_exam_solution_id(db, exam_solution_id)
 
     @classmethod
-    def delete_question_solutions(self, db, question_solution_id):
-        return delete.delete_question_solutions(db, question_solution_id)
+    def delete_question_solution(self, db, question_solution_id):
+        return delete.delete_question_solution(db, question_solution_id)
 
     @classmethod
     def update_question_solution(self, db, question_solution_id, payload):

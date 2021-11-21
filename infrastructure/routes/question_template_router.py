@@ -41,14 +41,14 @@ async def get_all_question_templates_by_exam_template_id(
 
 
 @router.delete("/{question_template_id}", response_model=dict, status_code=200)
-async def delete_question_templates(
+async def delete_question_template(
     exam_template_id: str,
     question_template_id: str,
     db: Session = Depends(get_db),
     apikey: str = Header(None),
 ):
     auth_service.check_api_key(apikey)
-    QuestionTemplateController.delete_question_templates(db, question_template_id)
+    QuestionTemplateController.delete_question_template(db, question_template_id)
     return {"message": "The question template {} was deleted succesfully".format(question_template_id)}
 
 
