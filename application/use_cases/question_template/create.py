@@ -33,11 +33,11 @@ def add_question_template(db, exam_template_id, args):
         new_question_template.is_written = False
     if new_question_template.is_media is None:
         new_question_template.is_media = False
-    if new_question_template.is_written is None:
+    if new_question_template.options is None:
         new_question_template.options = {}
-    if new_question_template.is_written is None:
+    if new_question_template.correct is None:
         new_question_template.correct = 0
-    if new_question_template.is_written is None:
+    if new_question_template.value is None:
         new_question_template.value = 1
 
     qtrp.add_question_template(db, new_question_template)
