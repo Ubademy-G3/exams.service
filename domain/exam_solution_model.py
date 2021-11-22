@@ -6,6 +6,7 @@ from typing import Optional, List
 class ExamSolutionPostBody(BaseModel):
     course_id: UUID
     user_id: UUID
+    corrector_id: UUID
 
 
 class ExamSolutionDB(BaseModel):
@@ -13,8 +14,8 @@ class ExamSolutionDB(BaseModel):
     course_id: UUID
     user_id: UUID
     exam_template_id: UUID
+    corrector_id: UUID
     graded: bool
-    corrector_id: Optional[UUID]
     score: Optional[float]
     approval_state: Optional[bool]
 

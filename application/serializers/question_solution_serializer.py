@@ -10,4 +10,5 @@ class QuestionSolutionSerializer:
             "question_template_id": question_solution.question_template_id,
             "answer": question_solution.answer,
             "score": question_solution.score,
+            "max_score": question_solution.max_score,
         }

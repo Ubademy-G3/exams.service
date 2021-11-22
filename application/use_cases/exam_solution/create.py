@@ -12,10 +12,10 @@ def add_exam_solution(db, exam_template_id, args):
         course_id=args.course_id,
         user_id=args.user_id,
         exam_template_id=exam_template_id,
+        corrector_id=args.corrector_id,
         graded=False,
         score=None,
         approval_state=None,
-        corrector_id=None,
     )
     esrp.add_exam_solution(db, new_exam_solution)
     return ExamSolutionSerializer.serialize(new_exam_solution)
