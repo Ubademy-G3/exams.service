@@ -1,30 +1,18 @@
 from pydantic import BaseModel
 from uuid import UUID
 from typing import Optional, List
+import enum
 
-"""
-from enum import Enum
 
-class QuestionTypeEnum(Enum):
+class QuestionTypeEnum(enum.Enum):
     multiple_choice = 1
     written = 2
     media = 3
-"""
-"""
-class QuestionTemplate(BaseModel):
-    id: UUID
-    exam_id: UUID
-    question: str
-    type: str#QuestionTypeEnum
-    options: Optional[dict]
-    correct: Optional[int]
-"""
 
 
 class QuestionTemplatePostBody(BaseModel):
     question: str
-    is_written: Optional[bool]
-    is_media: Optional[bool]
+    question_type: Optional[str]
     options: Optional[dict]
     correct: Optional[int]
     value: Optional[float]
@@ -34,8 +22,7 @@ class QuestionTemplateDB(BaseModel):
     id: UUID
     exam_id: UUID
     question: str
-    is_written: bool
-    is_media: bool
+    question_type: str
     options: Optional[dict]
     correct: Optional[int]
     value: float
@@ -49,8 +36,7 @@ class QuestionTemplateList(BaseModel):
 
 class QuestionTemplatePatch(BaseModel):
     question: Optional[str]
-    is_written: Optional[bool]
-    is_media: Optional[bool]
+    question_type: Optional[str]
     options: Optional[dict]
     correct: Optional[int]
     value: Optional[float]

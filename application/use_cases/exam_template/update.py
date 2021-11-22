@@ -1,11 +1,16 @@
 from persistence.repositories.exam_template_repository_postgres import ExamTemplateRepositoryPostgres
+from infrastructure.db.exam_template_schema import ExamStateEnum
 from exceptions.http_exception import NotFoundException
 from application.serializers.exam_template_serializer import ExamTemplateSerializer
+from exceptions.ubademy_exception import InvalidExamStateException
 
 etrp = ExamTemplateRepositoryPostgres()
 
 
 def update_exam_template(db, exam_template_id, new_args):
+
+    if(new_args.state not in ["active", "inactive"]):
+        raise InvalidExamStateException(new_args.state)
 
     exam_template_to_update = etrp.get_exam_template(db, exam_template_id)
     if not exam_template_to_update:
@@ -15,7 +20,9 @@ def update_exam_template(db, exam_template_id, new_args):
         exam_template_to_update.name = new_args.name
 
     if new_args.state is not None:
-        exam_template_to_update.state = new_args.state
+        exam_template_to_update.state = ExamStateEnum.active
+        if(new_args.state == "inactive"):
+            exam_template_to_update.state = ExamStateEnum.inactive
 
     if new_args.max_score is not None:
         exam_template_to_update.max_score = new_args.max_score

@@ -1,22 +1,14 @@
 from pydantic import BaseModel
 from uuid import UUID
 from typing import Optional, List
+import enum
+from sqlalchemy import Enum as SQLalchemyEnum
 
-"""
-from enum import Enum
 
-class ExamStateEnum(Enum):
+class ExamStateEnum(enum.Enum):
     draft = 1
     active = 2
-    obsolete = 3
-"""
-"""
-class ExamTemplate(BaseModel):
-    id: UUID
-    name: str
-    course_id: UUID
-    state: str#ExamStateEnum
-"""
+    inactive = 3
 
 
 class ExamTemplatePostBody(BaseModel):
@@ -28,7 +20,7 @@ class ExamTemplateDB(BaseModel):
     id: UUID
     name: str
     course_id: UUID
-    state: str  # Enum(ExamStateEnum))
+    state: str
     max_score: float
     has_multiple_choice: bool
     has_written: bool

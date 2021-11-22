@@ -1,11 +1,16 @@
 from persistence.repositories.question_template_repository_postgres import QuestionTemplateRepositoryPostgres
+from infrastructure.db.question_template_schema import QuestionTypeEnum
 from exceptions.http_exception import NotFoundException
+from exceptions.ubademy_exception import InvalidQuestionTypeException
 from application.serializers.question_template_serializer import QuestionTemplateSerializer
 
 qtrp = QuestionTemplateRepositoryPostgres()
 
 
 def update_question_template(db, question_template_id, new_args):
+
+    if (new_args.question_type is not None and new_args.question_type not in ["multiple_choice", "written", "media"]):
+        raise InvalidQuestionTypeException(new_args.question_type)
 
     question_template_to_update = qtrp.get_question_template(db, question_template_id)
     if not question_template_to_update:
@@ -14,11 +19,12 @@ def update_question_template(db, question_template_id, new_args):
     if new_args.question is not None:
         question_template_to_update.question = new_args.question
 
-    if new_args.is_written is not None:
-        question_template_to_update.is_written = new_args.is_written
-
-    if new_args.is_media is not None:
-        question_template_to_update.is_media = new_args.is_media
+    if new_args.question_type is not None:
+        question_template_to_update.question_type = QuestionTypeEnum.multiple_choice
+        if(new_args.question_type == "written"):
+            question_template_to_update.question_type = QuestionTypeEnum.written
+        if(new_args.question_type == "media"):
+            question_template_to_update.question_type = QuestionTypeEnum.media
 
     if new_args.options is not None:
         question_template_to_update.options = new_args.options
