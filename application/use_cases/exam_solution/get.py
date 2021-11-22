@@ -18,19 +18,27 @@ def get_all_exam_solutions_by_user_id(db, user_id, graded, approval_state):
     for exam_solution in exam_solutions:
         exam_solution_list.append(ExamSolutionSerializer.serialize(exam_solution))
     amount = len(exam_solution_list)
+    amount_graded = 0
     total_score = 0
+    approval_count = 0
     average_score = 0
+    approval_rate = 0
     if amount != 0:
-        amount = 0
         for exam_solution in exam_solution_list:
             if exam_solution["graded"] is True:
-                amount += 1
+                amount_graded += 1
                 total_score += exam_solution["score"]
-        average_score = total_score/amount
+                if exam_solution["approval_state"] is True:
+                    approval_count += 1
+    if amount_graded != 0:
+        average_score = total_score/amount_graded
+        approval_rate = approval_count/amount_graded
     return {
-        "amount": amount,
         "user_id": user_id,
+        "amount": amount,
+        "amount_graded": amount_graded,
         "average_score": average_score,
+        "approval_rate": approval_rate,
         "exam_solutions": exam_solution_list,
     }
 
@@ -41,19 +49,27 @@ def get_all_exam_solutions_by_exam_template_id(db, exam_template_id, graded, app
     for exam_solution in exam_solutions:
         exam_solution_list.append(ExamSolutionSerializer.serialize(exam_solution))
     amount = len(exam_solution_list)
+    amount_graded = 0
     total_score = 0
+    approval_count = 0
     average_score = 0
+    approval_rate = 0
     if amount != 0:
-        amount = 0
         for exam_solution in exam_solution_list:
             if exam_solution["graded"] is True:
-                amount += 1
+                amount_graded += 1
                 total_score += exam_solution["score"]
-        average_score = total_score/amount
+                if exam_solution["approval_state"] is True:
+                    approval_count += 1
+    if amount_graded != 0:
+        average_score = total_score/amount_graded
+        approval_rate = approval_count/amount_graded
     return {
-        "amount": amount,
         "exam_template_id": exam_template_id,
+        "amount": amount,
+        "amount_graded": amount_graded,
         "average_score": average_score,
+        "approval_rate": approval_rate,
         "exam_solutions": exam_solution_list,
     }
 
@@ -64,19 +80,27 @@ def get_all_exam_solutions_by_course_id(db, course_id, graded, approval_state):
     for exam_solution in exam_solutions:
         exam_solution_list.append(ExamSolutionSerializer.serialize(exam_solution))
     amount = len(exam_solution_list)
+    amount_graded = 0
     total_score = 0
+    approval_count = 0
     average_score = 0
+    approval_rate = 0
     if amount != 0:
-        amount = 0
         for exam_solution in exam_solution_list:
             if exam_solution["graded"] is True:
-                amount += 1
+                amount_graded += 1
                 total_score += exam_solution["score"]
-        average_score = total_score/amount
+                if exam_solution["approval_state"] is True:
+                    approval_count += 1
+    if amount_graded != 0:
+        average_score = total_score/amount_graded
+        approval_rate = approval_count/amount_graded
     return {
-        "amount": amount,
         "course_id": course_id,
+        "amount": amount,
+        "amount_graded": amount_graded,
         "average_score": average_score,
+        "approval_rate": approval_rate,
         "exam_solutions": exam_solution_list,
     }
 
@@ -87,9 +111,22 @@ def get_all_exam_solutions_by_corrector_id(db, corrector_id, graded, approval_st
     for exam_solution in exam_solutions:
         exam_solution_list.append(ExamSolutionSerializer.serialize(exam_solution))
     amount = len(exam_solution_list)
+    amount_graded = 0
+    approval_count = 0
+    approval_rate = 0
+    if amount != 0:
+        for exam_solution in exam_solution_list:
+            if exam_solution["graded"] is True:
+                amount_graded += 1
+                if exam_solution["approval_state"] is True:
+                    approval_count += 1
+    if amount_graded != 0:
+        approval_rate = approval_count/amount_graded
     return {
-        "amount": amount,
         "corrector_id": corrector_id,
+        "amount": amount,
+        "amount_graded": amount_graded,
+        "approval_rate": approval_rate,
         "exam_solutions": exam_solution_list,
     }
 

@@ -20,29 +20,37 @@ class ExamSolutionDB(BaseModel):
 
 
 class ExamSolutionList(BaseModel):
-    amount: int
     exam_template_id: UUID
+    amount: int
+    amount_graded: int
     average_score: Optional[float]
+    approval_rate: Optional[float]
     exam_solutions: Optional[List[ExamSolutionDB]]
 
 
 class UserExamSolutionList(BaseModel):
-    amount: int
     user_id: UUID
+    amount: int
+    amount_graded: int
     average_score: Optional[float]
+    approval_rate: Optional[float]
     exam_solutions: Optional[List[ExamSolutionDB]]
 
 
 class CourseExamSolutionList(BaseModel):
-    amount: int
     course_id: UUID
+    amount: int
+    amount_graded: int
     average_score: Optional[float]
+    approval_rate: Optional[float]
     exam_solutions: Optional[List[ExamSolutionDB]]
 
 
 class CorrectorExamSolutionList(BaseModel):
-    amount: int
     corrector_id: UUID
+    amount: int
+    amount_graded: int
+    approval_rate: Optional[float]
     exam_solutions: Optional[List[ExamSolutionDB]]
 
 
