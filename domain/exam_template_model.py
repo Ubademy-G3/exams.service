@@ -34,6 +34,12 @@ class ExamTemplateList(BaseModel):
     exam_templates: Optional[List[ExamTemplateDB]]
 
 
+class CreatorExamTemplateList(BaseModel):
+    creator_id: UUID
+    amount: int
+    exam_templates: Optional[List[ExamTemplateDB]]
+
+
 class ExamTemplatePatch(BaseModel):
     name: Optional[str]
     state: Optional[str]
