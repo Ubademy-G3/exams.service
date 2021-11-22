@@ -6,12 +6,12 @@ class UbademyException(Exception):
 
 
 class InvalidExamStateException(UbademyException):
-    def __init__(self):
-        msg = "Exam template has an invalid state"
+    def __init__(self, detail):
+        msg = f"Exam template has an invalid state: \"{detail}\". Expected values: are \"active\" and \"inactive\""
         super().__init__(status_code=400, detail=msg)
 
 
 class InvalidQuestionTypeException(UbademyException):
-    def __init__(self):
-        msg = "Question template has an invalid type"
+    def __init__(self, detail):
+        msg = f"Question template has an invalid type: \"{detail}\". Expected values: are \"multiple_choice\", \"written\" and \"media\""
         super().__init__(status_code=400, detail=msg)
