@@ -23,6 +23,19 @@ class ExamTemplateRepositoryPostgres:
         exam_templates = query.all()
         return exam_templates
 
+    def get_all_exam_templates_by_creator_id(self, db, creator_id, has_multiple_choice, has_written, has_media, state):
+        query = db.query(ExamTemplate).filter(ExamTemplate.creator_id == creator_id)
+        if has_multiple_choice is not None:
+            query = query.filter(ExamTemplate.has_multiple_choice == has_multiple_choice)
+        if has_written is not None:
+            query = query.filter(ExamTemplate.has_written == has_written)
+        if has_media is not None:
+            query = query.filter(ExamTemplate.has_media == has_media)
+        if state is not None:
+            query = query.filter(ExamTemplate.state == state)
+        exam_templates = query.all()
+        return exam_templates
+
     def delete_exam_template(self, db, exam_template):
         db.delete(exam_template)
         db.commit()
