@@ -48,13 +48,6 @@ async def sql_exception_handler(request, exc):
     return JSONResponse(status_code=500, content=error)
 
 
-@app.exception_handler(Exception)
-async def sql_exception_handler(request, exc):
-    error = {"message": str(exc.__dict__)}
-    logging.error(f"status_code: 500 message: {str(exc.__dict__)}")
-    return JSONResponse(status_code=500, content=error)
-
-
 app.include_router(exam_template_router.router, prefix="/exams", tags=["exam-templates"])
 
 app.include_router(question_template_router.router, prefix="/exams/{exam_template_id}/questions", tags=["question-templates"])

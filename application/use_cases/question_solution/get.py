@@ -34,7 +34,6 @@ def get_all_question_solutions_by_question_template_id(db, question_template_id)
     }
 
 
-
 def get_all_question_solutions_by_exam_solution_id(db, exam_solution_id):
     question_solutions = qsrp.get_all_question_solutions_by_exam_solution_id(db, exam_solution_id)
     # if question_solutions is None or len(question_solutions) == 0:

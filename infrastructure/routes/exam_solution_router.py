@@ -37,7 +37,6 @@ async def get_all_exam_solutions_by_exam_template_id(
 ):
     auth_service.check_api_key(apikey)
     return ExamSolutionController.get_all_exam_solutions_by_exam_template_id(db, exam_template_id)
-    
 
 
 @router.delete("/{exam_solution_id}", response_model=dict, status_code=200)

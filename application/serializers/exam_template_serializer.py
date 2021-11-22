@@ -6,11 +6,11 @@ class ExamTemplateSerializer:
     @classmethod
     def serialize(self, exam_template: ExamTemplate):
 
-        state="draft"
-        if exam_template.state==ExamStateEnum.active:
-            state="active"
-        if exam_template.state==ExamStateEnum.inactive:
-            state="inactive"
+        state = "draft"
+        if exam_template.state == ExamStateEnum.active:
+            state = "active"
+        if exam_template.state == ExamStateEnum.inactive:
+            state = "inactive"
         return {
             "id": exam_template.id,
             "name": exam_template.name,

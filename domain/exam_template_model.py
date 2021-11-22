@@ -2,7 +2,6 @@ from pydantic import BaseModel
 from uuid import UUID
 from typing import Optional, List
 import enum
-from sqlalchemy import Enum as SQLalchemyEnum
 
 
 class ExamStateEnum(enum.Enum):
