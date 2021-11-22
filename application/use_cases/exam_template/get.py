@@ -20,8 +20,8 @@ def get_all_exam_templates_by_course_id(db, course_id, has_multiple_choice, has_
     for exam_template in exam_templates:
         exam_template_list.append(ExamTemplateSerializer.serialize(exam_template))
     return {
-        "amount": len(exam_template_list),
         "course_id": course_id,
+        "amount": len(exam_template_list),
         "exam_templates": exam_template_list,
     }
 

@@ -11,14 +11,16 @@ class ExamStateEnum(enum.Enum):
 
 
 class ExamTemplatePostBody(BaseModel):
-    name: str
     course_id: UUID
+    creator_id: UUID
+    name: str
 
 
 class ExamTemplateDB(BaseModel):
     id: UUID
-    name: str
     course_id: UUID
+    creator_id: UUID
+    name: str
     state: str
     max_score: float
     has_multiple_choice: bool
@@ -27,8 +29,8 @@ class ExamTemplateDB(BaseModel):
 
 
 class ExamTemplateList(BaseModel):
-    amount: int
     course_id: UUID
+    amount: int
     exam_templates: Optional[List[ExamTemplateDB]]
 
 
