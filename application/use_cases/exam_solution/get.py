@@ -27,7 +27,7 @@ def get_all_exam_solutions_by_user_id(db, user_id, graded, approval_state):
         for exam_solution in exam_solution_list:
             if exam_solution["graded"] is True:
                 amount_graded += 1
-                total_score += exam_solution["score"]
+                total_score += exam_solution["score"]/exam_solution["max_score"]
                 if exam_solution["approval_state"] is True:
                     approval_count += 1
     if amount_graded != 0:
@@ -58,7 +58,7 @@ def get_all_exam_solutions_by_exam_template_id(db, exam_template_id, graded, app
         for exam_solution in exam_solution_list:
             if exam_solution["graded"] is True:
                 amount_graded += 1
-                total_score += exam_solution["score"]
+                total_score += exam_solution["score"]/exam_solution["max_score"]
                 if exam_solution["approval_state"] is True:
                     approval_count += 1
     if amount_graded != 0:
@@ -89,7 +89,7 @@ def get_all_exam_solutions_by_course_id(db, course_id, graded, approval_state):
         for exam_solution in exam_solution_list:
             if exam_solution["graded"] is True:
                 amount_graded += 1
-                total_score += exam_solution["score"]
+                total_score += exam_solution["score"]/exam_solution["max_score"]
                 if exam_solution["approval_state"] is True:
                     approval_count += 1
     if amount_graded != 0:
