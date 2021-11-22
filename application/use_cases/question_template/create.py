@@ -13,7 +13,7 @@ qtrp = QuestionTemplateRepositoryPostgres()
 
 def add_question_template(db, exam_template_id, args):
     if (args.question_type is not None and args.question_type not in ["multiple_choice", "written", "media"]):
-        raise InvalidQuestionTypeException(new_args.question_type)
+        raise InvalidQuestionTypeException(args.question_type)
     new_question_template = QuestionTemplate(
         id=uuid4(),
         exam_id=exam_template_id,
