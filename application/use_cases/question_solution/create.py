@@ -13,6 +13,7 @@ def add_question_solution(db, exam_solution_id, args):
         question_template_id=args.question_template_id,
         answer=args.answer,
         score=0,
+        max_score=args.max_score,
     )
     qsrp.add_question_solution(db, new_question_solution)
     return QuestionSolutionSerializer.serialize(new_question_solution)

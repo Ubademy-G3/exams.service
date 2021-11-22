@@ -11,10 +11,12 @@ class QuestionSolution(Base):
     question_template_id = Column(UUID(as_uuid=True), ForeignKey("question_templates.id", ondelete="CASCADE"), nullable=False)
     answer = Column(String(300), nullable=False)
     score = Column(Float)
+    max_score = Column(Float)
 
-    def __init__(self, id, exam_solution_id, question_template_id, answer, score):
+    def __init__(self, id, exam_solution_id, question_template_id, answer, score, max_score):
         self.id = id
         self.exam_solution_id = exam_solution_id
         self.question_template_id = question_template_id
         self.answer = answer
         self.score = score
+        self.max_score = max_score
