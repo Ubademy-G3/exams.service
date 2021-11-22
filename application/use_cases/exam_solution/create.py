@@ -15,6 +15,7 @@ def add_exam_solution(db, exam_template_id, args):
         corrector_id=args.corrector_id,
         graded=False,
         score=None,
+        max_score=args.max_score,
         approval_state=None,
     )
     esrp.add_exam_solution(db, new_exam_solution)
