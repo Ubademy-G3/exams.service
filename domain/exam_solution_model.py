@@ -7,6 +7,7 @@ class ExamSolutionPostBody(BaseModel):
     course_id: UUID
     user_id: UUID
     corrector_id: UUID
+    max_score: float
 
 
 class ExamSolutionDB(BaseModel):
@@ -17,6 +18,7 @@ class ExamSolutionDB(BaseModel):
     corrector_id: UUID
     graded: bool
     score: Optional[float]
+    max_score: float
     approval_state: Optional[bool]
 
 
