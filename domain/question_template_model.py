@@ -13,7 +13,7 @@ class QuestionTypeEnum(enum.Enum):
 class QuestionTemplatePostBody(BaseModel):
     question: str
     question_type: Optional[str]
-    options: Optional[dict]
+    options: Optional[list]
     correct: Optional[int]
     value: Optional[float]
 
@@ -23,7 +23,7 @@ class QuestionTemplateDB(BaseModel):
     exam_id: UUID
     question: str
     question_type: str
-    options: Optional[dict]
+    options: Optional[list]
     correct: Optional[int]
     value: float
 
@@ -37,6 +37,6 @@ class QuestionTemplateList(BaseModel):
 class QuestionTemplatePatch(BaseModel):
     question: Optional[str]
     question_type: Optional[str]
-    options: Optional[dict]
+    options: Optional[list]
     correct: Optional[int]
     value: Optional[float]
