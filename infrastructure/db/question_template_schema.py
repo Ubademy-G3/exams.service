@@ -1,6 +1,6 @@
 from infrastructure.db.database import Base
 from sqlalchemy.orm import relationship
-from sqlalchemy import Column, Integer, Float, String, ForeignKey, JSON, Boolean, Enum
+from sqlalchemy import Column, Integer, Float, String, ForeignKey, JSON, Enum
 from sqlalchemy.dialects.postgresql import UUID
 import uuid
 from domain.question_template_model import QuestionTypeEnum

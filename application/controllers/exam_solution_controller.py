@@ -11,12 +11,20 @@ class ExamSolutionController:
         return get.get_exam_solution(db, exam_solution_id)
 
     @classmethod
-    def get_all_exam_solutions_by_user_id(self, db, user_id):
-        return get.get_all_exam_solutions_by_user_id(db, user_id)
+    def get_all_exam_solutions_by_user_id(self, db, user_id, graded, approval_state):
+        return get.get_all_exam_solutions_by_user_id(db, user_id, graded, approval_state)
 
     @classmethod
-    def get_all_exam_solutions_by_exam_template_id(self, db, exam_template_id):
-        return get.get_all_exam_solutions_by_exam_template_id(db, exam_template_id)
+    def get_all_exam_solutions_by_exam_template_id(self, db, exam_template_id, graded, approval_state):
+        return get.get_all_exam_solutions_by_exam_template_id(db, exam_template_id, graded, approval_state)
+
+    @classmethod
+    def get_all_exam_solutions_by_corrector_id(self, db, corrector_id, graded, approval_state):
+        return get.get_all_exam_solutions_by_corrector_id(db, corrector_id, graded, approval_state)
+
+    @classmethod
+    def get_all_exam_solutions_by_course_id(self, db, course_id, graded, approval_state):
+        return get.get_all_exam_solutions_by_course_id(db, course_id, graded, approval_state)
 
     @classmethod
     def delete_exam_solution(self, db, exam_solution_id):

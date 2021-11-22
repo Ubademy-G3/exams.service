@@ -27,18 +27,15 @@ def get_all_question_solutions_by_question_template_id(db, question_template_id)
             total_score += question_solution["score"]
         average_score = total_score/amount
     return {
-        "amount": amount,
         "question_template_id": question_template_id,
+        "amount": amount,
         "Average": average_score,
         "question_solutions": question_solution_list,
     }
 
 
-
 def get_all_question_solutions_by_exam_solution_id(db, exam_solution_id):
     question_solutions = qsrp.get_all_question_solutions_by_exam_solution_id(db, exam_solution_id)
-    # if question_solutions is None or len(question_solutions) == 0:
-    #    raise NotFoundException("Question solutions by exam_solution_id {}".format(exam_solution_id))
     question_solution_list = []
     for question_solution in question_solutions:
         question_solution_list.append(QuestionSolutionSerializer.serialize(question_solution))
@@ -46,8 +43,8 @@ def get_all_question_solutions_by_exam_solution_id(db, exam_solution_id):
     for question_solution in question_solution_list:
         total_score += question_solution["score"]
     return {
-        "amount": len(question_solution_list),
         "exam_solution_id": exam_solution_id,
+        "amount": len(question_solution_list),
         "total_score": total_score,
         "question_solutions": question_solution_list,
     }

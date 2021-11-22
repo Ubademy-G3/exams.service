@@ -29,15 +29,15 @@ class QuestionSolutionDB(BaseModel):
 
 
 class QuestionSolutionList(BaseModel):
-    amount: int
     exam_solution_id: UUID
+    amount: int
     total_score: float
     question_solutions: Optional[List[QuestionSolutionDB]]
 
 
 class UserQuestionSolutionList(BaseModel):
-    amount: int
     exam_solution_id: UUID
+    amount: int
     average: Optional[float]
     question_solutions: Optional[List[QuestionSolutionDB]]
 

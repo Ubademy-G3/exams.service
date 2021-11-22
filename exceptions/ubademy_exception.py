@@ -13,5 +13,6 @@ class InvalidExamStateException(UbademyException):
 
 class InvalidQuestionTypeException(UbademyException):
     def __init__(self, detail):
-        msg = f"Question template has an invalid type: \"{detail}\". Expected values: are \"multiple_choice\", \"written\" and \"media\""
+        msg = f"Question template has an invalid type: \"{detail}\". "
+        msg += "Expected values: are \"multiple_choice\", \"written\" and \"media\""
         super().__init__(status_code=400, detail=msg)

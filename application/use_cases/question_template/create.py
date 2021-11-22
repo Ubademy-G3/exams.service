@@ -5,9 +5,6 @@ from exceptions.ubademy_exception import InvalidQuestionTypeException
 from uuid import uuid4
 
 
-from exceptions.ubademy_exception import InvalidQuestionTypeException
-
-
 qtrp = QuestionTemplateRepositoryPostgres()
 
 
@@ -23,7 +20,7 @@ def add_question_template(db, exam_template_id, args):
         correct=args.correct,
         value=args.value,
     )
-    
+
     if(args.type == "written"):
         new_question_template.question_type = QuestionTypeEnum.written
     if(args.type == "media"):

@@ -2,17 +2,6 @@ from pydantic import BaseModel
 from uuid import UUID
 from typing import Optional, List
 
-"""
-class ExamSolution(BaseModel):
-    id: UUID
-    name: str
-    course_id: UUID
-    user_id: UUID
-    graded: bool = False
-    score: int = 0
-    aprobal_state: bool = False
-"""
-
 
 class ExamSolutionPostBody(BaseModel):
     course_id: UUID
@@ -25,25 +14,48 @@ class ExamSolutionDB(BaseModel):
     user_id: UUID
     exam_template_id: UUID
     graded: bool
-    score: float
-    aprobal_state: bool
-
-
-class UserExamSolutionList(BaseModel):
-    amount: int
-    user_id: UUID
-    average_score: Optional[float]
-    exam_solutions: Optional[List[ExamSolutionDB]]
+    corrector_id: Optional[UUID]
+    score: Optional[float]
+    approval_state: Optional[bool]
 
 
 class ExamSolutionList(BaseModel):
-    amount: int
     exam_template_id: UUID
+    amount: int
+    amount_graded: int
     average_score: Optional[float]
+    approval_rate: Optional[float]
+    exam_solutions: Optional[List[ExamSolutionDB]]
+
+
+class UserExamSolutionList(BaseModel):
+    user_id: UUID
+    amount: int
+    amount_graded: int
+    average_score: Optional[float]
+    approval_rate: Optional[float]
+    exam_solutions: Optional[List[ExamSolutionDB]]
+
+
+class CourseExamSolutionList(BaseModel):
+    course_id: UUID
+    amount: int
+    amount_graded: int
+    average_score: Optional[float]
+    approval_rate: Optional[float]
+    exam_solutions: Optional[List[ExamSolutionDB]]
+
+
+class CorrectorExamSolutionList(BaseModel):
+    corrector_id: UUID
+    amount: int
+    amount_graded: int
+    approval_rate: Optional[float]
     exam_solutions: Optional[List[ExamSolutionDB]]
 
 
 class ExamSolutionPatch(BaseModel):
+    corrector_id: UUID
     graded: Optional[bool]
     score: Optional[float]
-    aprobal_state: Optional[bool]
+    approval_state: Optional[bool]

@@ -11,5 +11,6 @@ class ExamSolutionSerializer:
             "exam_template_id": exam_solution.exam_template_id,
             "graded": exam_solution.graded,
             "score": exam_solution.score,
-            "aprobal_state": exam_solution.aprobal_state,
+            "approval_state": exam_solution.approval_state,
+            "corrector_id": exam_solution.corrector_id,
         }
