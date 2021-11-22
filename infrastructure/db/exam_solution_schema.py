@@ -1,6 +1,6 @@
 from infrastructure.db.database import Base
 from sqlalchemy.orm import relationship
-from sqlalchemy import Column, Integer, ForeignKey, Boolean
+from sqlalchemy import Column, Float, ForeignKey, Boolean
 from sqlalchemy.dialects.postgresql import UUID
 import uuid
 
@@ -12,7 +12,7 @@ class ExamSolution(Base):
     user_id = Column(UUID(as_uuid=True), nullable=False)
     exam_template_id = Column(UUID(as_uuid=True), ForeignKey("exam_templates.id", ondelete="CASCADE"), nullable=False)
     graded = Column(Boolean)
-    score = Column(Integer)
+    score = Column(Float)
     aprobal_state = Column(Boolean)
 
     # Relationships

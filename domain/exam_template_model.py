@@ -29,7 +29,7 @@ class ExamTemplateDB(BaseModel):
     name: str
     course_id: UUID
     state: str  # Enum(ExamStateEnum))
-    max_score: int
+    max_score: float
     has_multiple_choice: bool
     has_written: bool
     has_media: bool
@@ -44,7 +44,7 @@ class ExamTemplateList(BaseModel):
 class ExamTemplatePatch(BaseModel):
     name: Optional[str]
     state: Optional[str]
-    max_score: Optional[int]
+    max_score: Optional[float]
     has_multiple_choice: Optional[bool]
     has_written: Optional[bool]
     has_media: Optional[bool]

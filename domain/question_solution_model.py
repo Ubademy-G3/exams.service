@@ -25,13 +25,13 @@ class QuestionSolutionDB(BaseModel):
     exam_solution_id: UUID
     question_template_id: UUID
     answer: str
-    score: int
+    score: float
 
 
 class QuestionSolutionList(BaseModel):
     amount: int
     exam_solution_id: UUID
-    total_score: int
+    total_score: float
     question_solutions: Optional[List[QuestionSolutionDB]]
 
 
@@ -44,4 +44,4 @@ class UserQuestionSolutionList(BaseModel):
 
 class QuestionSolutionPatch(BaseModel):
     answer: Optional[str]
-    score: Optional[int]
+    score: Optional[float]

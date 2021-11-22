@@ -27,7 +27,7 @@ class QuestionTemplatePostBody(BaseModel):
     is_media: Optional[bool]
     options: Optional[dict]
     correct: Optional[int]
-    value: Optional[int]
+    value: Optional[float]
 
 
 class QuestionTemplateDB(BaseModel):
@@ -38,7 +38,7 @@ class QuestionTemplateDB(BaseModel):
     is_media: bool
     options: Optional[dict]
     correct: Optional[int]
-    value: int
+    value: float
 
 
 class QuestionTemplateList(BaseModel):
@@ -53,4 +53,4 @@ class QuestionTemplatePatch(BaseModel):
     is_media: Optional[bool]
     options: Optional[dict]
     correct: Optional[int]
-    value: Optional[int]
+    value: Optional[float]

@@ -1,6 +1,6 @@
 from infrastructure.db.database import Base
 from sqlalchemy.orm import relationship
-from sqlalchemy import Column, Integer, String, ForeignKey, JSON, Boolean
+from sqlalchemy import Column, Integer, Float, String, ForeignKey, JSON, Boolean
 from sqlalchemy.dialects.postgresql import UUID
 import uuid
 
@@ -17,7 +17,7 @@ class QuestionTemplate(Base):
     is_media = Column(Boolean, default=False)
     options = Column(JSON, default={})
     correct = Column(Integer, default=0)
-    value = Column(Integer, default=1)
+    value = Column(Float, default=1)
 
     # Relationships
     question_solution = relationship("QuestionSolution", cascade="all, delete")
