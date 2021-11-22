@@ -6,7 +6,6 @@ class QuestionTemplateRepositoryPostgres:
         db.add(question_template)
         db.commit()
 
-    # revisar este que onda
     def get_question_template(self, db, question_template_id):
         question_templates = db.query(QuestionTemplate).filter(QuestionTemplate.id == question_template_id).first()
         return question_templates

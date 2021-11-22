@@ -1,7 +1,7 @@
 from infrastructure.db.database import Base
 from sqlalchemy.orm import relationship
-from sqlalchemy import Column, Integer, Float, String, ForeignKey, JSON, Enum
-from sqlalchemy.dialects.postgresql import UUID
+from sqlalchemy import Column, Integer, Float, String, ForeignKey, Enum
+from sqlalchemy.dialects.postgresql import UUID, ARRAY
 import uuid
 from domain.question_template_model import QuestionTypeEnum
 
@@ -12,7 +12,7 @@ class QuestionTemplate(Base):
     exam_id = Column(UUID(as_uuid=True), ForeignKey("exam_templates.id", ondelete="CASCADE"), nullable=False)
     question = Column(String(300), nullable=False)
     question_type = Column(Enum(QuestionTypeEnum))
-    options = Column(JSON, default={})
+    options = Column(ARRAY(String(300)), default={})
     correct = Column(Integer, default=0)
     value = Column(Float, default=1)
 
