@@ -19,8 +19,8 @@ def update_exam_solution(db, exam_solution_id, new_args):
     if new_args.score is not None:
         exam_solution_to_update.score = new_args.score
 
-    if new_args.aprobal_state is not None:
-        exam_solution_to_update.aprobal_state = new_args.aprobal_state
+    if new_args.approval_state is not None:
+        exam_solution_to_update.approval_state = new_args.approval_state
 
     esrp.update_exam_solution(db)
     return ExamSolutionSerializer.serialize(exam_solution_to_update)

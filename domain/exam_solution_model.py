@@ -15,7 +15,7 @@ class ExamSolutionDB(BaseModel):
     exam_template_id: UUID
     graded: bool
     score: Optional[float]
-    aprobal_state: Optional[bool]
+    approval_state: Optional[bool]
     corrector_id: Optional[UUID]
 
 
@@ -49,5 +49,5 @@ class CorrectorExamSolutionList(BaseModel):
 class ExamSolutionPatch(BaseModel):
     graded: Optional[bool]
     score: Optional[float]
-    aprobal_state: Optional[bool]
+    approval_state: Optional[bool]
     corrector_id: UUID
