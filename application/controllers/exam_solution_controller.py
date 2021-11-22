@@ -19,6 +19,14 @@ class ExamSolutionController:
         return get.get_all_exam_solutions_by_exam_template_id(db, exam_template_id)
 
     @classmethod
+    def get_all_exam_solutions_by_corrector_id(self, db, corrector_id):
+        return get.get_all_exam_solutions_by_corrector_id(db, corrector_id)
+
+    @classmethod
+    def get_all_exam_solutions_by_course_id(self, db, course_id):
+        return get.get_all_exam_solutions_by_course_id(db, course_id)
+
+    @classmethod
     def delete_exam_solution(self, db, exam_solution_id):
         return delete.delete_exam_solution(db, exam_solution_id)
 

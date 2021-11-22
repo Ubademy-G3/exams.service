@@ -14,8 +14,6 @@ def get_exam_solution(db, exam_solution_id):
 
 def get_all_exam_solutions_by_user_id(db, user_id):
     exam_solutions = esrp.get_all_exam_solutions_by_user_id(db, user_id)
-    # if exam_solutions is None or len(exam_solutions) == 0:
-    #    raise NotFoundException("Exam solutions by user_id {}".format(user_id))
     exam_solution_list = []
     for exam_solution in exam_solutions:
         exam_solution_list.append(ExamSolutionSerializer.serialize(exam_solution))
@@ -36,8 +34,6 @@ def get_all_exam_solutions_by_user_id(db, user_id):
 
 def get_all_exam_solutions_by_exam_template_id(db, exam_template_id):
     exam_solutions = esrp.get_all_exam_solutions_by_exam_template_id(db, exam_template_id)
-    # if exam_solutions is None or len(exam_solutions) == 0:
-    #    raise NotFoundException("Exam solutions by exam_template_id {}".format(exam_template_id))
     exam_solution_list = []
     for exam_solution in exam_solutions:
         exam_solution_list.append(ExamSolutionSerializer.serialize(exam_solution))
@@ -52,6 +48,39 @@ def get_all_exam_solutions_by_exam_template_id(db, exam_template_id):
         "amount": amount,
         "exam_template_id": exam_template_id,
         "average_score": average_score,
+        "exam_solutions": exam_solution_list,
+    }
+
+
+def get_all_exam_solutions_by_course_id(db, course_id):
+    exam_solutions = esrp.get_all_exam_solutions_by_course_id(db, course_id)
+    exam_solution_list = []
+    for exam_solution in exam_solutions:
+        exam_solution_list.append(ExamSolutionSerializer.serialize(exam_solution))
+    amount = len(exam_solution_list)
+    total_score = 0
+    average_score = 0
+    if amount != 0:
+        for exam_solution in exam_solution_list:
+            total_score += exam_solution["score"]
+        average_score = total_score/amount
+    return {
+        "amount": amount,
+        "course_id": course_id,
+        "average_score": average_score,
+        "exam_solutions": exam_solution_list,
+    }
+
+
+def get_all_exam_solutions_by_corrector_id(db, corrector_id):
+    exam_solutions = esrp.get_all_exam_solutions_by_corrector_id(db, corrector_id)
+    exam_solution_list = []
+    for exam_solution in exam_solutions:
+        exam_solution_list.append(ExamSolutionSerializer.serialize(exam_solution))
+    amount = len(exam_solution_list)
+    return {
+        "amount": amount,
+        "corrector_id": corrector_id,
         "exam_solutions": exam_solution_list,
     }
 

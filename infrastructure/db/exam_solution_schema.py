@@ -14,11 +14,12 @@ class ExamSolution(Base):
     graded = Column(Boolean)
     score = Column(Float)
     aprobal_state = Column(Boolean)
+    corrector_id = Column(UUID(as_uuid=True), nullable=True)
 
     # Relationships
     question_solution = relationship("QuestionSolution", cascade="all, delete")
 
-    def __init__(self, id, course_id, user_id, exam_template_id, graded, score, aprobal_state):
+    def __init__(self, id, course_id, user_id, exam_template_id, graded, score, aprobal_state, corrector_id):
         self.id = id
         self.course_id = course_id
         self.user_id = user_id
@@ -26,3 +27,4 @@ class ExamSolution(Base):
         self.graded = graded
         self.score = score
         self.aprobal_state = aprobal_state
+        self.corrector_id = corrector_id

@@ -12,4 +12,5 @@ class ExamSolutionSerializer:
             "graded": exam_solution.graded,
             "score": exam_solution.score,
             "aprobal_state": exam_solution.aprobal_state,
+            "corrector_id": exam_solution.corrector_id,
         }

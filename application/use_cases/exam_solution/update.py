@@ -11,6 +11,8 @@ def update_exam_solution(db, exam_solution_id, new_args):
     if not exam_solution_to_update:
         raise NotFoundException("Exam solution {}".format(exam_solution_id))
 
+    exam_solution_to_update.corrector_id = new_args.corrector_id
+
     if new_args.graded is not None:
         exam_solution_to_update.graded = new_args.graded
 

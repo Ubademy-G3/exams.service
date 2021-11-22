@@ -20,6 +20,16 @@ class ExamSolutionRepositoryPostgres:
         exam_solutions = query.all()
         return exam_solutions
 
+    def get_all_exam_solutions_by_corrector_id(self, db, corrector_id):
+        query = db.query(ExamSolution).filter(ExamSolution.corrector_id == corrector_id)
+        exam_solutions = query.all()
+        return exam_solutions
+
+    def get_all_exam_solutions_by_course_id(self, db, course_id):
+        query = db.query(ExamSolution).filter(ExamSolution.course_id == course_id)
+        exam_solutions = query.all()
+        return exam_solutions
+
     def delete_exam_solution(self, db, exam_solution):
         db.delete(exam_solution)
         db.commit()
