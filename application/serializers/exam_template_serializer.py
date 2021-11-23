@@ -21,4 +21,5 @@ class ExamTemplateSerializer:
             "has_multiple_choice": exam_template.has_multiple_choice,
             "has_written": exam_template.has_written,
             "has_media": exam_template.has_media,
+            "max_attempts": exam_template.max_attempts,
         }

@@ -19,6 +19,7 @@ def add_exam_template(db, args):
         has_multiple_choice=False,
         has_written=False,
         has_media=False,
+        max_attempts=1,
     )
 
     etrp.add_exam_template(db, new_exam_template)

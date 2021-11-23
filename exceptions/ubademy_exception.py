@@ -20,6 +20,12 @@ class InvalidExamTemplateScoreException(UbademyException):
         super().__init__(status_code=400, detail=msg)
 
 
+class InvalidExamTemplateAttemptsException(UbademyException):
+    def __init__(self, detail):
+        msg = f"Exam template has a non positive max_attempts: {detail}"
+        super().__init__(status_code=400, detail=msg)
+
+
 class InvalidExamFilterException(UbademyException):
     def __init__(self, has_multiple_choice, has_written, has_media):
         msg = (f"Exam template has invalid filters while trying to publish the exam. "
@@ -69,6 +75,13 @@ class NonPositiveExamSolutionMaxScoreException(UbademyException):
 class NonPositiveExamSolutionScoreException(UbademyException):
     def __init__(self, detail):
         msg = f"Exam solution has a non positive score: {detail}"
+        super().__init__(status_code=400, detail=msg)
+
+
+class ExamSolutionTriesExceededException(UbademyException):
+    def __init__(self, user_id, exam_template_id, previous_attempts):
+        msg = (f"This user already reached the maximum amount of attempts for this exam: user_id {user_id}, "
+               f"previous_attempts {previous_attempts}, exam_template_id {exam_template_id}")
         super().__init__(status_code=400, detail=msg)
 
 

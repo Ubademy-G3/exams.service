@@ -3,7 +3,7 @@ from infrastructure.db.exam_template_schema import ExamStateEnum
 from exceptions.http_exception import NotFoundException
 from application.serializers.exam_template_serializer import ExamTemplateSerializer
 from exceptions.ubademy_exception import (InvalidExamStateException, InvalidExamTemplateScoreException,
-                                          InvalidExamFilterException)
+                                          InvalidExamFilterException, InvalidExamTemplateAttemptsException)
 
 etrp = ExamTemplateRepositoryPostgres()
 
@@ -15,6 +15,9 @@ def get_exam_template_to_update(db, exam_template_id, new_args):
 
     if(new_args.max_score <= 0):
         raise InvalidExamTemplateScoreException(new_args.max_score)
+
+    if(new_args.max_attempts <= 0):
+        raise InvalidExamTemplateAttemptsException(new_args.max_attempts)
 
     exam_template_to_update = etrp.get_exam_template(db, exam_template_id)
 
@@ -58,6 +61,9 @@ def update_exam_template(db, exam_template_id, new_args):
 
     if new_args.has_media is not None:
         exam_template_to_update.has_media = new_args.has_media
+
+    if new_args.max_attempts is not None:
+        exam_template_to_update.max_attempts = new_args.max_attempts
 
     etrp.update_exam_template(db)
     return ExamTemplateSerializer.serialize(exam_template_to_update)

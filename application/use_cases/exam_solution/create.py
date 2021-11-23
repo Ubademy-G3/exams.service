@@ -1,17 +1,27 @@
 from persistence.repositories.exam_solution_repository_postgres import ExamSolutionRepositoryPostgres
+from persistence.repositories.exam_template_repository_postgres import ExamTemplateRepositoryPostgres
 from application.serializers.exam_solution_serializer import ExamSolutionSerializer
 from infrastructure.db.exam_solution_schema import ExamSolution
 from uuid import uuid4
-from exceptions.ubademy_exception import NonPositiveExamSolutionMaxScoreException
+from exceptions.ubademy_exception import NonPositiveExamSolutionMaxScoreException, ExamSolutionTriesExceededException
 
 
 esrp = ExamSolutionRepositoryPostgres()
+etrp = ExamTemplateRepositoryPostgres()
 
 
 def add_exam_solution(db, exam_template_id, args):
 
     if args.max_score <= 0:
         raise NonPositiveExamSolutionMaxScoreException(args.max_score)
+
+    previous_exam_solutions = esrp.get_all_exam_solutions_by_user_id_and_exam_template_id(db, args.user_id, exam_template_id)
+
+    if previous_exam_solutions is not None:
+        exam_template = etrp.get_exam_template(db, exam_template_id)
+        previous_attempts = len(previous_exam_solutions)
+        if previous_attempts >= exam_template.max_attempts:
+            raise ExamSolutionTriesExceededException(args.user_id, exam_template_id, previous_attempts)
 
     new_exam_solution = ExamSolution(
         id=uuid4(),

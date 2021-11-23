@@ -1,6 +1,6 @@
 from infrastructure.db.database import Base
 from sqlalchemy.orm import relationship
-from sqlalchemy import Column, Float, String, Boolean, Enum
+from sqlalchemy import Column, Float, String, Boolean, Enum, Integer
 from sqlalchemy.dialects.postgresql import UUID
 import uuid
 from domain.exam_template_model import ExamStateEnum
@@ -18,12 +18,14 @@ class ExamTemplate(Base):
     has_multiple_choice = Column(Boolean, default=True)
     has_written = Column(Boolean, default=False)
     has_media = Column(Boolean, default=False)
+    max_attempts = Column(Integer, default=1)
 
     # Relationships
     exam_solution = relationship("ExamSolution", cascade="all, delete")
     question_template = relationship("QuestionTemplate", cascade="all, delete")
 
-    def __init__(self, id, course_id, creator_id, name, state, max_score, has_multiple_choice, has_written, has_media):
+    def __init__(self, id, course_id, creator_id, name, state, max_score,
+                 has_multiple_choice, has_written, has_media, max_attempts):
         self.id = id
         self.course_id = course_id
         self.creator_id = creator_id
@@ -33,3 +35,4 @@ class ExamTemplate(Base):
         self.has_multiple_choice = has_multiple_choice
         self.has_written = has_written
         self.has_media = has_media
+        self.max_attempts = max_attempts
