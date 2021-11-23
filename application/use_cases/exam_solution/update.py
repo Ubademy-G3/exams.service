@@ -9,7 +9,7 @@ esrp = ExamSolutionRepositoryPostgres()
 
 def update_exam_solution(db, exam_solution_id, new_args):
 
-    if new_args.score <= 0:
+    if new_args.score is not None and new_args.score <= 0:
         raise NonPositiveExamSolutionScoreException(new_args.score)
 
     exam_solution_to_update = esrp.get_exam_solution(db, exam_solution_id)

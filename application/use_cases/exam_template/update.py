@@ -13,10 +13,10 @@ def get_exam_template_to_update(db, exam_template_id, new_args):
     if(new_args.state is not None and new_args.state not in ["active", "inactive"]):
         raise InvalidExamStateException(new_args.state)
 
-    if(new_args.max_score <= 0):
+    if(new_args.max_score is not None and new_args.max_score <= 0):
         raise InvalidExamTemplateScoreException(new_args.max_score)
 
-    if(new_args.max_attempts <= 0):
+    if(new_args.max_attempts is not None and new_args.max_attempts <= 0):
         raise InvalidExamTemplateAttemptsException(new_args.max_attempts)
 
     exam_template_to_update = etrp.get_exam_template(db, exam_template_id)
