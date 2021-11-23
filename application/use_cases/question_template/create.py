@@ -33,10 +33,10 @@ def add_question_template(db, exam_template_id, args):
         value=args.value,
     )
 
-    if(args.type == "multiple_choice"):
+    if(args.question_type == "multiple_choice"):
         new_question_template.question_type = QuestionTypeEnum.multiple_choice
 
-    if(args.type == "media"):
+    if(args.question_type == "media"):
         new_question_template.question_type = QuestionTypeEnum.media
 
     if new_question_template.value is None:
