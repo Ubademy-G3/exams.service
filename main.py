@@ -48,6 +48,13 @@ async def sql_exception_handler(request, exc):
     return JSONResponse(status_code=500, content=message)
 
 
+@app.exception_handler(Exception)
+async def unknown_exception_handler(request, exc):
+    message = {"message": str(exc.__dict__)}
+    logging.error(f"status_code: 500 message: {str(exc.__dict__)}")
+    return JSONResponse(status_code=500, content=message)
+
+
 app.include_router(
     exam_template_router.router,
     prefix="/exams",
