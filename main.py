@@ -22,30 +22,30 @@ app = FastAPI(title="ubademy-examsservice", description="Exams service API")
 
 @app.exception_handler(HTTPException)
 async def http_exception_handler(request, exc):
-    exception = {"exception": exc.detail}
+    message = {"message": exc.detail}
     logging.error(f"status_code: {exc.status_code} message: {exc.detail}")
-    return JSONResponse(status_code=exc.status_code, content=exception)
+    return JSONResponse(status_code=exc.status_code, content=message)
 
 
 @app.exception_handler(UbademyException)
 async def ubademy_exception_hanlder(request, exc):
-    exception = {"exception": exc.detail}
+    message = {"message": exc.detail}
     logging.error(f"status_code: {exc.status_code} message: {exc.detail}")
-    return JSONResponse(status_code=exc.status_code, content=exception)
+    return JSONResponse(status_code=exc.status_code, content=message)
 
 
 @app.exception_handler(AuthorizationException)
 async def auth_exception_handler(request, exc):
-    exception = {"exception": exc.detail}
+    message = {"message": exc.detail}
     logging.error(f"status_code: {exc.status_code} message: {exc.detail}")
-    return JSONResponse(status_code=exc.status_code, content=exception)
+    return JSONResponse(status_code=exc.status_code, content=message)
 
 
 @app.exception_handler(SQLAlchemyError)
 async def sql_exception_handler(request, exc):
-    error = {"message": str(exc.__dict__)}
-    logging.error(f"status_code: 500 message: {str(exc.__dict__)}")
-    return JSONResponse(status_code=500, content=error)
+    message = {"message": str(exc.__dict__['orig'])}
+    logging.error(f"status_code: 500 message: {str(exc.__dict__['orig'])}")
+    return JSONResponse(status_code=500, content=message)
 
 
 app.include_router(
