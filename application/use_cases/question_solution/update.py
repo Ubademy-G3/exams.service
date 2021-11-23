@@ -8,7 +8,7 @@ qsrp = QuestionSolutionRepositoryPostgres()
 
 def update_question_solution(db, question_solution_id, new_args):
 
-    if  is not None and new_args.score <= 0:
+    if new_args.score is not None and new_args.score <= 0:
         raise NonPositiveQuestionSolutionScoreException(new_args.score)
 
     question_solution_to_update = qsrp.get_question_solution(db, question_solution_id)
