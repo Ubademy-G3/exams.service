@@ -13,10 +13,10 @@ def get_exam_template_to_update(db, exam_template_id, new_args):
     if(new_args.state is not None and new_args.state not in ["active", "inactive"]):
         raise InvalidExamStateException(new_args.state)
 
-    if(new_args.max_score <= 0):
+    if(new_args.max_score is not None and new_args.max_score <= 0):
         raise InvalidExamTemplateScoreException(new_args.max_score)
 
-    if(new_args.max_attempts <= 0):
+    if(new_args.max_attempts is not None and new_args.max_attempts <= 0):
         raise InvalidExamTemplateAttemptsException(new_args.max_attempts)
 
     exam_template_to_update = etrp.get_exam_template(db, exam_template_id)
@@ -24,20 +24,24 @@ def get_exam_template_to_update(db, exam_template_id, new_args):
     if not exam_template_to_update:
         raise NotFoundException("Exam template {}".format(exam_template_id))
 
+    has_multiple_choice = new_args.has_multiple_choice
+    if has_multiple_choice is None:
+        has_multiple_choice = exam_template_to_update.has_multiple_choice
+
+    has_written = new_args.has_written
+    if has_written is None:
+        has_written = exam_template_to_update.has_written
+
+    has_media = new_args.has_media
+    if has_media is None:
+        has_media = exam_template_to_update.has_media
+
     if(
         new_args.state is not None and
-        (exam_template_to_update.has_multiple_choice is None or
-         exam_template_to_update.has_written is None or
-         exam_template_to_update.has_media is None) or
-        (exam_template_to_update.has_multiple_choice is False and
-         exam_template_to_update.has_written is False and
-         exam_template_to_update.has_media is False)
+        (has_multiple_choice is None or has_written is None or has_media is None) or
+        (has_multiple_choice is False and has_written is False and has_media is False)
     ):
-        raise InvalidExamFilterException(
-            exam_template_to_update.has_multiple_choice,
-            exam_template_to_update.has_written,
-            exam_template_to_update.has_media,
-        )
+        raise InvalidExamFilterException(has_multiple_choice, has_written, has_media)
     return exam_template_to_update
 
 
