@@ -2,11 +2,17 @@ from persistence.repositories.exam_solution_repository_postgres import ExamSolut
 from application.serializers.exam_solution_serializer import ExamSolutionSerializer
 from infrastructure.db.exam_solution_schema import ExamSolution
 from uuid import uuid4
+from exceptions.ubademy_exception import NonPositiveExamSolutionMaxScoreException
+
 
 esrp = ExamSolutionRepositoryPostgres()
 
 
 def add_exam_solution(db, exam_template_id, args):
+
+    if args.max_score <= 0:
+        raise NonPositiveExamSolutionMaxScoreException(args.max_score)
+
     new_exam_solution = ExamSolution(
         id=uuid4(),
         course_id=args.course_id,
@@ -18,5 +24,6 @@ def add_exam_solution(db, exam_template_id, args):
         max_score=args.max_score,
         approval_state=None,
     )
+
     esrp.add_exam_solution(db, new_exam_solution)
     return ExamSolutionSerializer.serialize(new_exam_solution)

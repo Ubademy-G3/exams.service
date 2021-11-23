@@ -51,7 +51,22 @@ class EmptyCorrectException(UbademyException):
         super().__init__(status_code=400, detail=msg)
 
 
-class NonPositiveValueException(UbademyException):
+class NonPositiveQuestionTemplateValueException(UbademyException):
     def __init__(self, detail):
         msg = f"Question template has a non positive value: {detail}"
+        super().__init__(status_code=400, detail=msg)
+
+
+# Exam Solution Exceptions
+
+
+class NonPositiveExamSolutionMaxScoreException(UbademyException):
+    def __init__(self, detail):
+        msg = f"Exam solution has a non positive max_score: {detail}"
+        super().__init__(status_code=400, detail=msg)
+
+
+class NonPositiveExamSolutionScoreException(UbademyException):
+    def __init__(self, detail):
+        msg = f"Exam solution has a non positive score: {detail}"
         super().__init__(status_code=400, detail=msg)
