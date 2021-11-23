@@ -2,7 +2,7 @@ from persistence.repositories.question_template_repository_postgres import Quest
 from infrastructure.db.question_template_schema import QuestionTypeEnum
 from exceptions.http_exception import NotFoundException
 from exceptions.ubademy_exception import (InvalidQuestionTypeException, EmptyOptionListException,
-                                          EmptyCorrectException, NonPositiveValueException)
+                                          EmptyCorrectException, NonPositiveQuestionTemplateValueException)
 from application.serializers.question_template_serializer import QuestionTemplateSerializer
 
 qtrp = QuestionTemplateRepositoryPostgres()
@@ -20,7 +20,7 @@ def get_question_template_to_update(db, question_template_id, new_args):
         raise EmptyCorrectException()
 
     if (new_args.value is not None and new_args.value <= 0):
-        raise NonPositiveValueException(new_args.value)
+        raise NonPositiveQuestionTemplateValueException(new_args.value)
 
     question_template_to_update = qtrp.get_question_template(db, question_template_id)
 
