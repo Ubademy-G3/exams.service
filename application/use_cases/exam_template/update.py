@@ -2,19 +2,42 @@ from persistence.repositories.exam_template_repository_postgres import ExamTempl
 from infrastructure.db.exam_template_schema import ExamStateEnum
 from exceptions.http_exception import NotFoundException
 from application.serializers.exam_template_serializer import ExamTemplateSerializer
-from exceptions.ubademy_exception import InvalidExamStateException
+from exceptions.ubademy_exception import (InvalidExamStateException, InvalidExamTemplateScoreException,
+                                          InvalidExamFilterException)
 
 etrp = ExamTemplateRepositoryPostgres()
 
 
-def update_exam_template(db, exam_template_id, new_args):
+def get_exam_template_to_update(db, exam_template_id, new_args):
 
-    if(new_args.state not in ["active", "inactive"]):
+    if(new_args.state is not None and new_args.state not in ["active", "inactive"]):
         raise InvalidExamStateException(new_args.state)
 
+    if(new_args.max_score <= 0):
+        raise InvalidExamTemplateScoreException(new_args.max_score)
+
     exam_template_to_update = etrp.get_exam_template(db, exam_template_id)
+
     if not exam_template_to_update:
         raise NotFoundException("Exam template {}".format(exam_template_id))
+
+    if(
+        new_args.state is not None and
+        (exam_template_to_update.has_multiple_choice is None or
+         exam_template_to_update.has_written is None or
+         exam_template_to_update.has_media is None)
+    ):
+        raise InvalidExamFilterException(
+            exam_template_to_update.has_multiple_choice,
+            exam_template_to_update.has_written,
+            exam_template_to_update.has_media,
+        )
+    return exam_template_to_update
+
+
+def update_exam_template(db, exam_template_id, new_args):
+
+    exam_template_to_update = get_exam_template_to_update(db, exam_template_id, new_args)
 
     if new_args.name is not None:
         exam_template_to_update.name = new_args.name
