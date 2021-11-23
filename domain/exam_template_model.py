@@ -26,6 +26,7 @@ class ExamTemplateDB(BaseModel):
     has_multiple_choice: bool
     has_written: bool
     has_media: bool
+    max_attempts: int
 
 
 class ExamTemplateList(BaseModel):
@@ -47,3 +48,4 @@ class ExamTemplatePatch(BaseModel):
     has_multiple_choice: Optional[bool]
     has_written: Optional[bool]
     has_media: Optional[bool]
+    max_attempts: Optional[int]
