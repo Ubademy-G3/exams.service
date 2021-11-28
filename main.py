@@ -15,6 +15,7 @@ from sqlalchemy.exc import SQLAlchemyError
 from exceptions.ubademy_exception import UbademyException
 from exceptions.auth_exception import AuthorizationException
 
+
 Base.metadata.create_all(engine)
 
 app = FastAPI(title="ubademy-examsservice", description="Exams service API")

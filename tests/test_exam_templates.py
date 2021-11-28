@@ -65,5 +65,5 @@ def test_get_existing_course(test_app, monkeypatch):
 """
 
 
-def test_basic():
-    assert 2 == 1 + 1
+# def test_basic():
+#    assert 2 == 1 + 1
