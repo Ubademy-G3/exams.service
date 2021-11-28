@@ -10,13 +10,13 @@ from infrastructure.routes import (
     exam_solution_outside_router,
 )
 
-from infrastructure.db.database import Base, engine
+from infrastructure.db.database import Base, engine, DATABASE_URL
 from sqlalchemy.exc import SQLAlchemyError
 from exceptions.ubademy_exception import UbademyException
 from exceptions.auth_exception import AuthorizationException
 
-
-Base.metadata.create_all(engine)
+if DATABASE_URL is not None:
+    Base.metadata.create_all(engine)
 
 app = FastAPI(title="ubademy-examsservice", description="Exams service API")
 

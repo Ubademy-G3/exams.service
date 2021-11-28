@@ -9,9 +9,16 @@ load_dotenv()
 
 
 DATABASE_URL = os.getenv("DATABASE_URL")
-engine = create_engine(DATABASE_URL)
 
-Session = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+
+if DATABASE_URL is not None:
+    engine = create_engine(DATABASE_URL)
+
+    Session = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+else:
+    engine = []
+    Session = sessionmaker(autocommit=False, autoflush=False)
+
 session = Session()
 
 # Base class for models

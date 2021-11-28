@@ -1,14 +1,9 @@
 from fastapi.testclient import TestClient
-# from infrastructure.db.database import Base, engine
 from main import app
 from unittest import TestCase, mock
 from persistence.repositories.exam_template_repository_postgres import ExamTemplateRepositoryPostgres
-from infrastructure.db.database import Base, engine
 from infrastructure.db.exam_template_schema import ExamTemplate, ExamStateEnum
 import json
-
-
-Base.metadata.create_all(bind=engine)
 
 
 etrp = ExamTemplateRepositoryPostgres()
