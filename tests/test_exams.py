@@ -4,7 +4,10 @@ from unittest import TestCase, mock
 from persistence.repositories.exam_template_repository_postgres import ExamTemplateRepositoryPostgres
 from infrastructure.db.exam_template_schema import ExamTemplate, ExamStateEnum
 import json
+import os
 
+
+apikey = os.getenv("API_KEY")
 
 etrp = ExamTemplateRepositoryPostgres()
 
@@ -12,7 +15,7 @@ etrp = ExamTemplateRepositoryPostgres()
 client = TestClient(app)
 
 
-post_header = {"apikey": "gonza"}
+post_header = {"apikey": apikey}
 
 post_body = {
     "course_id": "2f120281-12cd-413f-8e6a-2678b6b92406",
@@ -40,7 +43,7 @@ class CreateExamTemplateMock(TestCase):
         assert data["state"] == "draft"
 
 
-get_header = {"apikey": "gonza", "exam_id": "5122b737-f815-4e15-a56d-abbff2fee900"}
+get_header = {"apikey": apikey, "exam_id": "5122b737-f815-4e15-a56d-abbff2fee900"}
 
 get_body = None
 
