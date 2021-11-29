@@ -85,6 +85,13 @@ class ExamSolutionTriesExceededException(UbademyException):
         super().__init__(status_code=400, detail=msg)
 
 
+class ExamSolutionUsesAnInvalidTest(UbademyException):
+    def __init__(self, exam_template_id, exam_template_state):
+        msg = (f"The exam template id {exam_template_id}, is not an active test, "
+               f"the state of the test is {exam_template_state}")
+        super().__init__(status_code=400, detail=msg)
+
+
 # Question Solution Exceptions
 
 
