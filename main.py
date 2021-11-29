@@ -10,12 +10,13 @@ from infrastructure.routes import (
     exam_solution_outside_router,
 )
 
-from infrastructure.db.database import Base, engine
+from infrastructure.db.database import Base, engine, DATABASE_URL
 from sqlalchemy.exc import SQLAlchemyError
 from exceptions.ubademy_exception import UbademyException
 from exceptions.auth_exception import AuthorizationException
 
-Base.metadata.create_all(engine)
+if DATABASE_URL is not None:
+    Base.metadata.create_all(engine)
 
 app = FastAPI(title="ubademy-examsservice", description="Exams service API")
 
@@ -43,8 +44,8 @@ async def auth_exception_handler(request, exc):
 
 @app.exception_handler(SQLAlchemyError)
 async def sql_exception_handler(request, exc):
-    message = {"message": str(exc.__dict__['orig'])}
-    logging.error(f"status_code: 500 message: {str(exc.__dict__['orig'])}")
+    message = {"message": str(exc.__dict__)}
+    logging.error(f"status_code: 500 message: {str(exc.__dict__)}")
     return JSONResponse(status_code=500, content=message)
 
 
