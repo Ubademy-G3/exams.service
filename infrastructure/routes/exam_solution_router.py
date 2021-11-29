@@ -19,7 +19,7 @@ async def create_exam_solution(
     return ExamSolutionController.create_exam_solution(db, exam_template_id, exam_solution)
 
 
-@router.get("/{exam_solution_id}", response_model=ExamSolutionDB, status_code=200)
+@router.get("/{exam_solution_id}/", response_model=ExamSolutionDB, status_code=200)
 async def get_exam_solution(
     exam_template_id: str,
     exam_solution_id: str,
@@ -42,7 +42,7 @@ async def get_all_exam_solutions_by_exam_template_id(
     return ExamSolutionController.get_all_exam_solutions_by_exam_template_id(db, exam_template_id, graded, approval_state)
 
 
-@router.delete("/{exam_solution_id}", response_model=dict, status_code=200)
+@router.delete("/{exam_solution_id}/", response_model=dict, status_code=200)
 async def delete_exam_solution(
     exam_template_id: str,
     exam_solution_id: str,
@@ -51,10 +51,10 @@ async def delete_exam_solution(
 ):
     auth_service.check_api_key(apikey)
     ExamSolutionController.delete_exam_solution(db, exam_solution_id)
-    return {"message": "The exam solution {} was deleted succesfully".format(exam_solution_id)}
+    return {"message": "The exam solution {} was deleted successfully".format(exam_solution_id)}
 
 
-@router.patch("/{exam_solution_id}", response_model=ExamSolutionDB, status_code=200)
+@router.patch("/{exam_solution_id}/", response_model=ExamSolutionDB, status_code=200)
 async def update_exam_solution(
     exam_template_id: str,
     exam_solution_id: str,

@@ -49,7 +49,7 @@ async def delete_question_template(
 ):
     auth_service.check_api_key(apikey)
     QuestionTemplateController.delete_question_template(db, question_template_id)
-    return {"message": "The question template {} was deleted succesfully".format(question_template_id)}
+    return {"message": "The question template {} was deleted successfully".format(question_template_id)}
 
 
 @router.patch("/{question_template_id}", response_model=QuestionTemplateDB, status_code=200)
