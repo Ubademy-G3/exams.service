@@ -23,7 +23,11 @@ post_body = {
 }
 
 # Get
-get_header = {"apikey": apikey, "exam_template_id": "5122b737-f815-4e15-a56d-abbff2fee900", "question_template_id": "2be97039-8c07-48ae-a18e-16d4779b977b"}
+get_header = {
+    "apikey": apikey,
+    "exam_template_id": "5122b737-f815-4e15-a56d-abbff2fee900",
+    "question_template_id": "2be97039-8c07-48ae-a18e-16d4779b977b"
+}
 
 return_from_get = QuestionTemplate(
     id="2be97039-8c07-48ae-a18e-16d4779b977b",
@@ -51,12 +55,20 @@ return_from_get_all_by_exam_id = [
 ]
 
 # Delete
-delete_header = {"apikey": apikey, "exam_template_id": "5122b737-f815-4e15-a56d-abbff2fee900"}
+delete_header = {
+    "apikey": apikey,
+    "exam_template_id": "5122b737-f815-4e15-a56d-abbff2fee900",
+    "question_template_id": "2be97039-8c07-48ae-a18e-16d4779b977b"
+}
 
 return_from_delete = None
 
 # Update
-update_header = {"apikey": apikey, "exam_template_id": "5122b737-f815-4e15-a56d-abbff2fee900"}
+update_header = {
+    "apikey": apikey,
+    "exam_template_id": "5122b737-f815-4e15-a56d-abbff2fee900",
+    "question_template_id": "2be97039-8c07-48ae-a18e-16d4779b977b"
+}
 
 update_body = {
     "question": "What is 1 * 1?",
@@ -110,10 +122,10 @@ class QuestionTemplateMock(TestCase):
     @mock.patch.object(QuestionTemplateRepositoryPostgres, "get_all_question_templates_by_exam_template_id")
     def test_get_all_by_exam_id(self, mock_get_all_by_exam_id):
         mock_get_all_by_exam_id.return_value = return_from_get_all_by_exam_id
-        
+
         exam_template_id = "5122b737-f815-4e15-a56d-abbff2fee900"
         question_template_id = "2be97039-8c07-48ae-a18e-16d4779b977b"
-        
+
         response = client.get(
             f"/exams/{exam_template_id}/questions/",
             headers=get_all_by_exam_id_header
@@ -145,7 +157,7 @@ class QuestionTemplateMock(TestCase):
         )
         assert response.status_code == 200, response.text
         data = response.json()
-        assert data["message"] == f"The question template {question_template_id} was deleted succesfully"
+        assert data["message"] == f"The question template {question_template_id} was deleted successfully"
 
     @mock.patch.object(QuestionTemplateRepositoryPostgres, "update_question_template")
     @mock.patch.object(QuestionTemplateRepositoryPostgres, "get_question_template")

@@ -8,7 +8,7 @@ from domain.exam_solution_model import UserExamSolutionList, CorrectorExamSoluti
 router = APIRouter()
 
 
-@router.get("/user/", response_model=UserExamSolutionList, status_code=200)
+@router.get("/user/{user_id}/", response_model=UserExamSolutionList, status_code=200)
 async def get_all_exam_solutions_by_user_id(
     user_id: str,
     graded: Optional[bool] = Query(None),
@@ -20,7 +20,7 @@ async def get_all_exam_solutions_by_user_id(
     return ExamSolutionController.get_all_exam_solutions_by_user_id(db, user_id, graded, approval_state)
 
 
-@router.get("/corrector/", response_model=CorrectorExamSolutionList, status_code=200)
+@router.get("/corrector/{corrector_id}/", response_model=CorrectorExamSolutionList, status_code=200)
 async def get_all_exam_solutions_by_corrector_id(
     corrector_id: str,
     graded: Optional[bool] = Query(None),
@@ -32,7 +32,7 @@ async def get_all_exam_solutions_by_corrector_id(
     return ExamSolutionController.get_all_exam_solutions_by_corrector_id(db, corrector_id, graded, approval_state)
 
 
-@router.get("/course/", response_model=CourseExamSolutionList, status_code=200)
+@router.get("/course/{course_id}/", response_model=CourseExamSolutionList, status_code=200)
 async def get_all_exam_solutions_by_course_id(
     course_id: str,
     graded: Optional[bool] = Query(None),

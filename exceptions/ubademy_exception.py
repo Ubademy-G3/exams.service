@@ -79,9 +79,10 @@ class NonPositiveExamSolutionScoreException(UbademyException):
 
 
 class ExamSolutionTriesExceededException(UbademyException):
-    def __init__(self, user_id, exam_template_id, previous_attempts):
+    def __init__(self, user_id, exam_template_id, previous_attempts, max_attempts):
         msg = (f"This user already reached the maximum amount of attempts for this exam: user_id {user_id}, "
-               f"previous_attempts {previous_attempts}, exam_template_id {exam_template_id}")
+               f"previous attempts are {previous_attempts}, out of the {max_attempts} maximum. "
+               f"exam_template_id {exam_template_id}")
         super().__init__(status_code=400, detail=msg)
 
 

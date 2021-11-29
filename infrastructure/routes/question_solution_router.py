@@ -65,7 +65,7 @@ async def delete_question_solution(
 ):
     auth_service.check_api_key(apikey)
     QuestionSolutionController.delete_question_solution(db, question_solution_id)
-    return {"message": "The question solution {} was deleted succesfully".format(question_solution_id)}
+    return {"message": "The question solution {} was deleted successfully".format(question_solution_id)}
 
 
 @router.patch("/{question_solution_id}", response_model=QuestionSolutionDB, status_code=200)
