@@ -113,6 +113,11 @@ class ExamTemplateMock(TestCase):
         assert data["creator_id"] == "f1e8ea4b-3909-4f66-80ca-aad491049bdf"
         assert data["name"] == "Test name for exam"
         assert data["state"] == "draft"
+        assert data["max_score"] == 10
+        assert data["has_multiple_choice"] is False
+        assert data["has_written"] is False
+        assert data["has_media"] is False
+        assert data["max_attempts"] == 1
 
     @mock.patch.object(ExamTemplateRepositoryPostgres, "get_exam_template")
     def test_get_exam_template(self, mock_get):
