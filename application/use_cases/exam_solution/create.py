@@ -22,7 +22,7 @@ def add_exam_solution(db, exam_template_id, args):
     if previous_exam_solutions is not None:
         exam_template = etrp.get_exam_template(db, exam_template_id)
         if exam_template.state != ExamStateEnum.active:
-            raise ExamSolutionUsesAnInvalidTest(exam_template_id. exam_template.state)
+            raise ExamSolutionUsesAnInvalidTest(exam_template_id, exam_template.state)
         previous_attempts = len(previous_exam_solutions)
         if previous_attempts >= exam_template.max_attempts:
             raise ExamSolutionTriesExceededException(
