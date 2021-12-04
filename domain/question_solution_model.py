@@ -6,7 +6,6 @@ from typing import Optional, List
 class QuestionSolutionPostBody(BaseModel):
     question_template_id: UUID
     answer: str
-    max_score: float
 
 
 class QuestionSolutionDB(BaseModel):
@@ -15,7 +14,6 @@ class QuestionSolutionDB(BaseModel):
     question_template_id: UUID
     answer: Optional[str]
     score: Optional[float]
-    max_score: float
 
 
 class QuestionSolutionList(BaseModel):
