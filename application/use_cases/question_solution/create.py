@@ -2,15 +2,11 @@ from persistence.repositories.question_solution_repository_postgres import Quest
 from application.serializers.question_solution_serializer import QuestionSolutionSerializer
 from infrastructure.db.question_solution_schema import QuestionSolution
 from uuid import uuid4
-from exceptions.ubademy_exception import NonPositiveQuestionSolutionMaxScoreException
 
 qsrp = QuestionSolutionRepositoryPostgres()
 
 
 def add_question_solution(db, exam_solution_id, args):
-
-    if args.max_score <= 0:
-        raise NonPositiveQuestionSolutionMaxScoreException(args.max_score)
 
     new_question_solution = QuestionSolution(
         id=uuid4(),
@@ -18,7 +14,6 @@ def add_question_solution(db, exam_solution_id, args):
         question_template_id=args.question_template_id,
         answer=args.answer,
         score=0,
-        max_score=args.max_score,
     )
 
     qsrp.add_question_solution(db, new_question_solution)

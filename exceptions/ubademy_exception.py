@@ -96,12 +96,6 @@ class ExamSolutionUsesAnInvalidTest(UbademyException):
 # Question Solution Exceptions
 
 
-class NonPositiveQuestionSolutionMaxScoreException(UbademyException):
-    def __init__(self, detail):
-        msg = f"Question solution has a non positive max_score: {detail}"
-        super().__init__(status_code=400, detail=msg)
-
-
 class NonPositiveQuestionSolutionScoreException(UbademyException):
     def __init__(self, detail):
         msg = f"Question solution has a non positive score: {detail}"
