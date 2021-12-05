@@ -30,7 +30,7 @@ class ExamSolutionRepositoryPostgres:
 
     def get_all_exam_solutions_by_user_id_and_exam_template_id(self, db, user_id, exam_template_id):
         query = db.query(ExamSolution).filter(ExamSolution.user_id == user_id)
-        query.filter(ExamSolution.exam_template_id == exam_template_id)
+        query = query.filter(ExamSolution.exam_template_id == exam_template_id)
         exam_solutions = query.all()
         return exam_solutions
 
