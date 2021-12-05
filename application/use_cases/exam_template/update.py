@@ -38,8 +38,8 @@ def get_exam_template_to_update(db, exam_template_id, new_args):
 
     if(
         new_args.state is not None and
-        (has_multiple_choice is None or has_written is None or has_media is None) or
-        (has_multiple_choice is False and has_written is False and has_media is False)
+        ((has_multiple_choice is None or has_written is None or has_media is None) or
+         (has_multiple_choice is False and has_written is False and has_media is False))
     ):
         raise InvalidExamFilterException(has_multiple_choice, has_written, has_media)
     return exam_template_to_update
