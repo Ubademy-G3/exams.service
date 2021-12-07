@@ -25,12 +25,7 @@ def add_exam_solution(db, exam_template_id, args):
             raise ExamSolutionUsesAnInvalidTest(exam_template_id, exam_template.state)
         previous_attempts = len(previous_exam_solutions)
         if previous_attempts >= exam_template.max_attempts:
-            raise ExamSolutionTriesExceededException(
-                args.user_id,
-                exam_template_id,
-                previous_attempts,
-                exam_template.max_attempts
-            )
+            raise ExamSolutionTriesExceededException()
 
     new_exam_solution = ExamSolution(
         id=uuid4(),
