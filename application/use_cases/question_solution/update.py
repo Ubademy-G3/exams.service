@@ -1,15 +1,15 @@
 from persistence.repositories.question_solution_repository_postgres import QuestionSolutionRepositoryPostgres
 from exceptions.http_exception import NotFoundException
 from application.serializers.question_solution_serializer import QuestionSolutionSerializer
-from exceptions.ubademy_exception import NonPositiveQuestionSolutionScoreException
+from exceptions.ubademy_exception import NegativeQuestionSolutionScoreException
 
 qsrp = QuestionSolutionRepositoryPostgres()
 
 
 def update_question_solution(db, question_solution_id, new_args):
 
-    if new_args.score is not None and new_args.score <= 0:
-        raise NonPositiveQuestionSolutionScoreException(new_args.score)
+    if new_args.score is not None and new_args.score < 0:
+        raise NegativeQuestionSolutionScoreException(new_args.score)
 
     question_solution_to_update = qsrp.get_question_solution(db, question_solution_id)
 
