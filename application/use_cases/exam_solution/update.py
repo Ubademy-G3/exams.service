@@ -1,7 +1,7 @@
 from persistence.repositories.exam_solution_repository_postgres import ExamSolutionRepositoryPostgres
 from exceptions.http_exception import NotFoundException
 from application.serializers.exam_solution_serializer import ExamSolutionSerializer
-from exceptions.ubademy_exception import NonPositiveExamSolutionScoreException
+from exceptions.ubademy_exception import NegativeExamSolutionScoreException
 
 
 esrp = ExamSolutionRepositoryPostgres()
@@ -9,8 +9,8 @@ esrp = ExamSolutionRepositoryPostgres()
 
 def update_exam_solution(db, exam_solution_id, new_args):
 
-    if new_args.score is not None and new_args.score <= 0:
-        raise NonPositiveExamSolutionScoreException(new_args.score)
+    if new_args.score is not None and new_args.score < 0:
+        raise NegativeExamSolutionScoreException(new_args.score)
 
     exam_solution_to_update = esrp.get_exam_solution(db, exam_solution_id)
     if not exam_solution_to_update:
