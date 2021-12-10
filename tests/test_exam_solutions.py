@@ -150,6 +150,11 @@ update_body = {
     "approval_state": True,
 }
 
+second_update_body = {
+    "corrector_id": "5384d830-c14a-4e1a-9215-9525307b24a8",
+    "score": 4,
+}
+
 
 class ExamSolutionMock(TestCase):
 
@@ -340,3 +345,29 @@ class ExamSolutionMock(TestCase):
         assert data["score"] == 10
         assert data["max_score"] == 10
         assert data["approval_state"] is True
+
+    @mock.patch.object(ExamSolutionRepositoryPostgres, "update_exam_solution")
+    @mock.patch.object(ExamSolutionRepositoryPostgres, "get_exam_solution")
+    def test_partial_update_exam_solution(self, mock_get, mock_update):
+        mock_get.return_value = return_from_get
+        mock_update.return_value = None
+
+        exam_template_id = "5122b737-f815-4e15-a56d-abbff2fee900"
+        exam_solution_id = "fe7c9444-3354-4ec4-b9f7-330638d752aa"
+
+        response = client.patch(
+            f"/exams/{exam_template_id}/solutions/{exam_solution_id}/",
+            data=json.dumps(second_update_body),
+            headers=update_header
+        )
+        assert response.status_code == 200, response.text
+        data = response.json()
+        assert data["id"] == exam_solution_id
+        assert data["course_id"] == "2f120281-12cd-413f-8e6a-2678b6b92406"
+        assert data["user_id"] == "943368d4-cfa2-442c-a41e-14b6645b4472"
+        assert data["exam_template_id"] == "5122b737-f815-4e15-a56d-abbff2fee900"
+        assert data["corrector_id"] == "5384d830-c14a-4e1a-9215-9525307b24a8"
+        assert data["graded"] is False
+        assert data["score"] == 4
+        assert data["max_score"] == 10
+        assert data["approval_state"] is False
