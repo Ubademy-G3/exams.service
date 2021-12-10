@@ -57,7 +57,7 @@ class CorrectorExamSolutionList(BaseModel):
 
 
 class ExamSolutionPatch(BaseModel):
-    corrector_id: UUID
-    graded: bool
-    score: float
-    approval_state: bool
+    corrector_id: Optional[UUID]
+    graded: Optional[bool]
+    score: Optional[float]
+    approval_state: Optional[bool]
