@@ -53,9 +53,9 @@ return_from_get = ExamSolution(
     exam_template_id="5122b737-f815-4e15-a56d-abbff2fee900",
     corrector_id=None,
     graded=False,
-    score=None,
+    score=0,
     max_score=10,
-    approval_state=None,
+    approval_state=False,
 )
 
 # Get all by exam template id
@@ -69,9 +69,9 @@ return_from_get_all_by_exam_template_id = [
         exam_template_id="5122b737-f815-4e15-a56d-abbff2fee900",
         corrector_id=None,
         graded=False,
-        score=None,
+        score=0,
         max_score=10,
-        approval_state=None,
+        approval_state=False,
     )
 ]
 
@@ -86,9 +86,9 @@ return_from_get_all_by_user_id = [
         exam_template_id="5122b737-f815-4e15-a56d-abbff2fee900",
         corrector_id=None,
         graded=False,
-        score=None,
+        score=0,
         max_score=10,
-        approval_state=None,
+        approval_state=False,
     )
 ]
 
@@ -120,9 +120,9 @@ return_from_get_all_by_course_id = [
         exam_template_id="5122b737-f815-4e15-a56d-abbff2fee900",
         corrector_id=None,
         graded=False,
-        score=None,
+        score=0,
         max_score=10,
-        approval_state=None,
+        approval_state=False,
     )
 ]
 
@@ -175,9 +175,9 @@ class ExamSolutionMock(TestCase):
         assert data["exam_template_id"] == "5122b737-f815-4e15-a56d-abbff2fee900"
         assert data["corrector_id"] is None
         assert data["graded"] is False
-        assert data["score"] is None
+        assert data["score"] == 0
         assert data["max_score"] == 10
-        assert data["approval_state"] is None
+        assert data["approval_state"] is False
 
     @mock.patch.object(ExamSolutionRepositoryPostgres, "get_exam_solution")
     def test_get_exam_solution(self, mock_get):
@@ -198,9 +198,9 @@ class ExamSolutionMock(TestCase):
         assert data["exam_template_id"] == "5122b737-f815-4e15-a56d-abbff2fee900"
         assert data["corrector_id"] is None
         assert data["graded"] is False
-        assert data["score"] is None
+        assert data["score"] == 0
         assert data["max_score"] == 10
-        assert data["approval_state"] is None
+        assert data["approval_state"] is False
 
     @mock.patch.object(ExamSolutionRepositoryPostgres, "get_all_exam_solutions_by_exam_template_id")
     def test_get_all_exam_solutions_by_exam_template_id(self, mock_get_all_by_exam_template_id):
@@ -222,9 +222,9 @@ class ExamSolutionMock(TestCase):
         assert data["exam_solutions"][0]["exam_template_id"] == "5122b737-f815-4e15-a56d-abbff2fee900"
         assert data["exam_solutions"][0]["corrector_id"] is None
         assert data["exam_solutions"][0]["graded"] is False
-        assert data["exam_solutions"][0]["score"] is None
+        assert data["exam_solutions"][0]["score"] == 0
         assert data["exam_solutions"][0]["max_score"] == 10
-        assert data["exam_solutions"][0]["approval_state"] is None
+        assert data["exam_solutions"][0]["approval_state"] is False
 
     @mock.patch.object(ExamSolutionRepositoryPostgres, "get_all_exam_solutions_by_user_id")
     def test_get_all_exam_solutions_by_user_id(self, mock_get_all_by_user_id):
@@ -246,9 +246,9 @@ class ExamSolutionMock(TestCase):
         assert data["exam_solutions"][0]["exam_template_id"] == "5122b737-f815-4e15-a56d-abbff2fee900"
         assert data["exam_solutions"][0]["corrector_id"] is None
         assert data["exam_solutions"][0]["graded"] is False
-        assert data["exam_solutions"][0]["score"] is None
+        assert data["exam_solutions"][0]["score"] == 0
         assert data["exam_solutions"][0]["max_score"] == 10
-        assert data["exam_solutions"][0]["approval_state"] is None
+        assert data["exam_solutions"][0]["approval_state"] is False
 
     @mock.patch.object(ExamSolutionRepositoryPostgres, "get_all_exam_solutions_by_course_id")
     def test_get_all_exam_solutions_by_course_id(self, mock_get_all_by_course_id):
@@ -270,9 +270,9 @@ class ExamSolutionMock(TestCase):
         assert data["exam_solutions"][0]["exam_template_id"] == "5122b737-f815-4e15-a56d-abbff2fee900"
         assert data["exam_solutions"][0]["corrector_id"] is None
         assert data["exam_solutions"][0]["graded"] is False
-        assert data["exam_solutions"][0]["score"] is None
+        assert data["exam_solutions"][0]["score"] == 0
         assert data["exam_solutions"][0]["max_score"] == 10
-        assert data["exam_solutions"][0]["approval_state"] is None
+        assert data["exam_solutions"][0]["approval_state"] is False
 
     @mock.patch.object(ExamSolutionRepositoryPostgres, "get_all_exam_solutions_by_corrector_id")
     def test_get_all_exam_solutions_by_corrector_id(self, mock_get_all_by_corrector_id):
