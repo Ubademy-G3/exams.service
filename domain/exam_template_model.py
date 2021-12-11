@@ -23,6 +23,7 @@ class ExamTemplateDB(BaseModel):
     name: str
     state: str
     max_score: float
+    approval_score: float
     has_multiple_choice: bool
     has_written: bool
     has_media: bool
@@ -45,6 +46,7 @@ class ExamTemplatePatch(BaseModel):
     name: Optional[str]
     state: Optional[str]
     max_score: Optional[float]
+    approval_score: Optional[float]
     has_multiple_choice: Optional[bool]
     has_written: Optional[bool]
     has_media: Optional[bool]

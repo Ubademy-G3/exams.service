@@ -34,6 +34,7 @@ return_from_get = ExamTemplate(
     name="Test name for exam",
     state=ExamStateEnum.draft,
     max_score=10,
+    approval_score=5,
     has_multiple_choice=False,
     has_written=False,
     has_media=False,
@@ -51,6 +52,7 @@ return_from_get_all_by_course_id = [
         name="Test name for exam",
         state=ExamStateEnum.draft,
         max_score=10,
+        approval_score=5,
         has_multiple_choice=False,
         has_written=False,
         has_media=False,
@@ -69,6 +71,7 @@ return_from_get_all_by_creator_id = [
         name="Test name for exam",
         state=ExamStateEnum.draft,
         max_score=10,
+        approval_score=5,
         has_multiple_choice=False,
         has_written=False,
         has_media=False,
@@ -86,13 +89,10 @@ return_from_delete = None
 update_header = {"apikey": apikey, "exam_id": "5122b737-f815-4e15-a56d-abbff2fee900"}
 
 update_body = {
-    "name": "Test name for exam",
     "state": "active",
     "max_score": 10,
-    "has_multiple_choice": True,
-    "has_written": False,
-    "has_media": False,
-    "max_attempts": 1
+    "approval_score": 5,
+    "has_multiple_choice": True
 }
 
 
@@ -114,6 +114,7 @@ class ExamTemplateMock(TestCase):
         assert data["name"] == "Test name for exam"
         assert data["state"] == "draft"
         assert data["max_score"] == 10
+        assert data["approval_score"] == 5
         assert data["has_multiple_choice"] is False
         assert data["has_written"] is False
         assert data["has_media"] is False
@@ -135,6 +136,7 @@ class ExamTemplateMock(TestCase):
         assert data["name"] == "Test name for exam"
         assert data["state"] == "draft"
         assert data["max_score"] == 10
+        assert data["approval_score"] == 5
         assert data["has_multiple_choice"] is False
         assert data["has_written"] is False
         assert data["has_media"] is False
@@ -158,6 +160,7 @@ class ExamTemplateMock(TestCase):
         assert data["exam_templates"][0]["name"] == "Test name for exam"
         assert data["exam_templates"][0]["state"] == "draft"
         assert data["exam_templates"][0]["max_score"] == 10
+        assert data["exam_templates"][0]["approval_score"] == 5
         assert data["exam_templates"][0]["has_multiple_choice"] is False
         assert data["exam_templates"][0]["has_written"] is False
         assert data["exam_templates"][0]["has_media"] is False
@@ -181,6 +184,7 @@ class ExamTemplateMock(TestCase):
         assert data["exam_templates"][0]["name"] == "Test name for exam"
         assert data["exam_templates"][0]["state"] == "draft"
         assert data["exam_templates"][0]["max_score"] == 10
+        assert data["exam_templates"][0]["approval_score"] == 5
         assert data["exam_templates"][0]["has_multiple_choice"] is False
         assert data["exam_templates"][0]["has_written"] is False
         assert data["exam_templates"][0]["has_media"] is False
@@ -219,6 +223,7 @@ class ExamTemplateMock(TestCase):
         assert data["name"] == "Test name for exam"
         assert data["state"] == "active"
         assert data["max_score"] == 10
+        assert data["approval_score"] == 5
         assert data["has_multiple_choice"] is True
         assert data["has_written"] is False
         assert data["has_media"] is False

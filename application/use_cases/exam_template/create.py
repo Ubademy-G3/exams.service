@@ -16,6 +16,7 @@ def add_exam_template(db, args):
         name=args.name,
         state=ExamStateEnum.draft,
         max_score=10,
+        approval_score=5,
         has_multiple_choice=False,
         has_written=False,
         has_media=False,

@@ -33,6 +33,7 @@ return_from_get_template = ExamTemplate(
     name="Test name for exam",
     state=ExamStateEnum.active,
     max_score=10,
+    approval_score=10,
     has_multiple_choice=False,
     has_written=True,
     has_media=False,

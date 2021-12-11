@@ -15,6 +15,7 @@ class ExamTemplate(Base):
     name = Column(String(50), nullable=False)
     state = Column(Enum(ExamStateEnum))
     max_score = Column(Float, default=10)
+    approval_score = Column(Float, default=5)
     has_multiple_choice = Column(Boolean, default=True)
     has_written = Column(Boolean, default=False)
     has_media = Column(Boolean, default=False)
@@ -24,7 +25,7 @@ class ExamTemplate(Base):
     exam_solution = relationship("ExamSolution", cascade="all, delete")
     question_template = relationship("QuestionTemplate", cascade="all, delete")
 
-    def __init__(self, id, course_id, creator_id, name, state, max_score,
+    def __init__(self, id, course_id, creator_id, name, state, max_score, approval_score,
                  has_multiple_choice, has_written, has_media, max_attempts):
         self.id = id
         self.course_id = course_id
@@ -32,6 +33,7 @@ class ExamTemplate(Base):
         self.name = name
         self.state = state
         self.max_score = max_score
+        self.approval_score = approval_score
         self.has_multiple_choice = has_multiple_choice
         self.has_written = has_written
         self.has_media = has_media

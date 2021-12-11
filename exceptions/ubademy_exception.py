@@ -20,6 +20,18 @@ class InvalidExamTemplateScoreException(UbademyException):
         super().__init__(status_code=400, detail=msg)
 
 
+class NonPositiveExamTemplateApprovalScoreException(UbademyException):
+    def __init__(self, detail):
+        msg = f"Exam template has a non positive approval_score: {detail}"
+        super().__init__(status_code=400, detail=msg)
+
+
+class HighExamTemplateApprovalScoreException(UbademyException):
+    def __init__(self, detail):
+        msg = f"Exam template has an approval_score bigger than the max score: {detail}"
+        super().__init__(status_code=400, detail=msg)
+
+
 class InvalidExamTemplateAttemptsException(UbademyException):
     def __init__(self, detail):
         msg = f"Exam template has a non positive max_attempts: {detail}"

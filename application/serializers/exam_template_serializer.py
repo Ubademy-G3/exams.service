@@ -18,6 +18,7 @@ class ExamTemplateSerializer:
             "name": exam_template.name,
             "state": state,
             "max_score": exam_template.max_score,
+            "approval_score": exam_template.approval_score,
             "has_multiple_choice": exam_template.has_multiple_choice,
             "has_written": exam_template.has_written,
             "has_media": exam_template.has_media,
