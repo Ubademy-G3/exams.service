@@ -1,6 +1,9 @@
 from persistence.repositories.exam_solution_repository_postgres import ExamSolutionRepositoryPostgres
 from exceptions.http_exception import NotFoundException
 from application.serializers.exam_solution_serializer import ExamSolutionSerializer
+import logging
+
+logger = logging.getLogger(__name__)
 
 esrp = ExamSolutionRepositoryPostgres()
 
@@ -8,6 +11,7 @@ esrp = ExamSolutionRepositoryPostgres()
 def get_exam_solution(db, exam_solution_id):
     exam_solution = esrp.get_exam_solution(db, exam_solution_id)
     if exam_solution is None:
+        logger.warning("Exam solution %s not found", exam_solution_id)
         raise NotFoundException("Exam solution {}".format(exam_solution_id))
     return ExamSolutionSerializer.serialize(exam_solution)
 

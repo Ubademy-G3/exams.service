@@ -7,6 +7,9 @@ from uuid import uuid4
 from exceptions.ubademy_exception import (NonPositiveExamSolutionMaxScoreException, ExamSolutionTriesExceededException,
                                           ExamSolutionUsesAnInvalidTest)
 
+import logging
+
+logger = logging.getLogger(__name__)
 
 esrp = ExamSolutionRepositoryPostgres()
 etrp = ExamTemplateRepositoryPostgres()
@@ -15,6 +18,7 @@ etrp = ExamTemplateRepositoryPostgres()
 def add_exam_solution(db, exam_template_id, args):
 
     if args.max_score <= 0:
+        logger.error("Trying to create exam template %s solution with non-positive max score", exam_template_id)
         raise NonPositiveExamSolutionMaxScoreException(args.max_score)
 
     previous_exam_solutions = esrp.get_all_exam_solutions_by_user_id_and_exam_template_id(db, args.user_id, exam_template_id)
@@ -22,9 +26,11 @@ def add_exam_solution(db, exam_template_id, args):
     if previous_exam_solutions is not None:
         exam_template = etrp.get_exam_template(db, exam_template_id)
         if exam_template.state != ExamStateEnum.active:
+            logger.error("Trying to create exam template %s solution with invalid state", exam_template_id)
             raise ExamSolutionUsesAnInvalidTest(exam_template_id, exam_template.state)
         previous_attempts = len(previous_exam_solutions)
         if previous_attempts >= exam_template.max_attempts:
+            logger.error("Trying to create exam template %s solution exceeding attemps", exam_template_id)
             raise ExamSolutionTriesExceededException()
 
     new_exam_solution = ExamSolution(

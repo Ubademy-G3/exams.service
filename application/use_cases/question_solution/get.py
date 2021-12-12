@@ -1,6 +1,9 @@
 from persistence.repositories.question_solution_repository_postgres import QuestionSolutionRepositoryPostgres
 from exceptions.http_exception import NotFoundException
 from application.serializers.question_solution_serializer import QuestionSolutionSerializer
+import logging
+
+logger = logging.getLogger(__name__)
 
 qsrp = QuestionSolutionRepositoryPostgres()
 
@@ -8,6 +11,7 @@ qsrp = QuestionSolutionRepositoryPostgres()
 def get_question_solution(db, question_solution_id):
     question_solution = qsrp.get_question_solution(db, question_solution_id)
     if question_solution is None:
+        logger.debug("Question solution %s not found", question_solution_id)
         raise NotFoundException("Question solution {}".format(question_solution_id))
     return QuestionSolutionSerializer.serialize(question_solution)
 

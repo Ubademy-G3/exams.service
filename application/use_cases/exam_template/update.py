@@ -6,6 +6,9 @@ from exceptions.ubademy_exception import (InvalidExamStateException, InvalidExam
                                           InvalidExamFilterException, InvalidExamTemplateAttemptsException,
                                           NonPositiveExamTemplateApprovalScoreException,
                                           HighExamTemplateApprovalScoreException)
+import logging
+
+logger = logging.getLogger(__name__)
 
 etrp = ExamTemplateRepositoryPostgres()
 
@@ -35,18 +38,23 @@ def validate_flags(exam_template_to_update, new_args):
 def get_exam_template_to_update(db, exam_template_id, new_args):
 
     if(new_args.state is not None and new_args.state not in ["active", "inactive"]):
+        logger.warning("Invalid exam state in %s", exam_template_id)
         raise InvalidExamStateException(new_args.state)
 
     if(new_args.max_score is not None and new_args.max_score <= 0):
+        logger.warning("Invalid exam score in %s", exam_template_id)
         raise InvalidExamTemplateScoreException(new_args.max_score)
 
     if new_args.approval_score is not None:
         if new_args.approval_score <= 0:
+            logger.warning("Invalid exam approval score in %s", exam_template_id)
             raise NonPositiveExamTemplateApprovalScoreException(new_args.approval_score)
         if new_args.max_score is not None and new_args.approval_score > new_args.max_score:
+            logger.warning("Invalid exam approval score in %s", exam_template_id)
             raise HighExamTemplateApprovalScoreException(new_args.approval_score)
 
     if(new_args.max_attempts is not None and new_args.max_attempts <= 0):
+        logger.warning("Invalid exam approval attempts in %s", exam_template_id)
         raise InvalidExamTemplateAttemptsException(new_args.max_attempts)
 
     exam_template_to_update = etrp.get_exam_template(db, exam_template_id)
@@ -95,5 +103,7 @@ def update_exam_template(db, exam_template_id, new_args):
     if new_args.max_attempts is not None:
         exam_template_to_update.max_attempts = new_args.max_attempts
 
+    logger.debug("Update exam template %s", exam_template_id)
     etrp.update_exam_template(db)
+    logger.info("Exam template updated")
     return ExamTemplateSerializer.serialize(exam_template_to_update)

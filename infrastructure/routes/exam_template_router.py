@@ -5,6 +5,9 @@ from application.controllers.exam_template_controller import ExamTemplateControl
 from application.services.auth import auth_service
 from domain.exam_template_model import (ExamTemplatePostBody, ExamTemplateDB, ExamTemplateList,
                                         CreatorExamTemplateList, ExamTemplatePatch)
+import logging
+
+logger = logging.getLogger(__name__)
 
 router = APIRouter()
 
@@ -15,6 +18,7 @@ async def create_exam_template(
     db: Session = Depends(get_db),
     apikey: str = Header(None),
 ):
+    logger.debug("Creating exam template...")
     auth_service.check_api_key(apikey)
     return ExamTemplateController.create_exam_template(db, exam_template)
 
