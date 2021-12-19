@@ -29,7 +29,7 @@ def add_exam_solution(db, exam_template_id, args):
         if exam_template.state != ExamStateEnum.active:
             logger.error("Trying to create exam template %s solution with invalid state", exam_template_id)
             raise ExamSolutionUsesAnInvalidTest(exam_template_id, exam_template.state)
-        
+
         if previous_attempts >= exam_template.max_attempts:
             logger.error("Trying to create exam template %s solution exceeding attemps", exam_template_id)
             raise ExamSolutionTriesExceededException()
