@@ -22,13 +22,14 @@ def add_exam_solution(db, exam_template_id, args):
         raise NonPositiveExamSolutionMaxScoreException(args.max_score)
 
     previous_exam_solutions = esrp.get_all_exam_solutions_by_user_id_and_exam_template_id(db, args.user_id, exam_template_id)
+    previous_attempts = len(previous_exam_solutions)
 
-    if previous_exam_solutions is not None:
+    if previous_attempts > 0:
         exam_template = etrp.get_exam_template(db, exam_template_id)
         if exam_template.state != ExamStateEnum.active:
             logger.error("Trying to create exam template %s solution with invalid state", exam_template_id)
             raise ExamSolutionUsesAnInvalidTest(exam_template_id, exam_template.state)
-        previous_attempts = len(previous_exam_solutions)
+        
         if previous_attempts >= exam_template.max_attempts:
             logger.error("Trying to create exam template %s solution exceeding attemps", exam_template_id)
             raise ExamSolutionTriesExceededException()
