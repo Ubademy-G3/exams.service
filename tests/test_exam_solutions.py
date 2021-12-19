@@ -77,7 +77,7 @@ return_from_get_all_by_exam_template_id = [
 ]
 
 # Get all by user id
-get_all_by_user_id_header = {"apikey": apikey, "user_id": "f1e8ea4b-3909-4f66-80ca-aad491049bdf"}
+get_all_by_user_id_header = {"apikey": apikey, "user_id": "943368d4-cfa2-442c-a41e-14b6645b4472"}
 
 return_from_get_all_by_user_id = [
     ExamSolution(
@@ -114,6 +114,24 @@ return_from_get_all_by_corrector_id = [
 get_all_by_course_id_header = {"apikey": apikey, "course_id": "2f120281-12cd-413f-8e6a-2678b6b92406"}
 
 return_from_get_all_by_course_id = [
+    ExamSolution(
+        id="fe7c9444-3354-4ec4-b9f7-330638d752aa",
+        course_id="2f120281-12cd-413f-8e6a-2678b6b92406",
+        user_id="943368d4-cfa2-442c-a41e-14b6645b4472",
+        exam_template_id="5122b737-f815-4e15-a56d-abbff2fee900",
+        corrector_id=None,
+        graded=False,
+        score=0,
+        max_score=10,
+        approval_state=False,
+    )
+]
+
+
+# Get all by course id
+get_all_by_user_course_id_header = {"apikey": apikey, "user_id": "943368d4-cfa2-442c-a41e-14b6645b4472", "course_id": "2f120281-12cd-413f-8e6a-2678b6b92406"}
+
+return_from_get_all_by_user_course_id = [
     ExamSolution(
         id="fe7c9444-3354-4ec4-b9f7-330638d752aa",
         course_id="2f120281-12cd-413f-8e6a-2678b6b92406",
@@ -268,6 +286,32 @@ class ExamSolutionMock(TestCase):
         )
         assert response.status_code == 200, response.text
         data = response.json()
+        assert data["course_id"] == course_id
+        assert data["amount"] == 1
+        assert data["exam_solutions"][0]["id"] == "fe7c9444-3354-4ec4-b9f7-330638d752aa"
+        assert data["exam_solutions"][0]["course_id"] == "2f120281-12cd-413f-8e6a-2678b6b92406"
+        assert data["exam_solutions"][0]["user_id"] == "943368d4-cfa2-442c-a41e-14b6645b4472"
+        assert data["exam_solutions"][0]["exam_template_id"] == "5122b737-f815-4e15-a56d-abbff2fee900"
+        assert data["exam_solutions"][0]["corrector_id"] is None
+        assert data["exam_solutions"][0]["graded"] is False
+        assert data["exam_solutions"][0]["score"] == 0
+        assert data["exam_solutions"][0]["max_score"] == 10
+        assert data["exam_solutions"][0]["approval_state"] is False
+
+    @mock.patch.object(ExamSolutionRepositoryPostgres, "get_all_exam_solutions_by_user_id_and_course_id")
+    def test_get_all_exam_solutions_by_user_course_id(self, mock_get_all_by_user_course_id):
+        mock_get_all_by_user_course_id.return_value = return_from_get_all_by_user_course_id
+
+        user_id = "943368d4-cfa2-442c-a41e-14b6645b4472"
+        course_id = "2f120281-12cd-413f-8e6a-2678b6b92406"
+
+        response = client.get(
+            f"/exams/solutions/user/{user_id}/course/{course_id}/",
+            headers=get_all_by_user_course_id_header
+        )
+        assert response.status_code == 200, response.text
+        data = response.json()
+        assert data["user_id"] == user_id
         assert data["course_id"] == course_id
         assert data["amount"] == 1
         assert data["exam_solutions"][0]["id"] == "fe7c9444-3354-4ec4-b9f7-330638d752aa"
