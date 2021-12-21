@@ -28,7 +28,7 @@ class ExamTemplateRepositoryPostgres:
             query = query.filter(ExamTemplate.has_media == has_media)
         if state is not None:
             logger.debug("Get exam templates of course %s with filter state", course_id, state)
-            query = query.filter(ExamTemplate.state == state)
+            query = query.filter(ExamTemplate.state.in_(state))
         exam_templates = query.all()
         logger.debug("Getting all exam templates of course %s", course_id)
         return exam_templates
@@ -46,7 +46,7 @@ class ExamTemplateRepositoryPostgres:
             query = query.filter(ExamTemplate.has_media == has_media)
         if state is not None:
             logger.debug("Get exam templates of creator %s with filter state", creator_id, state)
-            query = query.filter(ExamTemplate.state == state)
+            query = query.filter(ExamTemplate.state.in_(state))
         exam_templates = query.all()
         logger.debug("Getting all exam templates of creator %s", creator_id)
         return exam_templates
