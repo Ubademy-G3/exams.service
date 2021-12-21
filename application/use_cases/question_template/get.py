@@ -1,6 +1,9 @@
 from persistence.repositories.question_template_repository_postgres import QuestionTemplateRepositoryPostgres
 from exceptions.http_exception import NotFoundException
 from application.serializers.question_template_serializer import QuestionTemplateSerializer
+import logging
+
+logger = logging.getLogger(__name__)
 
 qtrp = QuestionTemplateRepositoryPostgres()
 
@@ -8,6 +11,7 @@ qtrp = QuestionTemplateRepositoryPostgres()
 def get_question_template(db, question_template_id):
     question_template = qtrp.get_question_template(db, question_template_id)
     if question_template is None:
+        logger.warning("Question template %s not found", question_template_id)
         raise NotFoundException("Question template {}".format(question_template_id))
     return QuestionTemplateSerializer.serialize(question_template)
 

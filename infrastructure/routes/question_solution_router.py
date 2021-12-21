@@ -4,6 +4,9 @@ from application.controllers.question_solution_controller import QuestionSolutio
 from application.services.auth import auth_service
 from domain.question_solution_model import (QuestionSolutionPostBody, QuestionSolutionDB,
                                             QuestionSolutionList, QuestionSolutionPatch)
+import logging
+
+logger = logging.getLogger(__name__)
 
 router = APIRouter()
 
@@ -16,6 +19,7 @@ async def create_question_solution(
     db: Session = Depends(get_db),
     apikey: str = Header(None),
 ):
+    logger.debug("Creating question solution %s for template %s ...", exam_solution_id, exam_template_id)
     auth_service.check_api_key(apikey)
     return QuestionSolutionController.create_question_solution(db, exam_solution_id, question_solution)
 

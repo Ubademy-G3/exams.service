@@ -4,6 +4,9 @@ from application.controllers.question_template_controller import QuestionTemplat
 from application.services.auth import auth_service
 from domain.question_template_model import (QuestionTemplatePostBody, QuestionTemplateDB,
                                             QuestionTemplateList, QuestionTemplatePatch)
+import logging
+
+logger = logging.getLogger(__name__)
 
 router = APIRouter()
 
@@ -15,6 +18,7 @@ async def create_question_template(
     db: Session = Depends(get_db),
     apikey: str = Header(None),
 ):
+    logger.debug("Creating question template for exam %s ...", exam_template_id)
     auth_service.check_api_key(apikey)
     return QuestionTemplateController.create_question_template(db, exam_template_id, question_template)
 

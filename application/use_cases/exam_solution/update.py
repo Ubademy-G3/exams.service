@@ -2,7 +2,9 @@ from persistence.repositories.exam_solution_repository_postgres import ExamSolut
 from exceptions.http_exception import NotFoundException
 from application.serializers.exam_solution_serializer import ExamSolutionSerializer
 from exceptions.ubademy_exception import NegativeExamSolutionScoreException
+import logging
 
+logger = logging.getLogger(__name__)
 
 esrp = ExamSolutionRepositoryPostgres()
 
@@ -28,5 +30,7 @@ def update_exam_solution(db, exam_solution_id, new_args):
     if new_args.approval_state is not None:
         exam_solution_to_update.approval_state = new_args.approval_state
 
+    logger.debug("Update exam solution %s", exam_solution_id)
     esrp.update_exam_solution(db)
+    logger.info("Exam solution updated")
     return ExamSolutionSerializer.serialize(exam_solution_to_update)
