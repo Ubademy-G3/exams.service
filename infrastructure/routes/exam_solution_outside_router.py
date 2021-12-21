@@ -4,7 +4,8 @@ from typing import Optional
 from application.controllers.exam_solution_controller import ExamSolutionController
 from application.services.auth import auth_service
 from domain.exam_solution_model import (UserExamSolutionList, CorrectorExamSolutionList,
-                                        CourseExamSolutionList, UserCourseExamSolutionList)
+                                        CourseExamSolutionList, UserCourseExamSolutionList,
+                                        CorrectorCourseExamSolutionList)
 
 router = APIRouter()
 
@@ -57,4 +58,19 @@ async def get_all_exam_solutions_by_user_id_and_course_id(
     auth_service.check_api_key(apikey)
     return ExamSolutionController.get_all_exam_solutions_by_user_id_and_course_id(
         db, user_id, course_id, graded, approval_state
+    )
+
+
+@router.get("/corrector/{corrector_id}/course/{course_id}/", response_model=CorrectorCourseExamSolutionList, status_code=200)
+async def get_all_exam_solutions_by_corrector_id_and_course_id(
+    corrector_id: str,
+    course_id: str,
+    graded: Optional[bool] = Query(None),
+    approval_state: Optional[bool] = Query(None),
+    db: Session = Depends(get_db),
+    apikey: str = Header(None),
+):
+    auth_service.check_api_key(apikey)
+    return ExamSolutionController.get_all_exam_solutions_by_corrector_id_and_course_id(
+        db, corrector_id, course_id, graded, approval_state
     )

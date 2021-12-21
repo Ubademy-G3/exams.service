@@ -58,6 +58,16 @@ class UserCourseExamSolutionList(BaseModel):
     exam_solutions: Optional[List[ExamSolutionDB]]
 
 
+class CorrectorCourseExamSolutionList(BaseModel):
+    corrector_id: UUID
+    course_id: UUID
+    amount: int
+    amount_graded: int
+    average_score: Optional[float]
+    approval_rate: Optional[float]
+    exam_solutions: Optional[List[ExamSolutionDB]]
+
+
 class CorrectorExamSolutionList(BaseModel):
     corrector_id: UUID
     amount: int
