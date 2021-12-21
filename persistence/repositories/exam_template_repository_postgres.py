@@ -19,7 +19,7 @@ class ExamTemplateRepositoryPostgres:
         if has_media is not None:
             query = query.filter(ExamTemplate.has_media == has_media)
         if state is not None:
-            query = query.filter(ExamTemplate.state == state)
+            query = query.filter(ExamTemplate.state.in_(state))
         exam_templates = query.all()
         return exam_templates
 
@@ -32,7 +32,7 @@ class ExamTemplateRepositoryPostgres:
         if has_media is not None:
             query = query.filter(ExamTemplate.has_media == has_media)
         if state is not None:
-            query = query.filter(ExamTemplate.state == state)
+            query = query.filter(ExamTemplate.state.in_(state))
         exam_templates = query.all()
         return exam_templates
 
