@@ -129,7 +129,9 @@ return_from_get_all_by_course_id = [
 
 
 # Get all by course id
-get_all_by_user_course_id_header = {"apikey": apikey, "user_id": "943368d4-cfa2-442c-a41e-14b6645b4472", "course_id": "2f120281-12cd-413f-8e6a-2678b6b92406"}
+get_all_by_user_course_id_header = {
+    "apikey": apikey, "user_id": "943368d4-cfa2-442c-a41e-14b6645b4472", "course_id": "2f120281-12cd-413f-8e6a-2678b6b92406"
+}
 
 return_from_get_all_by_user_course_id = [
     ExamSolution(

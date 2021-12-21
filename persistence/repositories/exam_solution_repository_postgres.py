@@ -62,6 +62,16 @@ class ExamSolutionRepositoryPostgres:
         exam_solutions = query.all()
         return exam_solutions
 
+    def get_all_exam_solutions_by_corrector_id_and_course_id(self, db, corrector_id, course_id, graded, approval_state):
+        query = db.query(ExamSolution).filter(ExamSolution.corrector_id == corrector_id)
+        query = query.filter(ExamSolution.course_id == course_id)
+        if graded is not None:
+            query = query.filter(ExamSolution.graded == graded)
+        if approval_state is not None:
+            query = query.filter(ExamSolution.approval_state == approval_state)
+        exam_solutions = query.all()
+        return exam_solutions
+
     def delete_exam_solution(self, db, exam_solution):
         db.delete(exam_solution)
         db.commit()
