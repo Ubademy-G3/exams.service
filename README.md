@@ -3,6 +3,8 @@
 [![CI](https://github.com/Ubademy-G3/exams.service/actions/workflows/default.yml/badge.svg)](https://github.com/Ubademy-G3/exams.service/actions/workflows/default.yml)
 [![codecov](https://codecov.io/gh/Ubademy-G3/exams.service/branch/main/graph/badge.svg?token=A3547H62WC)](https://codecov.io/gh/Ubademy-G3/exams.service)
 
+Service dedicated to the management of the exams of each course: creation, edition, removal, and everything related to exams of online courses.
+
 # File Structure:
 ```tree
 ├── application
