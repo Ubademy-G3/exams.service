@@ -84,11 +84,11 @@ class ExamSolutionRepositoryPostgres:
         query = query.filter(ExamSolution.course_id == course_id)
         if graded is not None:
             logger.debug("Get solutions of exam for course %s and user %s with filter graded %s",
-                        course_id, user_type, graded)
+                        course_id, user_id, graded)
             query = query.filter(ExamSolution.graded == graded)
         if approval_state is not None:
             logger.debug("Get solutions of exam for course %s and user %s with filter aproval_state %s",
-                        course_id, user_type, approval_state)
+                        course_id, user_id, approval_state)
             query = query.filter(ExamSolution.approval_state == approval_state)
         exam_solutions = query.all()
         return exam_solutions
@@ -98,11 +98,11 @@ class ExamSolutionRepositoryPostgres:
         query = query.filter(ExamSolution.course_id == course_id)
         if graded is not None:
             logger.debug("Get solutions of exam for course %s and corrector %s with filter graded %s",
-                        course_id, user_type, graded)
+                        course_id, corrector_id, graded)
             query = query.filter(ExamSolution.graded == graded)
         if approval_state is not None:
             logger.debug("Get solutions of exam for course %s and corrector %s with filter aproval_state %s",
-                        course_id, user_type, approval_state)
+                        course_id, corrector_id, approval_state)
             query = query.filter(ExamSolution.approval_state == approval_state)
         exam_solutions = query.all()
         return exam_solutions
