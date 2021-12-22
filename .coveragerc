@@ -2,10 +2,9 @@
 omit = 
         *__init__*
         */exceptions/*
-        */infrastructure/routes/*
+        *infrastructure/routes/*
         *monitoring/datadog.yml*
         *deploy/heroku-entrypoint.sh*
-        *infrastructure/db/_pycache_/*
         *infrastructure/db/database.py*
         *persistence/repositories/*
         *application/use_cases/question_solution/get.py*
