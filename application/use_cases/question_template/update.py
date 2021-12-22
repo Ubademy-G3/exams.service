@@ -1,8 +1,12 @@
 from persistence.repositories.question_template_repository_postgres import QuestionTemplateRepositoryPostgres
 from infrastructure.db.question_template_schema import QuestionTypeEnum
 from exceptions.http_exception import NotFoundException
-from exceptions.ubademy_exception import (InvalidQuestionTypeException, EmptyOptionListException,
-                                          EmptyCorrectException, NonPositiveQuestionTemplateValueException)
+from exceptions.ubademy_exception import (
+    InvalidQuestionTypeException,
+    EmptyOptionListException,
+    EmptyCorrectException,
+    NonPositiveQuestionTemplateValueException,
+)
 from application.serializers.question_template_serializer import QuestionTemplateSerializer
 
 qtrp = QuestionTemplateRepositoryPostgres()
@@ -10,16 +14,16 @@ qtrp = QuestionTemplateRepositoryPostgres()
 
 def get_question_template_to_update(db, question_template_id, new_args):
 
-    if (new_args.question_type is not None and new_args.question_type not in ["multiple_choice", "written", "media"]):
+    if new_args.question_type is not None and new_args.question_type not in ["multiple_choice", "written", "media"]:
         raise InvalidQuestionTypeException(new_args.question_type)
 
-    if (new_args.question_type is not None and new_args.question_type == "multiple_choice" and new_args.options is None):
+    if new_args.question_type is not None and new_args.question_type == "multiple_choice" and new_args.options is None:
         raise EmptyOptionListException()
 
-    if (new_args.question_type is not None and new_args.question_type == "multiple_choice" and new_args.correct is None):
+    if new_args.question_type is not None and new_args.question_type == "multiple_choice" and new_args.correct is None:
         raise EmptyCorrectException()
 
-    if (new_args.value is not None and new_args.value <= 0):
+    if new_args.value is not None and new_args.value <= 0:
         raise NonPositiveQuestionTemplateValueException(new_args.value)
 
     question_template_to_update = qtrp.get_question_template(db, question_template_id)
@@ -39,10 +43,10 @@ def update_question_template(db, question_template_id, new_args):
 
     if new_args.question_type is not None:
         question_template_to_update.question_type = QuestionTypeEnum.multiple_choice
-        if(new_args.question_type == "written"):
+        if new_args.question_type == "written":
             question_template_to_update.question_type = QuestionTypeEnum.written
 
-        if(new_args.question_type == "media"):
+        if new_args.question_type == "media":
             question_template_to_update.question_type = QuestionTypeEnum.media
 
     if new_args.options is not None:

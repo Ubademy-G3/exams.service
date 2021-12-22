@@ -2,6 +2,7 @@ from persistence.repositories.exam_template_repository_postgres import ExamTempl
 from exceptions.http_exception import NotFoundException
 from application.serializers.exam_template_serializer import ExamTemplateSerializer
 import logging
+from domain.exam_template_model import ExamStateEnum
 
 logger = logging.getLogger(__name__)
 
@@ -18,11 +19,11 @@ def get_exam_template(db, exam_template_id):
 
 def get_enum_state(word):
     enum_state = None
-    if i == "draft":
+    if word == "draft":
         enum_state = ExamStateEnum.draft
-    else if i == "active"
+    elif word == "active":
         enum_state = ExamStateEnum.active
-    else if i == "inactive"
+    elif word == "inactive":
         enum_state = ExamStateEnum.inactive
     return enum_state
 
@@ -36,7 +37,6 @@ def get_all_exam_templates_by_course_id(db, course_id, has_multiple_choice, has_
                 state_list.append(get_enum_state(i))
         else:
             state_list.append(get_enum_state(state))
-
 
     exam_templates = etrp.get_all_exam_templates_by_course_id(db, course_id, has_multiple_choice,
                                                               has_written, has_media, state_list)

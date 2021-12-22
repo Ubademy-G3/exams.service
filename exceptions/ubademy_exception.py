@@ -10,7 +10,7 @@ class UbademyException(Exception):
 
 class InvalidExamStateException(UbademyException):
     def __init__(self, detail):
-        msg = f"Exam template has an invalid state: \"{detail}\". Expected values: are \"active\" and \"inactive\""
+        msg = f'Exam template has an invalid state: "{detail}". Expected values: are "active" and "inactive"'
         super().__init__(status_code=400, detail=msg)
 
 
@@ -40,10 +40,12 @@ class InvalidExamTemplateAttemptsException(UbademyException):
 
 class InvalidExamFilterException(UbademyException):
     def __init__(self, has_multiple_choice, has_written, has_media):
-        msg = (f"Exam template has invalid filters while trying to publish the exam. "
-               f"has_multiple_choice: {has_multiple_choice}, "
-               f"has_written: {has_written}, "
-               f"has_media: {has_media}")
+        msg = (
+            f"Exam template has invalid filters while trying to publish the exam. "
+            f"has_multiple_choice: {has_multiple_choice}, "
+            f"has_written: {has_written}, "
+            f"has_media: {has_media}"
+        )
         super().__init__(status_code=400, detail=msg)
 
 
@@ -52,8 +54,10 @@ class InvalidExamFilterException(UbademyException):
 
 class InvalidQuestionTypeException(UbademyException):
     def __init__(self, detail):
-        msg = (f"Question template has an invalid type: \"{detail}\". "
-               f"Expected values: are \"multiple_choice\", \"written\" and \"media\"")
+        msg = (
+            f'Question template has an invalid type: "{detail}". '
+            f'Expected values: are "multiple_choice", "written" and "media"'
+        )
         super().__init__(status_code=400, detail=msg)
 
 
@@ -92,14 +96,16 @@ class NegativeExamSolutionScoreException(UbademyException):
 
 class ExamSolutionTriesExceededException(UbademyException):
     def __init__(self):
-        msg = ("This user already reached the maximum amount of attempts for this exam")
+        msg = "This user already reached the maximum amount of attempts for this exam"
         super().__init__(status_code=400, detail=msg)
 
 
 class ExamSolutionUsesAnInvalidTest(UbademyException):
     def __init__(self, exam_template_id, exam_template_state):
-        msg = (f"The exam template id {exam_template_id}, is not an active test, "
-               f"the state of the test is {exam_template_state}")
+        msg = (
+            f"The exam template id {exam_template_id}, is not an active test, "
+            f"the state of the test is {exam_template_state}"
+        )
         super().__init__(status_code=400, detail=msg)
 
 

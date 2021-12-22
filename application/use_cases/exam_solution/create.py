@@ -4,8 +4,11 @@ from application.serializers.exam_solution_serializer import ExamSolutionSeriali
 from infrastructure.db.exam_solution_schema import ExamSolution
 from infrastructure.db.exam_template_schema import ExamStateEnum
 from uuid import uuid4
-from exceptions.ubademy_exception import (NonPositiveExamSolutionMaxScoreException, ExamSolutionTriesExceededException,
-                                          ExamSolutionUsesAnInvalidTest)
+from exceptions.ubademy_exception import (
+    NonPositiveExamSolutionMaxScoreException,
+    ExamSolutionTriesExceededException,
+    ExamSolutionUsesAnInvalidTest,
+)
 
 import logging
 

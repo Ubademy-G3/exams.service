@@ -26,7 +26,7 @@ post_body = {
 get_header = {
     "apikey": apikey,
     "exam_template_id": "5122b737-f815-4e15-a56d-abbff2fee900",
-    "question_template_id": "2be97039-8c07-48ae-a18e-16d4779b977b"
+    "question_template_id": "2be97039-8c07-48ae-a18e-16d4779b977b",
 }
 
 return_from_get = QuestionTemplate(
@@ -58,7 +58,7 @@ return_from_get_all_by_exam_id = [
 delete_header = {
     "apikey": apikey,
     "exam_template_id": "5122b737-f815-4e15-a56d-abbff2fee900",
-    "question_template_id": "2be97039-8c07-48ae-a18e-16d4779b977b"
+    "question_template_id": "2be97039-8c07-48ae-a18e-16d4779b977b",
 }
 
 return_from_delete = None
@@ -67,7 +67,7 @@ return_from_delete = None
 update_header = {
     "apikey": apikey,
     "exam_template_id": "5122b737-f815-4e15-a56d-abbff2fee900",
-    "question_template_id": "2be97039-8c07-48ae-a18e-16d4779b977b"
+    "question_template_id": "2be97039-8c07-48ae-a18e-16d4779b977b",
 }
 
 update_body = {
@@ -77,18 +77,13 @@ update_body = {
 
 
 class QuestionTemplateMock(TestCase):
-
     @mock.patch.object(QuestionTemplateRepositoryPostgres, "add_question_template")
     def test_create_question_template(self, mock_post):
         mock_post.return_value = None
 
         exam_template_id = "5122b737-f815-4e15-a56d-abbff2fee900"
 
-        response = client.post(
-            f"/exams/{exam_template_id}/questions/",
-            data=json.dumps(post_body),
-            headers=post_header
-        )
+        response = client.post(f"/exams/{exam_template_id}/questions/", data=json.dumps(post_body), headers=post_header)
         assert response.status_code == 201, response.text
         data = response.json()
         assert data["exam_id"] == exam_template_id
@@ -105,10 +100,7 @@ class QuestionTemplateMock(TestCase):
         exam_template_id = "5122b737-f815-4e15-a56d-abbff2fee900"
         question_template_id = "2be97039-8c07-48ae-a18e-16d4779b977b"
 
-        response = client.get(
-            f"/exams/{exam_template_id}/questions/{question_template_id}",
-            headers=get_header
-        )
+        response = client.get(f"/exams/{exam_template_id}/questions/{question_template_id}", headers=get_header)
         assert response.status_code == 200, response.text
         data = response.json()
         assert data["id"] == question_template_id
@@ -126,10 +118,7 @@ class QuestionTemplateMock(TestCase):
         exam_template_id = "5122b737-f815-4e15-a56d-abbff2fee900"
         question_template_id = "2be97039-8c07-48ae-a18e-16d4779b977b"
 
-        response = client.get(
-            f"/exams/{exam_template_id}/questions/",
-            headers=get_all_by_exam_id_header
-        )
+        response = client.get(f"/exams/{exam_template_id}/questions/", headers=get_all_by_exam_id_header)
         assert response.status_code == 200, response.text
         data = response.json()
         assert data["exam_template_id"] == exam_template_id
@@ -151,10 +140,7 @@ class QuestionTemplateMock(TestCase):
         exam_template_id = "5122b737-f815-4e15-a56d-abbff2fee900"
         question_template_id = "2be97039-8c07-48ae-a18e-16d4779b977b"
 
-        response = client.delete(
-            f"/exams/{exam_template_id}/questions/{question_template_id}",
-            headers=delete_header
-        )
+        response = client.delete(f"/exams/{exam_template_id}/questions/{question_template_id}", headers=delete_header)
         assert response.status_code == 200, response.text
         data = response.json()
         assert data["message"] == f"The question template {question_template_id} was deleted successfully"
@@ -169,9 +155,7 @@ class QuestionTemplateMock(TestCase):
         question_template_id = "2be97039-8c07-48ae-a18e-16d4779b977b"
 
         response = client.patch(
-            f"/exams/{exam_template_id}/questions/{question_template_id}",
-            data=json.dumps(update_body),
-            headers=update_header
+            f"/exams/{exam_template_id}/questions/{question_template_id}", data=json.dumps(update_body), headers=update_header
         )
         assert response.status_code == 200, response.text
         data = response.json()

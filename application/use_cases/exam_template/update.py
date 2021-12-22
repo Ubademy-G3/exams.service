@@ -2,10 +2,14 @@ from persistence.repositories.exam_template_repository_postgres import ExamTempl
 from infrastructure.db.exam_template_schema import ExamStateEnum
 from exceptions.http_exception import NotFoundException
 from application.serializers.exam_template_serializer import ExamTemplateSerializer
-from exceptions.ubademy_exception import (InvalidExamStateException, InvalidExamTemplateScoreException,
-                                          InvalidExamFilterException, InvalidExamTemplateAttemptsException,
-                                          NonPositiveExamTemplateApprovalScoreException,
-                                          HighExamTemplateApprovalScoreException)
+from exceptions.ubademy_exception import (
+    InvalidExamStateException,
+    InvalidExamTemplateScoreException,
+    InvalidExamFilterException,
+    InvalidExamTemplateAttemptsException,
+    NonPositiveExamTemplateApprovalScoreException,
+    HighExamTemplateApprovalScoreException,
+)
 import logging
 
 logger = logging.getLogger(__name__)
@@ -27,21 +31,20 @@ def validate_flags(exam_template_to_update, new_args):
     if has_media is None:
         has_media = exam_template_to_update.has_media
 
-    if(
-        new_args.state is not None and
-        ((has_multiple_choice is None or has_written is None or has_media is None) or
-         (has_multiple_choice is False and has_written is False and has_media is False))
+    if new_args.state is not None and (
+        (has_multiple_choice is None or has_written is None or has_media is None)
+        or (has_multiple_choice is False and has_written is False and has_media is False)
     ):
         raise InvalidExamFilterException(has_multiple_choice, has_written, has_media)
 
 
 def get_exam_template_to_update(db, exam_template_id, new_args):
 
-    if(new_args.state is not None and new_args.state not in ["active", "inactive"]):
+    if new_args.state is not None and new_args.state not in ["active", "inactive"]:
         logger.warning("Invalid exam state in %s", exam_template_id)
         raise InvalidExamStateException(new_args.state)
 
-    if(new_args.max_score is not None and new_args.max_score <= 0):
+    if new_args.max_score is not None and new_args.max_score <= 0:
         logger.warning("Invalid exam score in %s", exam_template_id)
         raise InvalidExamTemplateScoreException(new_args.max_score)
 
@@ -53,7 +56,7 @@ def get_exam_template_to_update(db, exam_template_id, new_args):
             logger.warning("Invalid exam approval score in %s", exam_template_id)
             raise HighExamTemplateApprovalScoreException(new_args.approval_score)
 
-    if(new_args.max_attempts is not None and new_args.max_attempts <= 0):
+    if new_args.max_attempts is not None and new_args.max_attempts <= 0:
         logger.warning("Invalid exam approval attempts in %s", exam_template_id)
         raise InvalidExamTemplateAttemptsException(new_args.max_attempts)
 
@@ -62,8 +65,9 @@ def get_exam_template_to_update(db, exam_template_id, new_args):
     if not exam_template_to_update:
         raise NotFoundException("Exam template {}".format(exam_template_id))
 
-    if(
-        new_args.approval_score is not None and new_args.max_score is None
+    if (
+        new_args.approval_score is not None
+        and new_args.max_score is None
         and new_args.approval_score > exam_template_to_update.max_score
     ):
         raise HighExamTemplateApprovalScoreException(new_args.approval_score)
@@ -82,7 +86,7 @@ def update_exam_template(db, exam_template_id, new_args):
 
     if new_args.state is not None:
         exam_template_to_update.state = ExamStateEnum.active
-        if(new_args.state == "inactive"):
+        if new_args.state == "inactive":
             exam_template_to_update.state = ExamStateEnum.inactive
 
     if new_args.max_score is not None:
