@@ -25,8 +25,20 @@ class ExamTemplate(Base):
     exam_solution = relationship("ExamSolution", cascade="all, delete")
     question_template = relationship("QuestionTemplate", cascade="all, delete")
 
-    def __init__(self, id, course_id, creator_id, name, state, max_score, approval_score,
-                 has_multiple_choice, has_written, has_media, max_attempts):
+    def __init__(
+        self,
+        id,
+        course_id,
+        creator_id,
+        name,
+        state,
+        max_score,
+        approval_score,
+        has_multiple_choice,
+        has_written,
+        has_media,
+        max_attempts,
+    ):
         self.id = id
         self.course_id = course_id
         self.creator_id = creator_id

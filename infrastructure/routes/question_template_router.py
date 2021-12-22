@@ -2,8 +2,12 @@ from fastapi import APIRouter, Header, Depends
 from infrastructure.db.database import Session, get_db
 from application.controllers.question_template_controller import QuestionTemplateController
 from application.services.auth import auth_service
-from domain.question_template_model import (QuestionTemplatePostBody, QuestionTemplateDB,
-                                            QuestionTemplateList, QuestionTemplatePatch)
+from domain.question_template_model import (
+    QuestionTemplatePostBody,
+    QuestionTemplateDB,
+    QuestionTemplateList,
+    QuestionTemplatePatch,
+)
 import logging
 
 logger = logging.getLogger(__name__)

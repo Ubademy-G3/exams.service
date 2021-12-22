@@ -29,7 +29,7 @@ def get_all_question_solutions_by_question_template_id(db, question_template_id)
     if amount != 0:
         for question_solution in question_solution_list:
             total_score += question_solution["score"]
-        average_score = total_score/amount
+        average_score = total_score / amount
     return {
         "question_template_id": question_template_id,
         "amount": amount,

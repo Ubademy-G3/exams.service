@@ -31,12 +31,12 @@ def get_all_exam_solutions_by_user_id(db, user_id, graded, approval_state):
         for exam_solution in exam_solution_list:
             if exam_solution["graded"] is True:
                 amount_graded += 1
-                total_score += exam_solution["score"]/exam_solution["max_score"]
+                total_score += exam_solution["score"] / exam_solution["max_score"]
                 if exam_solution["approval_state"] is True:
                     approval_count += 1
     if amount_graded != 0:
-        average_score = total_score/amount_graded
-        approval_rate = approval_count/amount_graded
+        average_score = total_score / amount_graded
+        approval_rate = approval_count / amount_graded
     return {
         "user_id": user_id,
         "amount": amount,
@@ -62,12 +62,12 @@ def get_all_exam_solutions_by_exam_template_id(db, exam_template_id, graded, app
         for exam_solution in exam_solution_list:
             if exam_solution["graded"] is True:
                 amount_graded += 1
-                total_score += exam_solution["score"]/exam_solution["max_score"]
+                total_score += exam_solution["score"] / exam_solution["max_score"]
                 if exam_solution["approval_state"] is True:
                     approval_count += 1
     if amount_graded != 0:
-        average_score = total_score/amount_graded
-        approval_rate = approval_count/amount_graded
+        average_score = total_score / amount_graded
+        approval_rate = approval_count / amount_graded
     return {
         "exam_template_id": exam_template_id,
         "amount": amount,
@@ -93,12 +93,12 @@ def get_all_exam_solutions_by_course_id(db, course_id, graded, approval_state):
         for exam_solution in exam_solution_list:
             if exam_solution["graded"] is True:
                 amount_graded += 1
-                total_score += exam_solution["score"]/exam_solution["max_score"]
+                total_score += exam_solution["score"] / exam_solution["max_score"]
                 if exam_solution["approval_state"] is True:
                     approval_count += 1
     if amount_graded != 0:
-        average_score = total_score/amount_graded
-        approval_rate = approval_count/amount_graded
+        average_score = total_score / amount_graded
+        approval_rate = approval_count / amount_graded
     return {
         "course_id": course_id,
         "amount": amount,
@@ -124,12 +124,12 @@ def get_all_exam_solutions_by_user_id_and_course_id(db, user_id, course_id, grad
         for exam_solution in exam_solution_list:
             if exam_solution["graded"] is True:
                 amount_graded += 1
-                total_score += exam_solution["score"]/exam_solution["max_score"]
+                total_score += exam_solution["score"] / exam_solution["max_score"]
                 if exam_solution["approval_state"] is True:
                     approval_count += 1
     if amount_graded != 0:
-        average_score = total_score/amount_graded
-        approval_rate = approval_count/amount_graded
+        average_score = total_score / amount_graded
+        approval_rate = approval_count / amount_graded
     return {
         "user_id": user_id,
         "course_id": course_id,
@@ -158,12 +158,12 @@ def get_all_exam_solutions_by_corrector_id_and_course_id(db, corrector_id, cours
         for exam_solution in exam_solution_list:
             if exam_solution["graded"] is True:
                 amount_graded += 1
-                total_score += exam_solution["score"]/exam_solution["max_score"]
+                total_score += exam_solution["score"] / exam_solution["max_score"]
                 if exam_solution["approval_state"] is True:
                     approval_count += 1
     if amount_graded != 0:
-        average_score = total_score/amount_graded
-        approval_rate = approval_count/amount_graded
+        average_score = total_score / amount_graded
+        approval_rate = approval_count / amount_graded
     return {
         "corrector_id": corrector_id,
         "course_id": course_id,
@@ -191,7 +191,7 @@ def get_all_exam_solutions_by_corrector_id(db, corrector_id, graded, approval_st
                 if exam_solution["approval_state"] is True:
                     approval_count += 1
     if amount_graded != 0:
-        approval_rate = approval_count/amount_graded
+        approval_rate = approval_count / amount_graded
     return {
         "corrector_id": corrector_id,
         "amount": amount,

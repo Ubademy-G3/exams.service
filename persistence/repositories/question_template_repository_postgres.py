@@ -3,6 +3,7 @@ import logging
 
 logger = logging.getLogger(__name__)
 
+
 class QuestionTemplateRepositoryPostgres:
     def add_question_template(self, db, question_template):
         db.add(question_template)

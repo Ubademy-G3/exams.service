@@ -21,7 +21,7 @@ post_header = {"apikey": apikey}
 post_body = {
     "course_id": "2f120281-12cd-413f-8e6a-2678b6b92406",
     "creator_id": "f1e8ea4b-3909-4f66-80ca-aad491049bdf",
-    "name": "Test name for exam"
+    "name": "Test name for exam",
 }
 
 # Get
@@ -88,25 +88,15 @@ return_from_delete = None
 # Update
 update_header = {"apikey": apikey, "exam_id": "5122b737-f815-4e15-a56d-abbff2fee900"}
 
-update_body = {
-    "state": "active",
-    "max_score": 10,
-    "approval_score": 5,
-    "has_multiple_choice": True
-}
+update_body = {"state": "active", "max_score": 10, "approval_score": 5, "has_multiple_choice": True}
 
 
 class ExamTemplateMock(TestCase):
-
     @mock.patch.object(ExamTemplateRepositoryPostgres, "add_exam_template")
     def test_create_exam_template(self, mock_post):
         mock_post.return_value = None
 
-        response = client.post(
-            "/exams/",
-            data=json.dumps(post_body),
-            headers=post_header
-        )
+        response = client.post("/exams/", data=json.dumps(post_body), headers=post_header)
         assert response.status_code == 201, response.text
         data = response.json()
         assert data["course_id"] == "2f120281-12cd-413f-8e6a-2678b6b92406"
@@ -124,10 +114,7 @@ class ExamTemplateMock(TestCase):
     def test_get_exam_template(self, mock_get):
         mock_get.return_value = return_from_get
         exam_id = "5122b737-f815-4e15-a56d-abbff2fee900"
-        response = client.get(
-            f"/exams/{exam_id}",
-            headers=get_header
-        )
+        response = client.get(f"/exams/{exam_id}", headers=get_header)
         assert response.status_code == 200, response.text
         data = response.json()
         assert data["id"] == exam_id
@@ -146,10 +133,7 @@ class ExamTemplateMock(TestCase):
     def test_get_all_exam_templates_by_course_id(self, mock_get_all_by_course_id):
         mock_get_all_by_course_id.return_value = return_from_get_all_by_course_id
         course_id = "2f120281-12cd-413f-8e6a-2678b6b92406"
-        response = client.get(
-            f"/exams/course/{course_id}",
-            headers=get_all_by_course_id_header
-        )
+        response = client.get(f"/exams/course/{course_id}", headers=get_all_by_course_id_header)
         assert response.status_code == 200, response.text
         data = response.json()
         assert data["course_id"] == course_id
@@ -170,10 +154,7 @@ class ExamTemplateMock(TestCase):
     def test_get_all_exam_templates_by_creator_id(self, mock_get_all_by_creator_id):
         mock_get_all_by_creator_id.return_value = return_from_get_all_by_creator_id
         creator_id = "f1e8ea4b-3909-4f66-80ca-aad491049bdf"
-        response = client.get(
-            f"/exams/creator/{creator_id}",
-            headers=get_all_by_creator_id_header
-        )
+        response = client.get(f"/exams/creator/{creator_id}", headers=get_all_by_creator_id_header)
         assert response.status_code == 200, response.text
         data = response.json()
         assert data["creator_id"] == creator_id
@@ -196,10 +177,7 @@ class ExamTemplateMock(TestCase):
         mock_get.return_value = return_from_get
         mock_delete.return_value = return_from_delete
         exam_id = "5122b737-f815-4e15-a56d-abbff2fee900"
-        response = client.delete(
-            f"/exams/{exam_id}",
-            headers=delete_header
-        )
+        response = client.delete(f"/exams/{exam_id}", headers=delete_header)
         assert response.status_code == 200, response.text
         data = response.json()
         assert data["message"] == f"The exam template {exam_id} was deleted successfully"
@@ -210,11 +188,7 @@ class ExamTemplateMock(TestCase):
         mock_get.return_value = return_from_get
         mock_update.return_value = None
         exam_id = "5122b737-f815-4e15-a56d-abbff2fee900"
-        response = client.patch(
-            f"/exams/{exam_id}",
-            data=json.dumps(update_body),
-            headers=update_header
-        )
+        response = client.patch(f"/exams/{exam_id}", data=json.dumps(update_body), headers=update_header)
         assert response.status_code == 200, response.text
         data = response.json()
         assert data["id"] == exam_id

@@ -23,7 +23,7 @@ post_header = {"apikey": apikey, "exam_template_id": "5122b737-f815-4e15-a56d-ab
 post_body = {
     "course_id": "2f120281-12cd-413f-8e6a-2678b6b92406",
     "user_id": "943368d4-cfa2-442c-a41e-14b6645b4472",
-    "max_score": 10
+    "max_score": 10,
 }
 
 return_from_get_template = ExamTemplate(
@@ -44,7 +44,7 @@ return_from_get_template = ExamTemplate(
 get_header = {
     "apikey": apikey,
     "exam_template_id": "5122b737-f815-4e15-a56d-abbff2fee900",
-    "exam_solution_id": "fe7c9444-3354-4ec4-b9f7-330638d752aa"
+    "exam_solution_id": "fe7c9444-3354-4ec4-b9f7-330638d752aa",
 }
 
 return_from_get = ExamSolution(
@@ -130,7 +130,9 @@ return_from_get_all_by_course_id = [
 
 # Get all by course id
 get_all_by_user_course_id_header = {
-    "apikey": apikey, "user_id": "943368d4-cfa2-442c-a41e-14b6645b4472", "course_id": "2f120281-12cd-413f-8e6a-2678b6b92406"
+    "apikey": apikey,
+    "user_id": "943368d4-cfa2-442c-a41e-14b6645b4472",
+    "course_id": "2f120281-12cd-413f-8e6a-2678b6b92406",
 }
 
 return_from_get_all_by_user_course_id = [
@@ -152,7 +154,7 @@ return_from_get_all_by_user_course_id = [
 delete_header = {
     "apikey": apikey,
     "exam_template_id": "5122b737-f815-4e15-a56d-abbff2fee900",
-    "exam_solution_id": "fe7c9444-3354-4ec4-b9f7-330638d752aa"
+    "exam_solution_id": "fe7c9444-3354-4ec4-b9f7-330638d752aa",
 }
 
 return_from_delete = None
@@ -161,7 +163,7 @@ return_from_delete = None
 update_header = {
     "apikey": apikey,
     "exam_template_id": "5122b737-f815-4e15-a56d-abbff2fee900",
-    "exam_solution_id": "fe7c9444-3354-4ec4-b9f7-330638d752aa"
+    "exam_solution_id": "fe7c9444-3354-4ec4-b9f7-330638d752aa",
 }
 
 update_body = {
@@ -178,7 +180,6 @@ second_update_body = {
 
 
 class ExamSolutionMock(TestCase):
-
     @mock.patch.object(ExamSolutionRepositoryPostgres, "add_exam_solution")
     @mock.patch.object(ExamSolutionRepositoryPostgres, "get_all_exam_solutions_by_user_id_and_exam_template_id")
     @mock.patch.object(ExamTemplateRepositoryPostgres, "get_exam_template")
@@ -189,11 +190,7 @@ class ExamSolutionMock(TestCase):
 
         exam_template_id = "5122b737-f815-4e15-a56d-abbff2fee900"
 
-        response = client.post(
-            f"/exams/{exam_template_id}/solutions/",
-            data=json.dumps(post_body),
-            headers=post_header
-        )
+        response = client.post(f"/exams/{exam_template_id}/solutions/", data=json.dumps(post_body), headers=post_header)
         assert response.status_code == 201, response.text
         data = response.json()
         assert data["course_id"] == "2f120281-12cd-413f-8e6a-2678b6b92406"
@@ -212,10 +209,7 @@ class ExamSolutionMock(TestCase):
         exam_template_id = "5122b737-f815-4e15-a56d-abbff2fee900"
         exam_solution_id = "fe7c9444-3354-4ec4-b9f7-330638d752aa"
 
-        response = client.get(
-            f"/exams/{exam_template_id}/solutions/{exam_solution_id}/",
-            headers=get_header
-        )
+        response = client.get(f"/exams/{exam_template_id}/solutions/{exam_solution_id}/", headers=get_header)
         assert response.status_code == 200, response.text
         data = response.json()
         assert data["id"] == exam_solution_id
@@ -234,10 +228,7 @@ class ExamSolutionMock(TestCase):
 
         exam_template_id = "5122b737-f815-4e15-a56d-abbff2fee900"
 
-        response = client.get(
-            f"/exams/{exam_template_id}/solutions/",
-            headers=get_all_by_exam_template_id_header
-        )
+        response = client.get(f"/exams/{exam_template_id}/solutions/", headers=get_all_by_exam_template_id_header)
         assert response.status_code == 200, response.text
         data = response.json()
         assert data["exam_template_id"] == exam_template_id
@@ -258,10 +249,7 @@ class ExamSolutionMock(TestCase):
 
         user_id = "943368d4-cfa2-442c-a41e-14b6645b4472"
 
-        response = client.get(
-            f"/exams/solutions/user/{user_id}/",
-            headers=get_all_by_user_id_header
-        )
+        response = client.get(f"/exams/solutions/user/{user_id}/", headers=get_all_by_user_id_header)
         assert response.status_code == 200, response.text
         data = response.json()
         assert data["user_id"] == user_id
@@ -282,10 +270,7 @@ class ExamSolutionMock(TestCase):
 
         course_id = "2f120281-12cd-413f-8e6a-2678b6b92406"
 
-        response = client.get(
-            f"/exams/solutions/course/{course_id}/",
-            headers=get_all_by_course_id_header
-        )
+        response = client.get(f"/exams/solutions/course/{course_id}/", headers=get_all_by_course_id_header)
         assert response.status_code == 200, response.text
         data = response.json()
         assert data["course_id"] == course_id
@@ -307,10 +292,7 @@ class ExamSolutionMock(TestCase):
         user_id = "943368d4-cfa2-442c-a41e-14b6645b4472"
         course_id = "2f120281-12cd-413f-8e6a-2678b6b92406"
 
-        response = client.get(
-            f"/exams/solutions/user/{user_id}/course/{course_id}/",
-            headers=get_all_by_user_course_id_header
-        )
+        response = client.get(f"/exams/solutions/user/{user_id}/course/{course_id}/", headers=get_all_by_user_course_id_header)
         assert response.status_code == 200, response.text
         data = response.json()
         assert data["user_id"] == user_id
@@ -332,10 +314,7 @@ class ExamSolutionMock(TestCase):
 
         corrector_id = "2f120281-12cd-413f-8e6a-2678b6b92406"
 
-        response = client.get(
-            f"/exams/solutions/corrector/{corrector_id}/",
-            headers=get_all_by_corrector_id_header
-        )
+        response = client.get(f"/exams/solutions/corrector/{corrector_id}/", headers=get_all_by_corrector_id_header)
         assert response.status_code == 200, response.text
         data = response.json()
         assert data["corrector_id"] == corrector_id
@@ -359,10 +338,7 @@ class ExamSolutionMock(TestCase):
         exam_template_id = "5122b737-f815-4e15-a56d-abbff2fee900"
         exam_solution_id = "fe7c9444-3354-4ec4-b9f7-330638d752aa"
 
-        response = client.delete(
-            f"/exams/{exam_template_id}/solutions/{exam_solution_id}/",
-            headers=delete_header
-        )
+        response = client.delete(f"/exams/{exam_template_id}/solutions/{exam_solution_id}/", headers=delete_header)
         assert response.status_code == 200, response.text
         data = response.json()
         assert data["message"] == f"The exam solution {exam_solution_id} was deleted successfully"
@@ -377,9 +353,7 @@ class ExamSolutionMock(TestCase):
         exam_solution_id = "fe7c9444-3354-4ec4-b9f7-330638d752aa"
 
         response = client.patch(
-            f"/exams/{exam_template_id}/solutions/{exam_solution_id}/",
-            data=json.dumps(update_body),
-            headers=update_header
+            f"/exams/{exam_template_id}/solutions/{exam_solution_id}/", data=json.dumps(update_body), headers=update_header
         )
         assert response.status_code == 200, response.text
         data = response.json()
@@ -405,7 +379,7 @@ class ExamSolutionMock(TestCase):
         response = client.patch(
             f"/exams/{exam_template_id}/solutions/{exam_solution_id}/",
             data=json.dumps(second_update_body),
-            headers=update_header
+            headers=update_header,
         )
         assert response.status_code == 200, response.text
         data = response.json()

@@ -3,6 +3,7 @@ import logging
 
 logger = logging.getLogger(__name__)
 
+
 class ExamTemplateRepositoryPostgres:
     def add_exam_template(self, db, exam_template):
         db.add(exam_template)

@@ -3,9 +3,13 @@ from infrastructure.db.database import Session, get_db
 from typing import Optional
 from application.controllers.exam_solution_controller import ExamSolutionController
 from application.services.auth import auth_service
-from domain.exam_solution_model import (UserExamSolutionList, CorrectorExamSolutionList,
-                                        CourseExamSolutionList, UserCourseExamSolutionList,
-                                        CorrectorCourseExamSolutionList)
+from domain.exam_solution_model import (
+    UserExamSolutionList,
+    CorrectorExamSolutionList,
+    CourseExamSolutionList,
+    UserCourseExamSolutionList,
+    CorrectorCourseExamSolutionList,
+)
 
 router = APIRouter()
 

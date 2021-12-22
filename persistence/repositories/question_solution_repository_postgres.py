@@ -3,13 +3,13 @@ import logging
 
 logger = logging.getLogger(__name__)
 
+
 class QuestionSolutionRepositoryPostgres:
     def add_question_solution(self, db, question_solution):
         db.add(question_solution)
         db.commit()
         logger.info("Added new question solution")
         logger.debug("ID of the new question solution: %s", question_solution.id)
-        
 
     def get_question_solution(self, db, question_solution_id):
         question_solution = db.query(QuestionSolution).filter(QuestionSolution.id == question_solution_id).first()
