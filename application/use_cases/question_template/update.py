@@ -8,6 +8,7 @@ from exceptions.ubademy_exception import (
     NonPositiveQuestionTemplateValueException,
 )
 from application.serializers.question_template_serializer import QuestionTemplateSerializer
+from application.use_cases.exam_template import update
 
 qtrp = QuestionTemplateRepositoryPostgres()
 
@@ -34,7 +35,7 @@ def get_question_template_to_update(db, question_template_id, new_args):
     return question_template_to_update
 
 
-def update_question_template(db, question_template_id, new_args):
+def update_question_template(db, exam_template_id, question_template_id, new_args):
 
     question_template_to_update = get_question_template_to_update(db, question_template_id, new_args)
 
@@ -59,4 +60,5 @@ def update_question_template(db, question_template_id, new_args):
         question_template_to_update.value = new_args.value
 
     qtrp.update_question_template(db)
+    update.update_flags(db, exam_template_id)
     return QuestionTemplateSerializer.serialize(question_template_to_update)

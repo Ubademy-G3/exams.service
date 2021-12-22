@@ -56,7 +56,7 @@ async def delete_question_template(
     apikey: str = Header(None),
 ):
     auth_service.check_api_key(apikey)
-    QuestionTemplateController.delete_question_template(db, question_template_id)
+    QuestionTemplateController.delete_question_template(db, exam_template_id, question_template_id)
     return {"message": "The question template {} was deleted successfully".format(question_template_id)}
 
 
@@ -70,4 +70,4 @@ async def update_question_template(
 ):
 
     auth_service.check_api_key(apikey)
-    return QuestionTemplateController.update_question_template(db, question_template_id, question_template)
+    return QuestionTemplateController.update_question_template(db, exam_template_id, question_template_id, question_template)
