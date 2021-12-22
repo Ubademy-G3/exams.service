@@ -9,6 +9,7 @@ from exceptions.ubademy_exception import (
 )
 from uuid import uuid4
 import logging
+from application.use_cases.exam_template import update
 
 logger = logging.getLogger(__name__)
 
@@ -53,4 +54,5 @@ def add_question_template(db, exam_template_id, args):
         new_question_template.value = 1
 
     qtrp.add_question_template(db, new_question_template)
+    update.update_flags(db, exam_template_id)
     return QuestionTemplateSerializer.serialize(new_question_template)

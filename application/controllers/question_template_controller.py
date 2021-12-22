@@ -15,9 +15,9 @@ class QuestionTemplateController:
         return get.get_all_question_templates_by_exam_template_id(db, exam_template_id)
 
     @classmethod
-    def delete_question_template(self, db, question_template_id):
-        return delete.delete_question_template(db, question_template_id)
+    def delete_question_template(self, db, exam_template_id, question_template_id):
+        return delete.delete_question_template(db, exam_template_id, question_template_id)
 
     @classmethod
-    def update_question_template(self, db, question_template_id, payload):
-        return update.update_question_template(db, question_template_id, payload)
+    def update_question_template(self, db, exam_template_id, question_template_id, payload):
+        return update.update_question_template(db, exam_template_id, question_template_id, payload)

@@ -1,4 +1,6 @@
 from persistence.repositories.exam_template_repository_postgres import ExamTemplateRepositoryPostgres
+from persistence.repositories.question_template_repository_postgres import QuestionTemplateRepositoryPostgres
+from infrastructure.db.question_template_schema import QuestionTypeEnum
 from infrastructure.db.exam_template_schema import ExamStateEnum
 from exceptions.http_exception import NotFoundException
 from application.serializers.exam_template_serializer import ExamTemplateSerializer
@@ -15,6 +17,7 @@ import logging
 logger = logging.getLogger(__name__)
 
 etrp = ExamTemplateRepositoryPostgres()
+qtrp = QuestionTemplateRepositoryPostgres()
 
 
 def validate_flags(exam_template_to_update, new_args):
@@ -111,3 +114,32 @@ def update_exam_template(db, exam_template_id, new_args):
     etrp.update_exam_template(db)
     logger.info("Exam template updated")
     return ExamTemplateSerializer.serialize(exam_template_to_update)
+
+
+def update_flags(db, exam_template_id):
+    exam_template_to_update = etrp.get_exam_template(db, exam_template_id)
+    question_template_list = qtrp.get_all_question_templates_by_exam_template_id(db, exam_template_id)
+    amount_written = 0
+    amount_multiple_choice = 0
+    amount_media = 0
+    for question_template in question_template_list:
+        if question_template.question_type == QuestionTypeEnum.written:
+            amount_written += 1
+        if question_template.question_type == QuestionTypeEnum.multiple_choice:
+            amount_multiple_choice += 1
+        if question_template.question_type == QuestionTypeEnum.media:
+            amount_media += 1
+
+    if amount_written == 0:
+        exam_template_to_update.has_written = False
+    else:
+        exam_template_to_update.has_written = True
+    if amount_multiple_choice == 0:
+        exam_template_to_update.has_multiple_choice = False
+    else:
+        exam_template_to_update.has_multiple_choice = True
+    if amount_media == 0:
+        exam_template_to_update.has_media = False
+    else:
+        exam_template_to_update.has_media = True
+    etrp.update_exam_template(db)
