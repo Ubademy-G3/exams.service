@@ -107,6 +107,14 @@ Service dedicated to the management of the exams of each course: creation, editi
     └── test_question_templates.py
 ```
 
+# Tech Stack
+
+* Python 3.x
+* FastAPI (as web framework to building the API with Python)
+* SQLAlchemy (as PostgreSQL Toolkit for Python and an ORM)
+* PostgreSQL (object-relational database)
+
+
 # Local Environment 
 
 ## Requirements 
